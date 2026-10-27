@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Product, WeaveCategory } from '../types';
 import { ASO_OKE_PRODUCTS } from '../data/asoOkeProducts';
-import { useCurrency } from '../context/CurrencyContext';
 import { Eye, MessageCircle, Sparkles, Filter, ChevronRight } from 'lucide-react';
 import { VENDOR_DETAILS } from '../data/asoOkeProducts';
 
@@ -16,7 +15,6 @@ export const ProductShowcase: React.FC<ProductShowcaseProps> = ({
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<WeaveCategory>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const { formatPrice } = useCurrency();
 
   const categories: { key: WeaveCategory; label: string }[] = [
     { key: 'all', label: 'All Ensembles' },
@@ -89,9 +87,7 @@ export const ProductShowcase: React.FC<ProductShowcaseProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProducts.map((product) => {
             const whatsappUrl = `https://wa.me/${VENDOR_DETAILS.whatsappNumber}?text=${encodeURIComponent(
-              `Hello Jesutofunmi, I want to order the *${product.name}* (${formatPrice(
-                product.priceNGN
-              )}) from Threads of Heritage.`
+              `Hello Jesutofunmi, I want to inquire about commissioning the *${product.name}* from Threads of Heritage.`
             )}`;
 
             return (
@@ -160,14 +156,14 @@ export const ProductShowcase: React.FC<ProductShowcaseProps> = ({
                       {product.subtitle}
                     </p>
 
-                    {/* Price */}
+                    {/* Pricing Display */}
                     <div className="mt-4 pt-3 border-t border-[#243044] flex items-baseline justify-between">
                       <div>
                         <span className="text-[10px] uppercase text-[#A0AEC0] block">
                           Bespoke Handwoven:
                         </span>
-                        <span className="text-xl font-black text-white font-heading">
-                          {formatPrice(product.priceNGN)}
+                        <span className="text-xs font-bold text-[#D4AF37] uppercase tracking-wider font-royal">
+                          Price on Request
                         </span>
                       </div>
 

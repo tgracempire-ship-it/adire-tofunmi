@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { OrderItem } from '../types';
-import { useCurrency } from '../context/CurrencyContext';
 import { VENDOR_DETAILS } from '../data/asoOkeProducts';
 import { X, Trash2, MessageCircle, ShoppingBag, ArrowRight } from 'lucide-react';
 
@@ -20,7 +19,6 @@ export const OrderSummaryDrawer: React.FC<OrderSummaryDrawerProps> = ({
   onClearItems,
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const { formatPrice } = useCurrency();
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -51,21 +49,17 @@ export const OrderSummaryDrawer: React.FC<OrderSummaryDrawerProps> = ({
     }
   };
 
-  const totalNGN = items.reduce((acc, curr) => acc + curr.priceNGN * curr.quantity, 0);
-
   const generateWhatsAppCheckout = () => {
     let msg = `👑 *THREADS OF HERITAGE - CUSTOM ORDER INQUIRY LIST*\n----------------------------------------\n*Artisan:* Jesutofunmi (@Threads of Heritage)\n\n`;
 
     items.forEach((item, idx) => {
       msg += `*${idx + 1}. ${item.title}*\n`;
       msg += `   • Details: ${item.details}\n`;
-      msg += `   • Quantity: ${item.quantity}\n`;
-      msg += `   • Price: ${formatPrice(item.priceNGN * item.quantity)}\n\n`;
+      msg += `   • Quantity: ${item.quantity}\n\n`;
     });
 
     msg += `----------------------------------------\n`;
-    msg += `*Total Estimated Value:* ${formatPrice(totalNGN)}\n\n`;
-    msg += `Hello Jesutofunmi, I would like to confirm loom availability and measurements for these items. Thank you!`;
+    msg += `Hello Jesutofunmi, I would like to request pricing, loom availability, and measurements for these items. Thank you!`;
 
     return `https://wa.me/${VENDOR_DETAILS.whatsappNumber}?text=${encodeURIComponent(msg)}`;
   };
@@ -135,12 +129,12 @@ export const OrderSummaryDrawer: React.FC<OrderSummaryDrawerProps> = ({
                       {item.details}
                     </p>
                     <div className="mt-1 flex items-center justify-between">
-                      <span className="text-xs font-extrabold text-[#D4AF37]">
-                        {formatPrice(item.priceNGN * item.quantity)}
+                      <span className="text-[11px] font-semibold text-[#D4AF37] uppercase">
+                        Bespoke Commission
                       </span>
                       <button
                         onClick={() => onRemoveItem(item.id)}
-                        className="text-red-400 hover:text-red-300 p-1"
+                        className="text-red-400 hover:text-red-300 p-1 cursor-pointer"
                         title="Remove item"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -167,15 +161,15 @@ export const OrderSummaryDrawer: React.FC<OrderSummaryDrawerProps> = ({
           <div className="p-5 border-t border-[#243044] bg-[#111724] space-y-4">
             <div className="flex justify-between items-baseline">
               <span className="text-xs text-[#A0AEC0] uppercase tracking-wider">
-                Total Estimated Value:
+                Total Items Selected:
               </span>
-              <span className="text-2xl font-black text-white font-heading">
-                {formatPrice(totalNGN)}
+              <span className="text-xl font-bold text-white font-heading">
+                {items.reduce((acc, curr) => acc + curr.quantity, 0)} Creations
               </span>
             </div>
 
             <p className="text-[11px] text-[#9CA3AF]">
-              Submitting this list generates a tailored WhatsApp invoice directly with Master Weaver Jesutofunmi.
+              Submitting this list sends your custom specifications directly to Master Weaver Jesutofunmi for quotation and loom scheduling.
             </p>
 
             <a
@@ -185,7 +179,7 @@ export const OrderSummaryDrawer: React.FC<OrderSummaryDrawerProps> = ({
               className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-bold text-xs sm:text-sm shadow-lg shadow-green-500/20 hover:brightness-110 transition-all cursor-pointer"
             >
               <MessageCircle className="w-4 h-4 fill-white" />
-              <span>Checkout Order on WhatsApp</span>
+              <span>Request Quote on WhatsApp</span>
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>

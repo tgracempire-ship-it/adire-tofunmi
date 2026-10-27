@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useCurrency } from '../context/CurrencyContext';
 import { TraditionalWeaveType } from '../types';
 import { VENDOR_DETAILS } from '../data/asoOkeProducts';
 import { Sparkles, MessageCircle, Check, Info, Palette, Clock, Scissors, Send } from 'lucide-react';
@@ -9,8 +8,6 @@ interface LoomCustomizerProps {
 }
 
 export const LoomCustomizer: React.FC<LoomCustomizerProps> = ({ onAddCustomToCart }) => {
-  const { formatPrice } = useCurrency();
-
   // Customizer State
   const [weaveType, setWeaveType] = useState<TraditionalWeaveType>('alaari');
   const [ensemble, setEnsemble] = useState<'bridal-full' | 'groom-agbada' | 'couple-twinning' | 'aso-ebi-set' | 'children-occasion'>('groom-agbada');
@@ -26,81 +23,55 @@ export const LoomCustomizer: React.FC<LoomCustomizerProps> = ({ onAddCustomToCar
   const [copiedNotification, setCopiedNotification] = useState(false);
 
   // Weave Information & Cultural Significance
-  const WEAVE_DETAILS: Record<TraditionalWeaveType, { title: string; subtitle: string; desc: string; baseMultiplier: number; defaultSample: string }> = {
+  const WEAVE_DETAILS: Record<TraditionalWeaveType, { title: string; subtitle: string; desc: string; defaultSample: string }> = {
     alaari: {
       title: 'Alaari (The Royal Magenta / Crimson)',
       subtitle: 'The King of Yoruba Weaves',
       desc: 'Historically reserved for kings, princes, and victorious celebration. Its crimson tone reflects vibrancy, royalty, and high authority.',
-      baseMultiplier: 1.15,
       defaultSample: '/images/groom-agbada-portrait.jpg'
     },
     sanyan: {
       title: 'Sanyan (The Aristocratic Wild Silk)',
       subtitle: 'Raw Earth Brown & Khaki Silk',
       desc: 'Woven from indigenous Anaphe silk moths. Warm fawn and beige hues symbolizing ancient prestige, wealth, and aristocratic restraint.',
-      baseMultiplier: 1.20,
       defaultSample: '/images/fabric-chocolate-roll.jpg'
     },
     etu: {
       title: 'Etu (The Indigo Guinea Fowl Weave)',
       subtitle: 'Deep Indigo Navy & Fine White Stripes',
       desc: 'Named after the dappled feathers of the guinea fowl. Striking midnight navy and cobalt lines symbolizing wisdom, eldership, and deep dignity.',
-      baseMultiplier: 1.10,
       defaultSample: '/images/fabric-blue-stripes.jpg'
     },
     lurex: {
       title: 'Metallic Lurex (Contemporary Shimmer)',
       subtitle: 'Modern Wedding Glamour & Gold Thread',
       desc: 'Intertwined with gleaming metallic filaments that capture photography flashes and ballroom chandeliers with majestic brilliance.',
-      baseMultiplier: 1.12,
       defaultSample: '/images/bride-grey-gold.jpg'
     },
     beaded: {
       title: 'Beaded & Stone Haute Couture',
       subtitle: 'Pearl Studded & Scalloped Trims',
       desc: 'Hand-sewn crystal beads, dangling fringe tassels, and intricate cord work placed along collar, cuffs, and hem.',
-      baseMultiplier: 1.35,
       defaultSample: '/images/bride-striped-gown.jpg'
     }
   };
 
-  // Base prices by ensemble
-  const ENSEMBLE_PRICING = {
-    'bridal-full': { name: 'Full Bridal Suite (Iro, Buba, Gele & Ipele)', baseNGN: 320000, leadWeeks: '3–4 weeks' },
-    'groom-agbada': { name: 'Royal Groom Grand Agbada (4-Piece with Fila)', baseNGN: 280000, leadWeeks: '3–4 weeks' },
-    'couple-twinning': { name: 'Oba & Olori Couple Twinning Suite (8 Pieces)', baseNGN: 520000, leadWeeks: '4–5 weeks' },
-    'aso-ebi-set': { name: 'Aso Ebi 5-Yard Loom Bundle', baseNGN: 130000, leadWeeks: '2–3 weeks' },
-    'children-occasion': { name: 'Little Monarch Children Milestone Wrap', baseNGN: 75000, leadWeeks: '1–2 weeks' }
+  // Base ensemble details
+  const ENSEMBLE_DETAILS = {
+    'bridal-full': { name: 'Full Bridal Suite (Iro, Buba, Gele & Ipele)', leadWeeks: '3–4 weeks' },
+    'groom-agbada': { name: 'Royal Groom Grand Agbada (4-Piece with Fila)', leadWeeks: '3–4 weeks' },
+    'couple-twinning': { name: 'Oba & Olori Couple Twinning Suite (8 Pieces)', leadWeeks: '4–5 weeks' },
+    'aso-ebi-set': { name: 'Aso Ebi 5-Yard Loom Bundle', leadWeeks: '2–3 weeks' },
+    'children-occasion': { name: 'Little Monarch Children Milestone Wrap', leadWeeks: '1–2 weeks' }
   };
 
-  // Embellishment addon prices
-  const EMBELLISHMENT_PRICING = {
-    'pure-classic': { name: 'Pure Classic Handloom (Clean Weave)', costNGN: 0 },
-    'bullion-embroidery': { name: 'Handcrafted Golden Bullion Chest / Border Work', costNGN: 45000 },
-    'coral-pearl-fringes': { name: 'Hand-strung Coral & Pearl Dangling Fringes', costNGN: 65000 },
-    'crystal-stone-royal': { name: 'All-over Swarovski Crystal & Diamond Stone Studding', costNGN: 95000 }
+  // Embellishment options
+  const EMBELLISHMENT_OPTIONS = {
+    'pure-classic': { name: 'Pure Classic Handloom (Clean Weave)', note: 'Minimalist Ancestral' },
+    'bullion-embroidery': { name: 'Handcrafted Golden Bullion Chest / Border Work', note: 'Royal Bullion Thread' },
+    'coral-pearl-fringes': { name: 'Hand-strung Coral & Pearl Dangling Fringes', note: 'Luxury Beaded Hem' },
+    'crystal-stone-royal': { name: 'All-over Swarovski Crystal & Diamond Stone Studding', note: 'Haute Couture Brilliance' }
   };
-
-  // Calculate live dynamic price
-  const calculateTotal = () => {
-    const ens = ENSEMBLE_PRICING[ensemble];
-    const weave = WEAVE_DETAILS[weaveType];
-    const emb = EMBELLISHMENT_PRICING[embellishment];
-
-    let total = ens.baseNGN * weave.baseMultiplier;
-    total += emb.costNGN;
-
-    if (!headwearIncluded && (ensemble === 'bridal-full' || ensemble === 'groom-agbada')) {
-      total -= 25000;
-    }
-    if (tailoringOption === 'fabric-raw-cut') {
-      total -= 40000;
-    }
-
-    return Math.round(total);
-  };
-
-  const currentTotal = calculateTotal();
 
   // Generate WhatsApp Message Link
   const generateWhatsAppMessage = () => {
@@ -109,22 +80,21 @@ export const LoomCustomizer: React.FC<LoomCustomizerProps> = ({ onAddCustomToCar
 *Artisan:* Jesutofunmi (@Threads of Heritage)
 
 *Client Name:* ${clientName || 'Valued Client'}
-*Ensemble Selected:* ${ENSEMBLE_PRICING[ensemble].name}
+*Ensemble Selected:* ${ENSEMBLE_DETAILS[ensemble].name}
 *Traditional Weave:* ${WEAVE_DETAILS[weaveType].title}
 *Base Color:* ${baseColor}
 *Accent Color:* ${accentColor}
 *Pattern Style:* ${patternStyle}
-*Embellishment:* ${EMBELLISHMENT_PRICING[embellishment].name}
+*Embellishment:* ${EMBELLISHMENT_OPTIONS[embellishment].name}
 *Tailoring Preference:* ${tailoringOption === 'custom-tailored' ? 'Full Bespoke Tailoring' : 'Raw Loom Fabric Only'}
 *Headwear (Gele / Fila):* ${headwearIncluded ? 'Included' : 'Excluded'}
-*Estimated Lead Time:* ${ENSEMBLE_PRICING[ensemble].leadWeeks}
-*Estimated Investment:* ${formatPrice(currentTotal)}
-*Event / Target Date:* ${targetDate || 'Not specified'}
+*Estimated Lead Time:* ${ENSEMBLE_DETAILS[ensemble].leadWeeks}
+*Target Event Date:* ${targetDate || 'Not specified'}
 
 *Special Notes / Measurements:*
 ${clientNotes || 'Standard consultation requested.'}
 ----------------------------------------
-Please confirm loom availability and next steps for sample swatches. Thank you!`;
+Please advise on custom quote, loom availability, and next steps for sample swatches. Thank you!`;
 
     return `https://wa.me/${VENDOR_DETAILS.whatsappNumber}?text=${encodeURIComponent(text)}`;
   };
@@ -133,11 +103,11 @@ Please confirm loom availability and next steps for sample swatches. Thank you!`
     if (onAddCustomToCart) {
       onAddCustomToCart({
         id: `custom-loom-${Date.now()}`,
-        title: `Bespoke ${WEAVE_DETAILS[weaveType].title.split(' ')[0]} ${ENSEMBLE_PRICING[ensemble].name.split(' ')[0]}`,
+        title: `Bespoke ${WEAVE_DETAILS[weaveType].title.split(' ')[0]} ${ENSEMBLE_DETAILS[ensemble].name.split(' ')[0]}`,
         category: 'custom-loom',
-        priceNGN: currentTotal,
+        priceNGN: 0,
         image: WEAVE_DETAILS[weaveType].defaultSample,
-        details: `${baseColor} with ${accentColor} • ${EMBELLISHMENT_PRICING[embellishment].name}`,
+        details: `${baseColor} with ${accentColor} • ${EMBELLISHMENT_OPTIONS[embellishment].name}`,
         quantity: 1
       });
       setCopiedNotification(true);
@@ -224,8 +194,8 @@ Please confirm loom availability and next steps for sample swatches. Thank you!`
               </label>
 
               <div className="space-y-2">
-                {(Object.keys(ENSEMBLE_PRICING) as (keyof typeof ENSEMBLE_PRICING)[]).map((key) => {
-                  const ens = ENSEMBLE_PRICING[key];
+                {(Object.keys(ENSEMBLE_DETAILS) as (keyof typeof ENSEMBLE_DETAILS)[]).map((key) => {
+                  const ens = ENSEMBLE_DETAILS[key];
                   const active = ensemble === key;
                   return (
                     <button
@@ -247,8 +217,8 @@ Please confirm loom availability and next steps for sample swatches. Thank you!`
                           <span className="text-[11px] text-[#A0AEC0]">Lead Time: {ens.leadWeeks}</span>
                         </div>
                       </div>
-                      <span className="text-xs font-bold text-[#D4AF37]">
-                        {formatPrice(ens.baseNGN)}
+                      <span className="text-xs font-semibold text-[#D4AF37]">
+                        Bespoke Commission
                       </span>
                     </button>
                   );
@@ -312,8 +282,8 @@ Please confirm loom availability and next steps for sample swatches. Thank you!`
               </label>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                {(Object.keys(EMBELLISHMENT_PRICING) as (keyof typeof EMBELLISHMENT_PRICING)[]).map((key) => {
-                  const emb = EMBELLISHMENT_PRICING[key];
+                {(Object.keys(EMBELLISHMENT_OPTIONS) as (keyof typeof EMBELLISHMENT_OPTIONS)[]).map((key) => {
+                  const emb = EMBELLISHMENT_OPTIONS[key];
                   const active = embellishment === key;
                   return (
                     <button
@@ -330,8 +300,8 @@ Please confirm loom availability and next steps for sample swatches. Thank you!`
                         <span className="text-xs font-semibold text-white">{emb.name}</span>
                         {active && <Check className="w-3.5 h-3.5 text-[#D4AF37]" />}
                       </div>
-                      <span className="text-[11px] font-bold text-[#D4AF37]">
-                        {emb.costNGN === 0 ? 'Included' : `+${formatPrice(emb.costNGN)}`}
+                      <span className="text-[11px] text-[#A0AEC0]">
+                        {emb.note}
                       </span>
                     </button>
                   );
@@ -368,7 +338,7 @@ Please confirm loom availability and next steps for sample swatches. Thank you!`
                       onClick={() => setTailoringOption('fabric-raw-cut')}
                       className={`px-2.5 py-1 rounded text-xs transition-all ${tailoringOption === 'fabric-raw-cut' ? 'bg-[#D4AF37] text-[#0A0E17] font-bold' : 'bg-[#182234] text-[#A0AEC0]'}`}
                     >
-                      Fabric Only (-{formatPrice(40000)})
+                      Fabric Only
                     </button>
                   </div>
                 </div>
@@ -406,11 +376,11 @@ Please confirm loom availability and next steps for sample swatches. Thank you!`
               {/* Gold Ribbon Header */}
               <div className="flex items-center justify-between pb-4 border-b border-[#D4AF37]/25">
                 <div>
-                  <span className="text-[11px] uppercase tracking-widest text-[#D4AF37] font-bold block">
+                  <span className="text-[10px] uppercase tracking-widest text-[#D4AF37] font-bold block">
                     Bespoke Loom Ticket
                   </span>
                   <h3 className="text-lg font-bold text-white font-heading">
-                    {ENSEMBLE_PRICING[ensemble].name}
+                    {ENSEMBLE_DETAILS[ensemble].name}
                   </h3>
                 </div>
                 <div className="w-10 h-10 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37] flex items-center justify-center text-lg">
@@ -438,12 +408,12 @@ Please confirm loom availability and next steps for sample swatches. Thank you!`
               {/* Summary Breakdown */}
               <div className="space-y-2 text-xs border-b border-[#243044] pb-4">
                 <div className="flex justify-between text-[#A0AEC0]">
-                  <span>Weave Multiplier:</span>
+                  <span>Weave Type:</span>
                   <span className="text-white font-medium capitalize">{weaveType} Handloom</span>
                 </div>
                 <div className="flex justify-between text-[#A0AEC0]">
                   <span>Embellishment:</span>
-                  <span className="text-white font-medium">{EMBELLISHMENT_PRICING[embellishment].name.split('(')[0]}</span>
+                  <span className="text-white font-medium">{EMBELLISHMENT_OPTIONS[embellishment].name.split('(')[0]}</span>
                 </div>
                 <div className="flex justify-between text-[#A0AEC0]">
                   <span>Headwear:</span>
@@ -453,23 +423,23 @@ Please confirm loom availability and next steps for sample swatches. Thank you!`
                   <span>Estimated Lead Time:</span>
                   <span className="text-[#F4E4BA] font-semibold flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5" />
-                    {ENSEMBLE_PRICING[ensemble].leadWeeks}
+                    {ENSEMBLE_DETAILS[ensemble].leadWeeks}
                   </span>
                 </div>
               </div>
 
-              {/* Price Calculation Box */}
+              {/* Price / Quote Notice */}
               <div className="pt-4 flex items-baseline justify-between">
                 <div>
                   <span className="text-[11px] uppercase tracking-wider text-[#A0AEC0] block">
-                    Estimated Investment:
+                    Bespoke Commission:
                   </span>
-                  <span className="text-2xl sm:text-3xl font-extrabold text-white font-heading">
-                    {formatPrice(currentTotal)}
+                  <span className="text-xl sm:text-2xl font-bold text-[#D4AF37] font-royal uppercase">
+                    Quotation on Request
                   </span>
                 </div>
                 <span className="text-[10px] text-[#D4AF37] font-medium bg-[#D4AF37]/10 px-2 py-1 rounded border border-[#D4AF37]/30">
-                  Direct Weaver Rate
+                  Direct Weaver
                 </span>
               </div>
 

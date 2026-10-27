@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useCurrency } from '../context/CurrencyContext';
-import { Currency } from '../types';
 import { VENDOR_DETAILS } from '../data/asoOkeProducts';
 import { MessageCircle, Menu, X, Sparkles, ShoppingBag } from 'lucide-react';
 
@@ -17,16 +15,13 @@ export const Navbar: React.FC<NavbarProps> = ({
   orderCount,
   onOpenCart,
 }) => {
-  const { currency, setCurrency } = useCurrency();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const currencies: Currency[] = ['NGN', 'USD', 'GBP'];
 
   const navLinks = [
     { label: 'Collection', href: '#collection' },
     { label: 'Custom Loom Builder', href: '#loom-builder', onClick: onOpenCustomizer },
     { label: 'Wedding Packages', href: '#wedding-packages' },
-    { label: 'Aso Ebi Calculator', href: '#aso-ebi-calc', onClick: onOpenAsoEbi },
+    { label: 'Aso Ebi Estimator', href: '#aso-ebi-calc', onClick: onOpenAsoEbi },
     { label: 'Artisan Story', href: '#story' },
     { label: 'Care & FAQ', href: '#faq' },
   ];
@@ -76,30 +71,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             ))}
           </nav>
 
-          {/* Right Actions: Currency Selector, WhatsApp & Cart */}
+          {/* Right Actions: WhatsApp & Inquiry List */}
           <div className="hidden sm:flex items-center gap-3">
-            {/* Currency Selector */}
-            <div className="flex items-center bg-[#131B29] border border-[#D4AF37]/30 rounded-lg p-0.5 text-xs font-medium">
-              {currencies.map((curr) => (
-                <button
-                  key={curr}
-                  onClick={() => setCurrency(curr)}
-                  className={`px-2.5 py-1 rounded-md transition-all ${
-                    currency === curr
-                      ? 'bg-[#D4AF37] text-[#0A0E17] font-bold shadow-sm'
-                      : 'text-[#A0AEC0] hover:text-[#FFF]'
-                  }`}
-                  title={`Switch currency to ${curr}`}
-                >
-                  {curr}
-                </button>
-              ))}
-            </div>
-
             {/* Quick Order Wishlist / Inquiry Drawer */}
             <button
               onClick={onOpenCart}
-              className="relative p-2.5 rounded-lg bg-[#131B29] border border-[#D4AF37]/30 text-[#D4AF37] hover:bg-[#1C2638] transition-all"
+              className="relative p-2.5 rounded-lg bg-[#131B29] border border-[#D4AF37]/30 text-[#D4AF37] hover:bg-[#1C2638] transition-all cursor-pointer"
               title="View your custom inquiry list"
               aria-label="View Inquiry List"
             >
@@ -119,7 +96,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white text-xs font-semibold hover:shadow-lg hover:shadow-green-500/20 transition-all transform hover:-translate-y-0.5"
             >
               <MessageCircle className="w-4 h-4 fill-white" />
-              <span>Chat on WhatsApp</span>
+              <span>Inquire on WhatsApp</span>
             </a>
           </div>
 
@@ -152,25 +129,6 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-[#0D131F] border-b border-[#D4AF37]/20 px-4 pt-3 pb-6 space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-[#232E42]">
-            <span className="text-xs text-[#A0AEC0]">Select Currency:</span>
-            <div className="flex items-center bg-[#131B29] border border-[#D4AF37]/30 rounded-lg p-0.5 text-xs">
-              {currencies.map((curr) => (
-                <button
-                  key={curr}
-                  onClick={() => setCurrency(curr)}
-                  className={`px-3 py-1 rounded-md ${
-                    currency === curr
-                      ? 'bg-[#D4AF37] text-[#0A0E17] font-bold'
-                      : 'text-[#A0AEC0]'
-                  }`}
-                >
-                  {curr}
-                </button>
-              ))}
-            </div>
-          </div>
-
           <div className="flex flex-col space-y-2">
             {navLinks.map((link) => (
               <a

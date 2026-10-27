@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import { useCurrency } from '../context/CurrencyContext';
 import { VENDOR_DETAILS } from '../data/asoOkeProducts';
 import { Users, Package, Calculator, Truck, MessageCircle, Gift, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export const AsoEbiCalculator: React.FC = () => {
-  const { formatPrice } = useCurrency();
-
   // State
   const [guestCount, setGuestCount] = useState<number>(30);
   const [bundleType, setBundleType] = useState<'standard-5yd' | 'lurex-shimmer' | 'dual-gele-ipele'>('dual-gele-ipele');
@@ -13,34 +10,27 @@ export const AsoEbiCalculator: React.FC = () => {
   const [destination, setDestination] = useState<'lagos-local' | 'nigeria-state' | 'uk-europe' | 'us-canada'>('lagos-local');
   const [eventDate, setEventDate] = useState<string>('');
 
-  // Pricing Matrix (in NGN)
   const BUNDLE_RATES = {
-    'dual-gele-ipele': { name: 'Gele & Ipele Set (Head-tie & Shoulder Sash)', baseNGN: 45000, desc: 'Most popular for wedding female guests & bridal train' },
-    'standard-5yd': { name: 'Full 5-Yard Loom Bundle (For tailored outfits)', baseNGN: 85000, desc: 'Complete cut for tailored Buba/Iro or men’s kaftan yokes' },
-    'lurex-shimmer': { name: 'Luxury Metallic Lurex 5-Yard Bundle', baseNGN: 110000, desc: 'High-shine celebratory weave for mothers of the day and VIPs' }
+    'dual-gele-ipele': { name: 'Gele & Ipele Set (Head-tie & Shoulder Sash)', desc: 'Most popular for wedding female guests & bridal train' },
+    'standard-5yd': { name: 'Full 5-Yard Loom Bundle (For tailored outfits)', desc: 'Complete cut for tailored Buba/Iro or men’s kaftan yokes' },
+    'lurex-shimmer': { name: 'Luxury Metallic Lurex 5-Yard Bundle', desc: 'High-shine celebratory weave for mothers of the day and VIPs' }
   };
 
   const PACKAGING_RATES = {
-    'gold-box': { name: 'Rigid Gold-Foil Keepsake Box with Ribbon', costPerSet: 4500 },
-    'satin-bag': { name: 'Monogrammed Drawstring Satin Pouch', costPerSet: 2500 },
-    'standard-band': { name: 'Standard Gold Ribbon & Tag Wrapping', costPerSet: 500 }
+    'gold-box': { name: 'Rigid Gold-Foil Keepsake Box with Ribbon', note: 'Luxury Wedding Keepsake' },
+    'satin-bag': { name: 'Monogrammed Drawstring Satin Pouch', note: 'Reusable Elegance' },
+    'standard-band': { name: 'Standard Gold Ribbon & Tag Wrapping', note: 'Eco Artisanal Band' }
   };
 
   // Discount percentage by volume
-  const getDiscountPercent = (count: number) => {
-    if (count >= 100) return 0.15; // 15% off
-    if (count >= 50) return 0.10;  // 10% off
-    if (count >= 25) return 0.05;  // 5% off
-    return 0;
+  const getVolumeTier = (count: number) => {
+    if (count >= 100) return 'VIP Wholesale Tier (15% Volume Rebate)';
+    if (count >= 50) return 'Royal Bulk Tier (10% Volume Rebate)';
+    if (count >= 25) return 'Group Privilege Tier (5% Volume Rebate)';
+    return 'Standard Artisanal Commission';
   };
 
-  const discountPercent = getDiscountPercent(guestCount);
-  const bundleBase = BUNDLE_RATES[bundleType].baseNGN;
-  const packageCost = PACKAGING_RATES[packagingTier].costPerSet;
-  const rawUnitCost = bundleBase + packageCost;
-  const discountedUnitCost = Math.round(rawUnitCost * (1 - discountPercent));
-  const totalCost = discountedUnitCost * guestCount;
-  const totalSavings = Math.round(rawUnitCost * discountPercent * guestCount);
+  const volumeTier = getVolumeTier(guestCount);
 
   // Lead time calculator
   const calculateLeadTime = (count: number) => {
@@ -63,13 +53,10 @@ export const AsoEbiCalculator: React.FC = () => {
 *Packaging Selected:* ${PACKAGING_RATES[packagingTier].name}
 *Destination Region:* ${destination}
 *Event Date:* ${eventDate || 'To be confirmed'}
-
-*Volume Discount Tier:* ${discountPercent * 100}% Rebate
-*Cost Per Guest/Set:* ${formatPrice(discountedUnitCost)}
-*Estimated Total Investment:* ${formatPrice(totalCost)}
+*Volume Tier:* ${volumeTier}
 *Production Lead Time:* ${leadTime}
 ----------------------------------------
-Hello Jesutofunmi, please advise on loom capacity and scheduling for our Aso Ebi production!`;
+Hello Jesutofunmi, please provide a wholesale bulk quotation and loom scheduling for our Aso Ebi production!`;
 
     return `https://wa.me/${VENDOR_DETAILS.whatsappNumber}?text=${encodeURIComponent(text)}`;
   };
@@ -87,7 +74,7 @@ Hello Jesutofunmi, please advise on loom capacity and scheduling for our Aso Ebi
             Aso Ebi <span className="gold-gradient-text font-royal">Bulk Estimator</span> & Timeline
           </h2>
           <p className="text-sm sm:text-base text-[#9CA3AF] mt-3">
-            Ensure color harmony across your wedding guests and bridal train. Use our instant estimator for volume discounts, luxury packaging, and worldwide distribution.
+            Ensure color harmony across your wedding guests and bridal train. Estimate bundles, custom packaging, and production timelines with worldwide courier distribution.
           </p>
         </div>
 
@@ -123,18 +110,12 @@ Hello Jesutofunmi, please advise on loom capacity and scheduling for our Aso Ebi
               </div>
 
               {/* Volume Discount Notice */}
-              {discountPercent > 0 ? (
-                <div className="mt-3 p-2.5 rounded-lg bg-green-950/40 border border-green-800 flex items-center gap-2 text-xs text-green-300">
-                  <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
-                  <span>
-                    <strong>{discountPercent * 100}% Wholesale Volume Rebate Applied!</strong> You save {formatPrice(totalSavings)} on this order.
-                  </span>
-                </div>
-              ) : (
-                <div className="mt-2 text-[11px] text-[#A0AEC0]">
-                  💡 Tip: Reach 25+ sets for 5% off, or 50+ sets for 10% off.
-                </div>
-              )}
+              <div className="mt-3 p-2.5 rounded-lg bg-[#162030] border border-[#D4AF37]/30 flex items-center gap-2 text-xs text-[#F4E4BA]">
+                <CheckCircle2 className="w-4 h-4 text-[#D4AF37] flex-shrink-0" />
+                <span>
+                  <strong>Tier Applied:</strong> {volumeTier}
+                </span>
+              </div>
             </div>
 
             {/* Bundle Type */}
@@ -159,7 +140,7 @@ Hello Jesutofunmi, please advise on loom capacity and scheduling for our Aso Ebi
                     >
                       <div className="flex items-center justify-between mb-1">
                         <span className="text-xs sm:text-sm font-semibold text-white">{b.name}</span>
-                        <span className="text-xs font-bold text-[#D4AF37]">{formatPrice(b.baseNGN)}/ea</span>
+                        <span className="text-xs font-semibold text-[#D4AF37]">Bespoke Weave</span>
                       </div>
                       <span className="text-[11px] text-[#A0AEC0] block">{b.desc}</span>
                     </button>
@@ -189,7 +170,7 @@ Hello Jesutofunmi, please advise on loom capacity and scheduling for our Aso Ebi
                       }`}
                     >
                       <span className="text-xs font-semibold text-white block mb-1">{p.name}</span>
-                      <span className="text-[11px] text-[#D4AF37] font-bold">+{formatPrice(p.costPerSet)}</span>
+                      <span className="text-[11px] text-[#D4AF37] block">{p.note}</span>
                     </button>
                   );
                 })}
@@ -230,7 +211,7 @@ Hello Jesutofunmi, please advise on loom capacity and scheduling for our Aso Ebi
               <div className="flex items-center justify-between pb-4 border-b border-[#D4AF37]/25">
                 <div>
                   <span className="text-[10px] uppercase tracking-widest text-[#D4AF37] font-bold block">
-                    Volume Quotation
+                    Volume Specification
                   </span>
                   <h3 className="text-lg font-bold text-white font-heading">
                     {guestCount} Guest Aso Ebi Order
@@ -246,38 +227,34 @@ Hello Jesutofunmi, please advise on loom capacity and scheduling for our Aso Ebi
                   <span className="text-white font-medium">{BUNDLE_RATES[bundleType].name.split('(')[0]}</span>
                 </div>
                 <div className="flex justify-between text-[#A0AEC0]">
-                  <span>Unit Cost Before Discount:</span>
-                  <span className="text-white line-through">{formatPrice(rawUnitCost)}</span>
-                </div>
-                <div className="flex justify-between text-[#A0AEC0]">
-                  <span>Discounted Unit Cost:</span>
-                  <span className="text-[#D4AF37] font-bold">{formatPrice(discountedUnitCost)} / guest</span>
+                  <span>Wholesale Tier:</span>
+                  <span className="text-[#D4AF37] font-semibold">{volumeTier}</span>
                 </div>
                 <div className="flex justify-between text-[#A0AEC0]">
                   <span>Packaging:</span>
                   <span className="text-white font-medium">{PACKAGING_RATES[packagingTier].name.split('(')[0]}</span>
                 </div>
                 <div className="flex justify-between text-[#A0AEC0]">
-                  <span>Estimated Weaving Lead Time:</span>
+                  <span>Estimated Production Lead Time:</span>
                   <span className="text-[#F4E4BA] font-bold">{leadTime}</span>
+                </div>
+                <div className="flex justify-between text-[#A0AEC0]">
+                  <span>Dye Consistency:</span>
+                  <span className="text-white font-medium">100% Kettle Batch Harmonized</span>
                 </div>
               </div>
 
-              {/* Total Calculation */}
-              <div className="pt-4 flex items-baseline justify-between">
-                <div>
-                  <span className="text-[11px] uppercase tracking-wider text-[#A0AEC0] block">
-                    Total Estimated Investment:
-                  </span>
-                  <span className="text-3xl font-extrabold text-white font-heading">
-                    {formatPrice(totalCost)}
-                  </span>
-                </div>
-                {discountPercent > 0 && (
-                  <span className="text-xs text-green-400 bg-green-950/50 px-2 py-1 rounded border border-green-800">
-                    Saves {formatPrice(totalSavings)}
-                  </span>
-                )}
+              {/* Quotation Notice */}
+              <div className="pt-4">
+                <span className="text-[11px] uppercase tracking-wider text-[#A0AEC0] block">
+                  Wholesale Bulk Pricing:
+                </span>
+                <span className="text-xl sm:text-2xl font-bold text-[#D4AF37] uppercase tracking-wide font-royal block mt-1">
+                  Quotation on Request
+                </span>
+                <span className="text-[11px] text-[#A0AEC0] block mt-0.5">
+                  Includes yarn dyeing, weaving, and optional luxury packaging.
+                </span>
               </div>
 
               {/* Action Button */}
@@ -289,7 +266,7 @@ Hello Jesutofunmi, please advise on loom capacity and scheduling for our Aso Ebi
                   className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-bold text-sm shadow-lg shadow-green-500/20 hover:brightness-110 transition-all cursor-pointer"
                 >
                   <MessageCircle className="w-5 h-5 fill-white" />
-                  <span>Send Proposal to Jesutofunmi</span>
+                  <span>Request Bulk Quote from Jesutofunmi</span>
                 </a>
               </div>
 

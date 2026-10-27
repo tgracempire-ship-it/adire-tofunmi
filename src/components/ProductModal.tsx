@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Product } from '../types';
-import { useCurrency } from '../context/CurrencyContext';
 import { VENDOR_DETAILS } from '../data/asoOkeProducts';
-import { X, MessageCircle, Clock, ShieldCheck, Sparkles, Check, Share2 } from 'lucide-react';
+import { X, MessageCircle, Clock, ShieldCheck, Sparkles, Check } from 'lucide-react';
 
 interface ProductModalProps {
   product: Product | null;
@@ -18,7 +17,6 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   onAddToCart,
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const { formatPrice } = useCurrency();
   const [activeImage, setActiveImage] = useState<string>('');
 
   useEffect(() => {
@@ -62,9 +60,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   const allImages = [product.image, ...(product.additionalImages || [])];
 
   const whatsappInquiryUrl = `https://wa.me/${VENDOR_DETAILS.whatsappNumber}?text=${encodeURIComponent(
-    `Hello Jesutofunmi, I am interested in ordering: *${product.name}* (${formatPrice(
-      product.priceNGN
-    )}). Please advise on loom availability and measurements.`
+    `Hello Jesutofunmi, I am interested in commissioning: *${product.name}*. Please advise on pricing, loom availability, and measurements.`
   )}`;
 
   return (
@@ -142,13 +138,18 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 {product.subtitle}
               </p>
 
-              {/* Price */}
-              <div className="mt-4 flex items-baseline gap-3">
-                <span className="text-3xl font-black text-white font-heading">
-                  {formatPrice(product.priceNGN)}
-                </span>
-                <span className="text-xs text-[#A0AEC0]">
-                  (Bespoke Handwoven Price)
+              {/* Pricing Consultation Notice */}
+              <div className="mt-4 p-3 rounded-xl bg-[#141B28] border border-[#D4AF37]/30 flex items-center justify-between">
+                <div>
+                  <span className="text-[10px] uppercase text-[#A0AEC0] block">
+                    Bespoke Handwoven Commission:
+                  </span>
+                  <span className="text-sm font-bold text-[#D4AF37] tracking-wider uppercase font-royal">
+                    Price on Request
+                  </span>
+                </div>
+                <span className="text-[11px] text-[#A0AEC0] italic">
+                  Direct artisan rates
                 </span>
               </div>
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { WEDDING_PACKAGES } from '../data/weddingPackages';
-import { useCurrency } from '../context/CurrencyContext';
 import { VENDOR_DETAILS } from '../data/asoOkeProducts';
 import { Crown, Sparkles, Check, MessageCircle, Calendar, Gift, HeartHandshake } from 'lucide-react';
 
@@ -9,7 +8,6 @@ interface BridalGroomSectionProps {
 }
 
 export const BridalGroomSection: React.FC<BridalGroomSectionProps> = ({ onSelectPackage }) => {
-  const { formatPrice } = useCurrency();
 
   return (
     <section id="wedding-packages" className="py-20 bg-[#0C121E] relative border-b border-[#D4AF37]/20">
@@ -33,9 +31,7 @@ export const BridalGroomSection: React.FC<BridalGroomSectionProps> = ({ onSelect
           {WEDDING_PACKAGES.map((pkg) => {
             const isCrown = pkg.tier === 'Royalty';
             const whatsappUrl = `https://wa.me/${VENDOR_DETAILS.whatsappNumber}?text=${encodeURIComponent(
-              `Hello Jesutofunmi, I want to book *${pkg.name}* (${formatPrice(
-                pkg.priceNGN
-              )}) for our upcoming wedding traditional engagement.`
+              `Hello Jesutofunmi, I want to book a consultation for *${pkg.name}* for our upcoming wedding traditional engagement.`
             )}`;
 
             return (
@@ -69,14 +65,14 @@ export const BridalGroomSection: React.FC<BridalGroomSectionProps> = ({ onSelect
                     "{pkg.tagline}"
                   </p>
 
-                  {/* Price */}
+                  {/* Pricing / Commission Banner */}
                   <div className="mt-5 pb-5 border-b border-[#243044]">
                     <span className="text-xs text-[#A0AEC0] block">Full Matrimonial Couple Suite:</span>
-                    <span className="text-3xl sm:text-4xl font-black text-white font-heading">
-                      {formatPrice(pkg.priceNGN)}
+                    <span className="text-xl sm:text-2xl font-bold text-[#D4AF37] uppercase tracking-wider font-royal">
+                      Pricing Upon Consultation
                     </span>
-                    <span className="text-[11px] text-[#D4AF37] block mt-1">
-                      Lead Time: <strong>{pkg.leadTime}</strong> (Rush slots available)
+                    <span className="text-[11px] text-[#A0AEC0] block mt-1">
+                      Lead Time: <strong className="text-white">{pkg.leadTime}</strong> (Rush slots available)
                     </span>
                   </div>
 
