@@ -163,7 +163,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   Pieces Included in this Ensemble:
                 </h4>
                 <ul className="space-y-1.5 text-xs text-[#CBD5E1]">
-                  {product.piecesIncluded.map((piece, i) => (
+                  {(product.piecesIncluded || []).map((piece, i) => (
                     <li key={i} className="flex items-center gap-2">
                       <Check className="w-3.5 h-3.5 text-gold" />
                       <span>{piece}</span>
@@ -178,7 +178,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   Craftsmanship Highlights:
                 </h4>
                 <ul className="space-y-1 text-xs text-[#9CA3AF]">
-                  {product.features.map((feat, i) => (
+                  {(product.features || []).map((feat, i) => (
                     <li key={i} className="flex items-start gap-1.5">
                       <span className="text-gold">•</span>
                       <span>{feat}</span>

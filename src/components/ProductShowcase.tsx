@@ -140,7 +140,7 @@ export const ProductShowcase: React.FC<ProductShowcaseProps> = ({
                   {/* Product Metadata Content */}
                   <div className="p-5 space-y-3">
                     <div className="flex items-center justify-between text-xs text-[#9CA3AF]">
-                      <span>{product.piecesIncluded} Included</span>
+                      <span>{product.piecesIncluded?.length ? `${product.piecesIncluded.length} Pieces` : 'Complete Ensemble'} Included</span>
                       <span className="text-gold font-medium">Bespoke Couture</span>
                     </div>
 
@@ -154,7 +154,7 @@ export const ProductShowcase: React.FC<ProductShowcaseProps> = ({
 
                     {/* Tag Pills */}
                     <div className="flex flex-wrap gap-1.5 pt-1">
-                      {product.tags.slice(0, 3).map((tag, idx) => (
+                      {(product.tags || []).slice(0, 3).map((tag, idx) => (
                         <span
                           key={idx}
                           className="text-[10px] bg-[#141C2B] border border-[#243044] text-[#CBD5E1] px-2 py-0.5 rounded-md"

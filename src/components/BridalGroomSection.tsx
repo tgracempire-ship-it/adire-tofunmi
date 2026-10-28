@@ -93,13 +93,13 @@ export const BridalGroomSection: React.FC<BridalGroomSectionProps> = ({ onSelect
                       </p>
                     </div>
 
-                    {/* Features Checklist */}
+                    {/* Features / Accessories Checklist */}
                     <div className="pt-2">
                       <h4 className="font-bold text-white uppercase tracking-wider mb-2">
                         Included Suite Services:
                       </h4>
                       <ul className="space-y-1.5 pl-1">
-                        {pkg.features.map((feat, idx) => (
+                        {(pkg.accessories || (pkg as any).features || []).map((feat: string, idx: number) => (
                           <li key={idx} className="flex items-start gap-2 text-[#9CA3AF]">
                             <Check className="w-3.5 h-3.5 text-gold flex-shrink-0 mt-0.5" />
                             <span>{feat}</span>
