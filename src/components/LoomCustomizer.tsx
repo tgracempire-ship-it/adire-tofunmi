@@ -29,13 +29,13 @@ export const LoomCustomizer: React.FC<LoomCustomizerProps> = ({ onAddCustomToCar
       title: 'Alaari (Royal Crimson / Magenta)',
       subtitle: 'The King of Yoruba Weaves',
       desc: 'Historically reserved for kings, princes, and victorious celebration. Its crimson tone reflects vibrancy, royalty, and high authority.',
-      defaultSample: '/images/groom-agbada-portrait.jpg'
+      defaultSample: '/assets/selection/alaari.jpg'
     },
     sanyan: {
       title: 'Sanyan (Aristocratic Wild Silk)',
       subtitle: 'Raw Earth Brown & Khaki Silk',
       desc: 'Woven from indigenous Anaphe silk moths. Warm fawn and beige hues symbolizing ancient prestige, wealth, and aristocratic restraint.',
-      defaultSample: '/images/fabric-chocolate-roll.jpg'
+      defaultSample: '/assets/selection/sanyan.jpg'
     },
     etu: {
       title: 'Etu (Indigo Guinea Fowl Weave)',
@@ -47,13 +47,13 @@ export const LoomCustomizer: React.FC<LoomCustomizerProps> = ({ onAddCustomToCar
       title: 'Metallic Lurex (Contemporary Shimmer)',
       subtitle: 'Modern Wedding Glamour & Gold Thread',
       desc: 'Intertwined with gleaming metallic filaments that capture photography flashes and ballroom chandeliers with majestic brilliance.',
-      defaultSample: '/images/bride-grey-gold.jpg'
+      defaultSample: '/assets/selection/gele.jpg'
     },
     beaded: {
       title: 'Beaded & Stone Haute Couture',
       subtitle: 'Pearl Studded & Scalloped Trims',
       desc: 'Hand-sewn crystal beads, dangling fringe tassels, and intricate cord work placed along collar, cuffs, and hem.',
-      defaultSample: '/images/bride-striped-gown.jpg'
+      defaultSample: '/assets/selection/textile-detail.jpg'
     }
   };
 
@@ -68,10 +68,42 @@ export const LoomCustomizer: React.FC<LoomCustomizerProps> = ({ onAddCustomToCar
 
   // Embellishment options
   const EMBELLISHMENT_OPTIONS = {
-    'pure-classic': { name: 'Pure Classic Handloom (Clean Weave)', note: 'Minimalist Ancestral' },
-    'bullion-embroidery': { name: 'Handcrafted Golden Bullion Chest / Border Work', note: 'Royal Bullion Thread' },
-    'coral-pearl-fringes': { name: 'Hand-strung Coral & Pearl Dangling Fringes', note: 'Luxury Beaded Hem' },
-    'crystal-stone-royal': { name: 'All-over Swarovski Crystal & Diamond Stone Studding', note: 'Haute Couture Brilliance' }
+    'pure-classic': { name: 'Pure Classic Handloom (Clean Weave)', note: 'Minimalist Ancestral', sample: '/assets/selection/textile-detail.jpg' },
+    'bullion-embroidery': { name: 'Handcrafted Golden Bullion Chest / Border Work', note: 'Royal Bullion Thread', sample: '/assets/selection/gele.jpg' },
+    'coral-pearl-fringes': { name: 'Hand-strung Coral & Pearl Dangling Fringes', note: 'Luxury Beaded Hem', sample: '/assets/plates/tassel-photo.png' },
+    'crystal-stone-royal': { name: 'All-over Swarovski Crystal & Diamond Stone Studding', note: 'Haute Couture Brilliance', sample: '/images/bride-grey-gold.jpg' }
+  };
+
+  const PATTERN_OPTIONS = {
+    'solid-regal': { name: 'Solid Regal', sample: '/assets/selection/alaari.jpg' },
+    'ancestral-pinstripe': { name: 'Ancestral Pinstripe', sample: '/images/fabric-blue-stripes.jpg' },
+    'eyelet-perforated': { name: 'Eyelet / Jawu', sample: '/assets/selection/textile-detail.jpg' },
+    'checker-herringbone': { name: 'Checker Herringbone', sample: '/assets/selection/sanyan.jpg' }
+  } as const;
+
+  const ENSEMBLE_SAMPLES = {
+    'bridal-full': '/images/bride-grey-gold.jpg',
+    'groom-agbada': '/images/groom-agbada-portrait.jpg',
+    'couple-twinning': '/assets/selection/couple.jpg',
+    'aso-ebi-set': '/assets/selection/loom.jpg',
+    'children-occasion': '/images/child-traditional-wrap.jpg'
+  } as const;
+
+  const COLOR_SWATCHES: Record<string, string> = {
+    'Royal Crimson (#8A1528)': '#8A1528',
+    'Deep Indigo Navy (#152238)': '#152238',
+    'Raw Silk Tan / Brown (#D9C3A3)': '#D9C3A3',
+    'Onyx Midnight Black (#0A0A0A)': '#0A0A0A',
+    'Emerald Monarch Green (#0F382A)': '#0F382A',
+    'Pure Sovereign White (#FFFFFF)': '#FFFFFF',
+    'Lavender Lilac Orchid (#7E5A8F)': '#7E5A8F',
+    'Custom Wedding Dye Match': '#E27D60',
+    'Champagne Gold (#D4AF37)': '#D4AF37',
+    'Polished Silver Lurex (#E2E8F0)': '#E2E8F0',
+    'Copper Rose Gold (#C87D55)': '#C87D55',
+    'Cobalt Blue Highlights (#1E40AF)': '#1E40AF',
+    'Coral Peach Tones (#E27D60)': '#E27D60',
+    'Tone-on-Tone Monochromatic': '#626964'
   };
 
   // Generate WhatsApp Message Link
@@ -260,11 +292,33 @@ Please advise on custom quote, loom availability, and next steps for sample swat
               </div>
             </div>
 
-            {/* Step 4: Embellishment & Detailing */}
+            {/* Step 4: Pattern Language */}
+            <div>
+              <label className="text-xs font-bold uppercase tracking-wider text-[var(--ink)] flex items-center gap-2 mb-3">
+                <Palette className="w-4 h-4 text-[var(--cobalt)]" />
+                <span>4. Choose Pattern Language</span>
+              </label>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {Object.entries(PATTERN_OPTIONS).map(([key, option]) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => setPatternStyle(key as typeof patternStyle)}
+                    className={`selection-swatch ${patternStyle === key ? 'selection-swatch--active' : ''}`}
+                  >
+                    <img src={option.sample} alt="" className="selection-swatch__image" />
+                    <span>{option.name}</span>
+                    {patternStyle === key && <Check className="w-3.5 h-3.5" />}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Step 5: Embellishment & Detailing */}
             <div>
               <label className="text-xs font-bold uppercase tracking-wider text-[var(--ink)] flex items-center gap-2 mb-3">
                 <Sparkles className="w-4 h-4 text-[var(--cobalt)]" />
-                <span>4. Bullion Embroidery & Embellishment</span>
+                <span>5. Bullion Embroidery & Embellishment</span>
               </label>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -279,6 +333,7 @@ Please advise on custom quote, loom availability, and next steps for sample swat
                         : 'border-[var(--line)] bg-[var(--chalk)] hover:border-[var(--cobalt)]/40 text-[var(--ink)]'
                     }`}
                   >
+                    <img src={val.sample} alt="" className="mb-3 h-16 w-full rounded-md object-cover" />
                     <div className="flex items-center justify-between mb-1">
                       <span className={`text-xs font-bold ${embellishment === key ? 'text-[var(--cobalt)]' : 'text-[var(--ink)]'}`}>
                         {val.name}
@@ -385,20 +440,33 @@ Please advise on custom quote, loom availability, and next steps for sample swat
                 </span>
               </div>
 
-              {/* Sample Preview Image */}
-              <div className="relative aspect-video rounded-lg overflow-hidden mb-4 border border-[var(--line)] bg-[#e8e2d8]">
-                <img
-                  src={WEAVE_DETAILS[weaveType].defaultSample}
-                  alt={WEAVE_DETAILS[weaveType].title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-3">
-                  <span className="text-[10px] font-bold text-[var(--saffron)] uppercase tracking-wider">
-                    {WEAVE_DETAILS[weaveType].title}
-                  </span>
-                  <span className="text-xs font-semibold text-white">
-                    {ENSEMBLE_DETAILS[ensemble].name}
-                  </span>
+              {/* Live Selection Preview */}
+              <div className="selection-preview mb-4">
+                <div className="selection-preview__hero">
+                  <img src={ENSEMBLE_SAMPLES[ensemble]} alt={ENSEMBLE_DETAILS[ensemble].name} />
+                  <div className="selection-preview__label">
+                    <span>{ENSEMBLE_DETAILS[ensemble].name}</span>
+                    <strong>{WEAVE_DETAILS[weaveType].title}</strong>
+                  </div>
+                </div>
+                <div className="selection-preview__rail">
+                  <div className="selection-preview__tile">
+                    <img src={WEAVE_DETAILS[weaveType].defaultSample} alt={WEAVE_DETAILS[weaveType].title} />
+                    <span>{WEAVE_DETAILS[weaveType].title.split(' ')[0]} weave</span>
+                  </div>
+                  <div className="selection-preview__tile">
+                    <img src={EMBELLISHMENT_OPTIONS[embellishment].sample} alt={EMBELLISHMENT_OPTIONS[embellishment].name} />
+                    <span>{EMBELLISHMENT_OPTIONS[embellishment].note}</span>
+                  </div>
+                  <div className="selection-preview__tile selection-preview__tile--palette">
+                    <span className="selection-preview__swatch" style={{ backgroundColor: COLOR_SWATCHES[baseColor] }} />
+                    <span className="selection-preview__swatch" style={{ backgroundColor: COLOR_SWATCHES[accentColor] }} />
+                    <span>{PATTERN_OPTIONS[patternStyle].name}</span>
+                  </div>
+                </div>
+                <div className="selection-preview__meta">
+                  <span>{tailoringOption === 'custom-tailored' ? 'Full bespoke tailoring' : 'Raw loom strips'}</span>
+                  <span>{headwearIncluded ? 'Matching gele / fila included' : 'Headwear excluded'}</span>
                 </div>
               </div>
 
