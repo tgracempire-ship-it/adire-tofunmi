@@ -27,9 +27,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const links = [
     { label: 'Lookbook', href: '#collection' },
     { label: 'Bespoke Loom', href: '#loom-builder', action: onOpenCustomizer },
-    { label: 'Weddings', href: '#wedding-packages' },
-    { label: 'Aso Ebi Bulk', href: '#aso-ebi-calc', action: onOpenAsoEbi },
-    { label: 'Artisan Story', href: '#story' },
+    { label: 'Our Story', href: '#story' },
   ];
 
   const closeAndRun = (action?: () => void) => {
@@ -92,18 +90,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Calendar className="h-3.5 w-3.5" />
             <span>Book Consultation</span>
           </button>
-
-          {/* Direct WhatsApp Pill (hidden on very small screens, accessible in menu) */}
-          <a
-            href={`https://wa.me/${VENDOR_DETAILS.whatsappNumber}?text=Hello%20Jesutofunmi,%20I%20am%20inquiring%20about%20ordering%20Aso%20Oke`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden xl:flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#25D366] text-[#070A0F] text-xs font-bold hover:brightness-105 transition-all shadow-sm"
-            title="Chat directly with Jesutofunmi"
-          >
-            <MessageCircle className="w-3.5 h-3.5 fill-[#070A0F]" />
-            <span>WhatsApp</span>
-          </a>
 
           {/* Mobile Menu Toggle Button */}
           <button

@@ -1,6 +1,5 @@
 import React from 'react';
-import { ArrowDownRight, ArrowRight, Globe2, Timer, Hand, Calendar, MessageCircle } from 'lucide-react';
-import { VENDOR_DETAILS } from '../data/asoOkeProducts';
+import { ArrowDownRight, ArrowRight, Globe2, Timer, Hand, Calendar } from 'lucide-react';
 
 interface HeroProps {
   onOpenCustomizer: () => void;
@@ -26,16 +25,8 @@ export const Hero: React.FC<HeroProps> = ({
           </p>
 
           <p className="max-w-[18rem] text-xs sm:text-sm leading-relaxed text-[var(--muted)] mt-4">
-            Bespoke Yoruba Aso Oke, handwoven strip by strip on traditional narrow looms for weddings, royal grooms, and milestone family celebrations.
+            Handwoven Yoruba Aso Oke for weddings and the family moments worth keeping.
           </p>
-        </div>
-
-        <div className="hero-rail-nav py-4" aria-label="Atelier sections">
-          <a href="#loom-builder">Atelier Simulator</a>
-          <a href="#collection">Heirloom Lookbook</a>
-          <a href="#wedding-packages">Wedding Suites</a>
-          <a href="#aso-ebi-calc">Aso Ebi Bulk</a>
-          <a href="#story">Artisan Story</a>
         </div>
 
         <div className="space-y-2 pt-2">
@@ -52,7 +43,7 @@ export const Hero: React.FC<HeroProps> = ({
               onClick={onExploreCollection}
               className="text-link text-xs text-[var(--muted)] hover:text-[var(--ink)]"
             >
-              <span>View Lookbook Collection</span>
+              <span>View the lookbook</span>
               <ArrowDownRight className="h-3.5 w-3.5" />
             </button>
           </div>
@@ -86,7 +77,7 @@ export const Hero: React.FC<HeroProps> = ({
           Dress the day your family will retell.
         </h1>
         <p>
-          Unbroken ancestral mastery woven on authentic wooden looms. From royal crimson Alaari to wild-silk Sanyan and deep indigo Etu.
+          Authentic Aso Oke, made slowly and commissioned around your day.
         </p>
       </div>
 
@@ -114,15 +105,6 @@ export const Hero: React.FC<HeroProps> = ({
             <ArrowRight className="h-4 w-4" />
           </button>
 
-          <a
-            href={`https://wa.me/${VENDOR_DETAILS.whatsappNumber}?text=Hello%20Jesutofunmi,%20I%20would%20like%20to%20order%20bespoke%20Aso%20Oke`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 py-2 px-3 rounded text-[11px] font-bold bg-[#25D366] text-[#070A0F] shadow-sm hover:brightness-105 transition-all text-center"
-          >
-            <MessageCircle className="h-3.5 w-3.5 fill-[#070A0F]" />
-            <span>Chat: {VENDOR_DETAILS.phone}</span>
-          </a>
         </div>
 
         <div className="oriki-swatch" aria-hidden="true">
