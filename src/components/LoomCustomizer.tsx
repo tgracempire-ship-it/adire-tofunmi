@@ -29,13 +29,13 @@ export const LoomCustomizer: React.FC<LoomCustomizerProps> = ({ onAddCustomToCar
       title: 'Alaari (Royal Crimson / Magenta)',
       subtitle: 'The King of Yoruba Weaves',
       desc: 'Historically reserved for kings, princes, and victorious celebration. Its crimson tone reflects vibrancy, royalty, and high authority.',
-      defaultSample: '/assets/selection/alaari.jpg'
+      defaultSample: '/assets/selection/alaari.webp'
     },
     sanyan: {
       title: 'Sanyan (Aristocratic Wild Silk)',
       subtitle: 'Raw Earth Brown & Khaki Silk',
       desc: 'Woven from indigenous Anaphe silk moths. Warm fawn and beige hues symbolizing ancient prestige, wealth, and aristocratic restraint.',
-      defaultSample: '/assets/selection/sanyan.jpg'
+      defaultSample: '/assets/selection/sanyan.webp'
     },
     etu: {
       title: 'Etu (Indigo Guinea Fowl Weave)',
@@ -47,13 +47,13 @@ export const LoomCustomizer: React.FC<LoomCustomizerProps> = ({ onAddCustomToCar
       title: 'Metallic Lurex (Contemporary Shimmer)',
       subtitle: 'Modern Wedding Glamour & Gold Thread',
       desc: 'Intertwined with gleaming metallic filaments that capture photography flashes and ballroom chandeliers with majestic brilliance.',
-      defaultSample: '/assets/selection/gele.jpg'
+      defaultSample: '/assets/selection/gele.webp'
     },
     beaded: {
       title: 'Beaded & Stone Haute Couture',
       subtitle: 'Pearl Studded & Scalloped Trims',
       desc: 'Hand-sewn crystal beads, dangling fringe tassels, and intricate cord work placed along collar, cuffs, and hem.',
-      defaultSample: '/assets/selection/textile-detail.jpg'
+      defaultSample: '/assets/selection/textile-detail.webp'
     }
   };
 
@@ -68,24 +68,24 @@ export const LoomCustomizer: React.FC<LoomCustomizerProps> = ({ onAddCustomToCar
 
   // Embellishment options
   const EMBELLISHMENT_OPTIONS = {
-    'pure-classic': { name: 'Pure Classic Handloom (Clean Weave)', note: 'Minimalist Ancestral', sample: '/assets/selection/textile-detail.jpg' },
-    'bullion-embroidery': { name: 'Handcrafted Golden Bullion Chest / Border Work', note: 'Royal Bullion Thread', sample: '/assets/selection/gele.jpg' },
-    'coral-pearl-fringes': { name: 'Hand-strung Coral & Pearl Dangling Fringes', note: 'Luxury Beaded Hem', sample: '/assets/plates/tassel-photo.png' },
+    'pure-classic': { name: 'Pure Classic Handloom (Clean Weave)', note: 'Minimalist Ancestral', sample: '/assets/selection/textile-detail.webp' },
+    'bullion-embroidery': { name: 'Handcrafted Golden Bullion Chest / Border Work', note: 'Royal Bullion Thread', sample: '/assets/selection/gele.webp' },
+    'coral-pearl-fringes': { name: 'Hand-strung Coral & Pearl Dangling Fringes', note: 'Luxury Beaded Hem', sample: '/assets/plates/tassel-photo.webp' },
     'crystal-stone-royal': { name: 'All-over Swarovski Crystal & Diamond Stone Studding', note: 'Haute Couture Brilliance', sample: '/images/bride-grey-gold.jpg' }
   };
 
   const PATTERN_OPTIONS = {
-    'solid-regal': { name: 'Solid Regal', sample: '/assets/selection/alaari.jpg' },
+    'solid-regal': { name: 'Solid Regal', sample: '/assets/selection/alaari.webp' },
     'ancestral-pinstripe': { name: 'Ancestral Pinstripe', sample: '/images/fabric-blue-stripes.jpg' },
-    'eyelet-perforated': { name: 'Eyelet / Jawu', sample: '/assets/selection/textile-detail.jpg' },
-    'checker-herringbone': { name: 'Checker Herringbone', sample: '/assets/selection/sanyan.jpg' }
+    'eyelet-perforated': { name: 'Eyelet / Jawu', sample: '/assets/selection/textile-detail.webp' },
+    'checker-herringbone': { name: 'Checker Herringbone', sample: '/assets/selection/sanyan.webp' }
   } as const;
 
   const ENSEMBLE_SAMPLES = {
     'bridal-full': '/images/bride-grey-gold.jpg',
     'groom-agbada': '/images/groom-agbada-portrait.jpg',
-    'couple-twinning': '/assets/selection/couple.jpg',
-    'aso-ebi-set': '/assets/selection/loom.jpg',
+    'couple-twinning': '/assets/selection/couple.webp',
+    'aso-ebi-set': '/assets/selection/loom.webp',
     'children-occasion': '/images/child-traditional-wrap.jpg'
   } as const;
 

@@ -262,7 +262,7 @@
   flex-direction: column;
   justify-content: flex-end;
   background-color: var(--cobalt);
-  background-image: url('/assets/materials/oriki-cobalt.png');
+  background-image: url('/assets/materials/oriki-cobalt.webp');
   background-position: center;
   background-size: cover;
   background-blend-mode: multiply;
@@ -294,7 +294,7 @@
   justify-content: space-between;
   overflow: hidden;
   background-color: #f7ede0;
-  background-image: url('/assets/materials/oriki-saffron.png');
+  background-image: url('/assets/materials/oriki-saffron.webp');
   background-position: center;
   background-size: cover;
   background-blend-mode: soft-light;

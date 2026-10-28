@@ -62,7 +62,7 @@ export const Hero: React.FC<HeroProps> = ({
       {/* Real Plate 1: Royal Groom in Alaari Agbada */}
       <figure className="oriki-photo oriki-groom">
         <img
-          src="/assets/plates/groom-photo.png"
+          src="/assets/plates/groom-photo.webp"
           alt="Royal groom wearing a crimson handwoven Alaari Aso Oke ensemble with coral beads"
         />
         <figcaption>Royal Groom · Alaari Crimson</figcaption>
@@ -71,7 +71,7 @@ export const Hero: React.FC<HeroProps> = ({
       {/* Real Plate 2: Bride in Shimmering Gele */}
       <figure className="oriki-photo oriki-bride">
         <img
-          src="/assets/plates/bride-photo.png"
+          src="/assets/plates/bride-photo.webp"
           alt="Bride wearing a luxury handwoven ensemble with sculpted metallic Gele"
         />
         <figcaption>Bridal Suite · Sculpted Gele</figcaption>
@@ -126,7 +126,7 @@ export const Hero: React.FC<HeroProps> = ({
         </div>
 
         <div className="oriki-swatch" aria-hidden="true">
-          <img src="/assets/plates/tassel-photo.png" alt="Handcrafted Aso Oke tassel" />
+          <img src="/assets/plates/tassel-photo.webp" alt="Handcrafted Aso Oke tassel" />
         </div>
       </div>
     </div>
@@ -154,7 +154,7 @@ export const Hero: React.FC<HeroProps> = ({
         </button>
       </div>
 
-      <img src="/assets/plates/step-one-photo.png" alt="Close detail of woven Aso Oke cloth" />
+      <img src="/assets/plates/step-one-photo.webp" alt="Close detail of woven Aso Oke cloth" />
 
       <div className="atelier-step">
         <strong>2. Shape Your Silhouette</strong>
@@ -165,7 +165,7 @@ export const Hero: React.FC<HeroProps> = ({
         </button>
       </div>
 
-      <img src="/assets/plates/step-two-photo.png" alt="Hands working at a traditional loom" />
+      <img src="/assets/plates/step-two-photo.webp" alt="Hands working at a traditional loom" />
 
       <div className="atelier-step">
         <strong>3. Reserve Loom Slot</strong>
@@ -176,7 +176,7 @@ export const Hero: React.FC<HeroProps> = ({
         </button>
       </div>
 
-      <img src="/assets/plates/step-three-photo.png" alt="Traditional narrow loom weaving in progress" />
+      <img src="/assets/plates/step-three-photo.webp" alt="Traditional narrow loom weaving in progress" />
     </div>
   </section>
 );
