@@ -116,10 +116,10 @@ Please advise on custom quote, loom availability, and next steps for sample swat
   };
 
   return (
-    <section id="loom-builder" className="py-20 bg-[#070A0F] relative border-b border-[#D4AF37]/20">
+    <section id="loom-builder" className="atelier-workbench py-20 bg-[#070A0F] relative border-b border-[#D4AF37]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="atelier-workbench__heading text-center max-w-3xl mx-auto mb-14">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FDFBF7] font-heading">
             Bespoke Loom <span className="text-gold font-royal">Atelier Simulator</span>
           </h2>
@@ -130,7 +130,7 @@ Please advise on custom quote, loom availability, and next steps for sample swat
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Controls: Left & Center Columns */}
-          <div className="lg:col-span-8 bg-[#0D1422] border border-[#243044] rounded-2xl p-6 sm:p-8 space-y-8">
+          <div className="atelier-controls lg:col-span-8 bg-[#0D1422] border border-[#243044] rounded-2xl p-6 sm:p-8 space-y-8">
             {/* Step 1: Traditional Weave Heritage Selection */}
             <div>
               <label className="text-xs font-bold uppercase tracking-wider text-gold-light flex items-center gap-2 mb-3">
@@ -371,7 +371,7 @@ Please advise on custom quote, loom availability, and next steps for sample swat
 
           {/* Right Column: Dynamic Specification & Live Summary */}
           <div className="lg:col-span-4 space-y-6">
-            <div className="bg-[#0D1422] border border-[#D4AF37]/35 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+            <div className="atelier-summary bg-[#0D1422] border border-[#D4AF37]/35 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
               <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#243044]">
                 <h3 className="text-base font-bold text-white font-heading">
                   Bespoke Commission Summary

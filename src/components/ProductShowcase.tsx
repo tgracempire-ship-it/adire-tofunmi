@@ -36,10 +36,10 @@ export const ProductShowcase: React.FC<ProductShowcaseProps> = ({
   });
 
   return (
-    <section id="collection" className="py-20 bg-[#070A0F] relative border-b border-[#D4AF37]/20">
+    <section id="collection" className="editorial-section collection-section py-20 bg-[#070A0F] relative border-b border-[#D4AF37]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div className="editorial-heading flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FDFBF7] font-heading">
               Curated <span className="text-gold font-royal">Heirloom Creations</span>
@@ -80,7 +80,7 @@ export const ProductShowcase: React.FC<ProductShowcaseProps> = ({
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="editorial-product-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProducts.map((product) => {
             const whatsappUrl = `https://wa.me/${VENDOR_DETAILS.whatsappNumber}?text=${encodeURIComponent(
               `Hello Jesutofunmi, I want to inquire about commissioning the *${product.name}* from Threads of Heritage.`
@@ -89,7 +89,7 @@ export const ProductShowcase: React.FC<ProductShowcaseProps> = ({
             return (
               <div
                 key={product.id}
-                className="luxury-card overflow-hidden group flex flex-col justify-between"
+                className="product-tile overflow-hidden group flex flex-col justify-between"
               >
                 <div>
                   {/* Image Container with Badges */}
@@ -138,7 +138,7 @@ export const ProductShowcase: React.FC<ProductShowcaseProps> = ({
                   </div>
 
                   {/* Product Metadata Content */}
-                  <div className="p-5 space-y-3">
+                  <div className="product-tile__copy p-5 space-y-3">
                     <div className="flex items-center justify-between text-xs text-[#9CA3AF]">
                       <span>{product.piecesIncluded?.length ? `${product.piecesIncluded.length} Pieces` : 'Complete Ensemble'} Included</span>
                       <span className="text-gold font-medium">Bespoke Couture</span>
@@ -167,7 +167,7 @@ export const ProductShowcase: React.FC<ProductShowcaseProps> = ({
                 </div>
 
                 {/* Card Footer: Price on Request & Actions */}
-                <div className="p-5 pt-0 border-t border-[#1C2638] mt-3">
+                <div className="product-tile__footer p-5 pt-0 border-t border-[#1C2638] mt-3">
                   <div className="pt-3 flex items-center justify-between">
                     <div>
                       <span className="text-[10px] uppercase tracking-wider text-[#9CA3AF] block font-semibold">

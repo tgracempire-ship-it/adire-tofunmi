@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-28T00:00:00+01:00",
+  "title": "Design System: Oriki in Motion",
+  "extensions": {
+    "colorMeta": {
+      "chalk": {
+        "role": "neutral",
+        "displayName": "Chalk Ground",
+        "canonical": "#f7f4ef",
+        "tonalRamp": ["oklch(15% 0.008 75)", "oklch(27% 0.008 75)", "oklch(39% 0.008 75)", "oklch(52% 0.008 75)", "oklch(65% 0.008 75)", "oklch(77% 0.008 75)", "oklch(88% 0.008 75)", "oklch(95% 0.008 75)"]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "canonical": "#fffdf9",
+        "tonalRamp": ["oklch(15% 0.006 78)", "oklch(27% 0.006 78)", "oklch(39% 0.006 78)", "oklch(52% 0.006 78)", "oklch(65% 0.006 78)", "oklch(77% 0.006 78)", "oklch(88% 0.006 78)", "oklch(95% 0.006 78)"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Palm Ink",
+        "canonical": "#17201f",
+        "tonalRamp": ["oklch(15% 0.015 190)", "oklch(27% 0.015 190)", "oklch(39% 0.015 190)", "oklch(52% 0.015 190)", "oklch(65% 0.015 190)", "oklch(77% 0.015 190)", "oklch(88% 0.015 190)", "oklch(95% 0.015 190)"]
+      },
+      "muted-ink": {
+        "role": "neutral",
+        "displayName": "Quiet Palm",
+        "canonical": "#626964",
+        "tonalRamp": ["oklch(15% 0.01 160)", "oklch(27% 0.01 160)", "oklch(39% 0.01 160)", "oklch(52% 0.01 160)", "oklch(65% 0.01 160)", "oklch(77% 0.01 160)", "oklch(88% 0.01 160)", "oklch(95% 0.01 160)"]
+      },
+      "cobalt": {
+        "role": "primary",
+        "displayName": "Atelier Cobalt",
+        "canonical": "#07358c",
+        "tonalRamp": ["oklch(15% 0.14 260)", "oklch(27% 0.14 260)", "oklch(39% 0.14 260)", "oklch(52% 0.14 260)", "oklch(65% 0.14 260)", "oklch(77% 0.14 260)", "oklch(88% 0.14 260)", "oklch(95% 0.14 260)"]
+      },
+      "deep-cobalt": {
+        "role": "primary",
+        "displayName": "Deep Cobalt",
+        "canonical": "#052664",
+        "tonalRamp": ["oklch(15% 0.11 260)", "oklch(27% 0.11 260)", "oklch(39% 0.11 260)", "oklch(52% 0.11 260)", "oklch(65% 0.11 260)", "oklch(77% 0.11 260)", "oklch(88% 0.11 260)", "oklch(95% 0.11 260)"]
+      },
+      "coral": {
+        "role": "secondary",
+        "displayName": "Kola Coral",
+        "canonical": "#ef5a45",
+        "tonalRamp": ["oklch(15% 0.17 30)", "oklch(27% 0.17 30)", "oklch(39% 0.17 30)", "oklch(52% 0.17 30)", "oklch(65% 0.17 30)", "oklch(77% 0.17 30)", "oklch(88% 0.17 30)", "oklch(95% 0.17 30)"]
+      },
+      "saffron": {
+        "role": "tertiary",
+        "displayName": "Loom Saffron",
+        "canonical": "#f2aa1c",
+        "tonalRamp": ["oklch(15% 0.15 75)", "oklch(27% 0.15 75)", "oklch(39% 0.15 75)", "oklch(52% 0.15 75)", "oklch(65% 0.15 75)", "oklch(77% 0.15 75)", "oklch(88% 0.15 75)", "oklch(95% 0.15 75)"]
+      },
+      "cool-wash": {
+        "role": "neutral",
+        "displayName": "Cool Wash",
+        "canonical": "#eef1f7",
+        "tonalRamp": ["oklch(15% 0.01 255)", "oklch(27% 0.01 255)", "oklch(39% 0.01 255)", "oklch(52% 0.01 255)", "oklch(65% 0.01 255)", "oklch(77% 0.01 255)", "oklch(88% 0.01 255)", "oklch(95% 0.01 255)"]
+      },
+      "warm-divider": {
+        "role": "neutral",
+        "displayName": "Warm Divider",
+        "canonical": "rgba(23, 32, 31, 0.18)",
+        "tonalRamp": ["oklch(15% 0.01 180)", "oklch(27% 0.01 180)", "oklch(39% 0.01 180)", "oklch(52% 0.01 180)", "oklch(65% 0.01 180)", "oklch(77% 0.01 180)", "oklch(88% 0.01 180)", "oklch(95% 0.01 180)"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Processional Display", "purpose": "Short hero declarations and major ceremonial statements." },
+      "section-heading": { "displayName": "Editorial Section Heading", "purpose": "Oversized section transitions and collection headings." },
+      "body": { "displayName": "Atelier Body", "purpose": "Readable product, process, and configuration guidance." },
+      "label": { "displayName": "Commission Label", "purpose": "Uppercase navigation, captions, proof points, and actions." }
+    },
+    "shadows": [
+      { "name": "action-lift", "value": "0 10px 28px rgba(7,53,140,.18)", "purpose": "Restrained ambient lift for primary cobalt conversion buttons." },
+      { "name": "card-hover", "value": "0 18px 45px rgba(7,53,140,.12)", "purpose": "Interaction-only lift for feature containers." },
+      { "name": "modal-veil", "value": "0 0 0 100vmax rgba(5,38,100,.78)", "purpose": "Conceptual preview of the deep-cobalt dialog backdrop; implementation uses backdrop color plus 8px blur." }
+    ],
+    "motion": [
+      { "name": "state-fast", "value": "160ms ease", "purpose": "Navigation color and small translation feedback." },
+      { "name": "state-standard", "value": "200ms ease", "purpose": "Button background, color, and lift transitions." },
+      { "name": "image-reveal", "value": "900ms cubic-bezier(.16,1,.3,1)", "purpose": "Subtle scale response on commission photography." },
+      { "name": "textile-procession", "value": "14s cubic-bezier(.16,1,.3,1)", "purpose": "Slow material drift across cobalt, coral, and saffron textile fields." },
+      { "name": "reduced-motion", "value": ".01ms linear", "purpose": "Collapses animation and transition duration when prefers-reduced-motion is enabled." }
+    ],
+    "breakpoints": [
+      { "name": "mobile-compact", "value": "640px" },
+      { "name": "vertical-score", "value": "760px" },
+      { "name": "compressed-procession", "value": "1100px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Hero Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The decisive build action used inside saffron and chalk conversion fields.",
+      "html": "<button class=\"ds-btn-primary\">BUILD YOUR ASO OKE <span aria-hidden=\"true\">↗</span></button>",
+      "css": ".ds-btn-primary{display:flex;width:100%;min-height:58px;align-items:center;justify-content:space-between;border:0;border-radius:0;background:var(--ink,#17201f);color:var(--chalk,#f7f4ef);padding:1rem 1.15rem;font-family:'Albert Sans',system-ui,sans-serif;font-size:.75rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;transition:background 200ms ease}.ds-btn-primary:hover{background:var(--cobalt,#07358c)}.ds-btn-primary:focus-visible{outline:3px solid var(--coral,#ef5a45);outline-offset:3px}.ds-btn-primary:active{background:var(--cobalt-deep,#052664)}"
+    },
+    {
+      "name": "Secondary Outline Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A lower-commitment browsing action that remains structural and square.",
+      "html": "<button class=\"ds-btn-secondary\">BROWSE COMMISSIONS <span aria-hidden=\"true\">↘</span></button>",
+      "css": ".ds-btn-secondary{display:flex;width:100%;min-height:58px;align-items:center;justify-content:space-between;border:1px solid var(--ink,#17201f);border-radius:0;background:transparent;color:var(--ink,#17201f);padding:1rem 1.15rem;font-family:'Albert Sans',system-ui,sans-serif;font-size:.75rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;transition:background 180ms ease}.ds-btn-secondary:hover{background:rgba(255,255,255,.35)}.ds-btn-secondary:focus-visible{outline:3px solid var(--coral,#ef5a45);outline-offset:3px}.ds-btn-secondary:active{background:rgba(23,32,31,.1)}"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "The practical Paper White field used to find weaves, colors, or ensembles.",
+      "html": "<label class=\"ds-field-label\" for=\"ds-search\">SEARCH COMMISSIONS</label><input class=\"ds-input\" id=\"ds-search\" type=\"search\" placeholder=\"Search by weave, color, or ensemble…\">",
+      "css": ".ds-field-label{display:block;margin-bottom:.5rem;color:var(--muted,#626964);font-family:'Albert Sans',system-ui,sans-serif;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.ds-input{width:100%;border:1px solid var(--line,rgba(23,32,31,.18));border-radius:.25rem;background:var(--paper,#fffdf9);color:var(--ink,#17201f);padding:.625rem 1rem;font-family:'Albert Sans',system-ui,sans-serif;font-size:.75rem;transition:border-color 180ms ease}.ds-input::placeholder{color:#838884}.ds-input:hover{border-color:rgba(7,53,140,.32)}.ds-input:focus-visible{outline:3px solid var(--coral,#ef5a45);outline-offset:3px;border-color:var(--cobalt,#07358c)}"
+    },
+    {
+      "name": "Selected Filter Chip",
+      "kind": "chip",
+      "description": "The active collection filter, using saffron to identify a current choice.",
+      "html": "<button class=\"ds-chip\" aria-pressed=\"true\">ALL ENSEMBLES</button>",
+      "css": ".ds-chip{border:1px solid var(--saffron,#f2aa1c);border-radius:.25rem;background:var(--saffron,#f2aa1c);color:var(--ink,#17201f);padding:.5rem 1rem;font-family:'Albert Sans',system-ui,sans-serif;font-size:.75rem;font-weight:800;white-space:nowrap;transition:background 180ms ease,border-color 180ms ease}.ds-chip:hover{background:#f7bb43}.ds-chip:focus-visible{outline:3px solid var(--coral,#ef5a45);outline-offset:3px}.ds-chip:active{background:#dc9410}"
+    },
+    {
+      "name": "Product Tile",
+      "kind": "card",
+      "refersTo": "product-card",
+      "description": "A square, image-first commission card designed to sit against 1px ink grid seams.",
+      "html": "<article class=\"ds-product\"><div class=\"ds-product-image\" role=\"img\" aria-label=\"Commission photography placeholder\"></div><div class=\"ds-product-copy\"><span class=\"ds-product-meta\">BESPOKE COUTURE</span><h3>ALAARI COMMISSION</h3><p>Handwoven for a defining family moment, shaped to the client's palette and ceremony.</p></div><footer><span>PRICE ON REQUEST</span><button>DETAILS ↗</button></footer></article>",
+      "css": ".ds-product{overflow:hidden;border:0;border-radius:0;background:var(--paper,#fffdf9);color:var(--ink,#17201f);font-family:'Albert Sans',system-ui,sans-serif;transition:transform 240ms ease}.ds-product:hover{transform:translateY(-4px)}.ds-product-image{aspect-ratio:4/3;background:linear-gradient(135deg,var(--cobalt,#07358c),var(--coral,#ef5a45))}.ds-product-copy{padding:1.6rem}.ds-product-meta{color:var(--cobalt,#07358c);font-size:.65rem;font-weight:800;letter-spacing:.11em}.ds-product h3{max-width:18ch;margin:.75rem 0;font-family:'Antonio','Arial Narrow',sans-serif;font-size:2.25rem;font-weight:600;line-height:.95;letter-spacing:-.025em;text-transform:uppercase}.ds-product p{margin:0;color:var(--muted,#626964);font-size:.8rem;line-height:1.55}.ds-product footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line,rgba(23,32,31,.18));padding:1.25rem 1.6rem;color:var(--cobalt,#07358c);font-size:.68rem;font-weight:800;letter-spacing:.08em}.ds-product button{border:1px solid var(--line,rgba(23,32,31,.18));border-radius:.25rem;background:transparent;color:var(--ink,#17201f);padding:.5rem .75rem;font:inherit}.ds-product button:hover{background:var(--cobalt,#07358c);color:var(--chalk,#f7f4ef)}.ds-product button:focus-visible{outline:3px solid var(--coral,#ef5a45);outline-offset:3px}"
+    },
+    {
+      "name": "Atelier Navigation",
+      "kind": "nav",
+      "description": "The chalk header identity block and high-contrast Begin action.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Atelier preview\"><a class=\"ds-brand\" href=\"#\"><span class=\"ds-mark\">TH</span><span><strong>THREADS OF HERITAGE</strong><small>ASO OKE ATELIER · NIGERIA</small></span></a><a class=\"ds-begin\" href=\"#\">BEGIN ↗</a></nav>",
+      "css": ".ds-nav{display:flex;min-height:72px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line,rgba(23,32,31,.18));background:var(--chalk,#f7f4ef);padding:.75rem 1rem;font-family:'Albert Sans',system-ui,sans-serif}.ds-brand{display:flex;align-items:center;gap:.75rem;color:var(--ink,#17201f);text-decoration:none}.ds-mark{display:grid;width:2.6rem;height:2.6rem;place-items:center;background:var(--cobalt,#07358c);color:var(--chalk,#f7f4ef);font-family:'Antonio','Arial Narrow',sans-serif;font-size:1.05rem;font-weight:700}.ds-brand strong{display:block;font-family:'Antonio','Arial Narrow',sans-serif;font-size:1.1rem;line-height:1;letter-spacing:-.02em}.ds-brand small{display:block;margin-top:.3rem;color:var(--cobalt,#07358c);font-size:.55rem;font-weight:800;letter-spacing:.18em}.ds-begin{background:var(--ink,#17201f);color:var(--chalk,#f7f4ef);padding:.9rem 1rem;font-size:.68rem;font-weight:800;letter-spacing:.12em;text-decoration:none}.ds-begin:hover{background:var(--cobalt,#07358c)}.ds-begin:focus-visible,.ds-brand:focus-visible{outline:3px solid var(--coral,#ef5a45);outline-offset:3px}"
+    },
+    {
+      "name": "Proof Band",
+      "kind": "custom",
+      "description": "A coral processional strip that converts provenance and delivery facts into a rhythmic proof sequence.",
+      "html": "<div class=\"ds-proof\"><span>HANDWOVEN BY JESUTOFUNMI</span><span>2–4 WEEK LEAD TIME</span><span>DELIVERY ACROSS NIGERIA &amp; WORLDWIDE</span></div>",
+      "css": ".ds-proof{display:grid;grid-template-columns:repeat(3,1fr);background:var(--coral,#ef5a45);color:var(--ink,#17201f);font-family:'Albert Sans',system-ui,sans-serif}.ds-proof span{display:flex;min-height:72px;align-items:center;justify-content:center;border-right:1px solid rgba(23,32,31,.35);padding:1rem;text-align:center;font-size:.72rem;font-weight:800;letter-spacing:.11em}.ds-proof span:last-child{border-right:0}@media(max-width:760px){.ds-proof{grid-template-columns:1fr}.ds-proof span{border-right:0;border-bottom:1px solid rgba(255,255,255,.4)}.ds-proof span:last-child{border-bottom:0}}"
+    },
+    {
+      "name": "Loom Summary Panel",
+      "kind": "custom",
+      "description": "The saffron specification summary that anchors the customizer and its next action.",
+      "html": "<aside class=\"ds-summary\"><span class=\"ds-summary-kicker\">YOUR COMMISSION</span><h3>WEAVE SPECIFICATION</h3><dl><div><dt>WEAVE</dt><dd>ALAARI</dd></div><div><dt>FINISHING</dt><dd>FULL BESPOKE</dd></div></dl><button>SEND SPECIFICATION ↗</button></aside>",
+      "css": ".ds-summary{border:0;border-radius:0;background:var(--saffron,#f2aa1c);color:var(--ink,#17201f);padding:2rem;font-family:'Albert Sans',system-ui,sans-serif}.ds-summary-kicker{font-size:.65rem;font-weight:800;letter-spacing:.18em}.ds-summary h3{max-width:9ch;margin:.75rem 0 1.5rem;font-family:'Antonio','Arial Narrow',sans-serif;font-size:2.75rem;font-weight:600;line-height:.9;letter-spacing:-.025em}.ds-summary dl{border-top:1px solid rgba(23,32,31,.35)}.ds-summary dl div{display:flex;justify-content:space-between;border-bottom:1px solid rgba(23,32,31,.35);padding:.8rem 0;font-size:.7rem}.ds-summary dd{font-weight:800}.ds-summary button{width:100%;margin-top:1.5rem;border:0;border-radius:0;background:var(--ink,#17201f);color:var(--chalk,#f7f4ef);padding:1rem;font-size:.72rem;font-weight:800;letter-spacing:.1em}.ds-summary button:hover{background:var(--cobalt,#07358c)}.ds-summary button:focus-visible{outline:3px solid var(--coral,#ef5a45);outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Oriki in Motion",
+    "overview": "Oriki in Motion translates the rhythm of an Oríkì performance and the narrow bands of Yoruba loom weaving into a conversion-first digital atelier. The experience is ceremonial without becoming ornamental: chalk-white breathing room, saturated processional strips, authentic textile grain, and real commission photography make the craft—not a generic idea of luxury—the source of prestige.\n\nThe system moves in square-edged bands. Condensed uppercase declarations in Antonio create public, processional moments; Albert Sans keeps product detail, configuration, and commissioning guidance warm and exact. Cobalt carries authority, coral marks proof and cadence, saffron concentrates action, and palm-dark ink anchors every decision. Visitors should encounter people and cloth before marketing claims, then move clearly from inspiration to configuration and a human WhatsApp enquiry.",
+    "keyCharacteristics": [
+      "Processional strips and adjacent color fields modeled on narrow-loom construction.",
+      "Authentic textile raster material and real commission photography used as evidence, not decoration.",
+      "Condensed uppercase display hierarchy paired with calm, readable humanist body copy.",
+      "Square silhouettes, fine structural rules, and flat surfaces with interaction-led lift.",
+      "Conversion-first actions that move from browse to build to a qualified artisan enquiry.",
+      "A responsive vertical score on mobile, with the primary action preceding secondary content.",
+      "Purposeful textile drift and image scale motion with a complete reduced-motion fallback."
+    ],
+    "rules": [
+      { "name": "The Processional Color Rule", "body": "Use cobalt, coral, and saffron as contiguous fields with a clear job—authority, cadence, or action—not as scattered luxury accents.", "section": "colors" },
+      { "name": "The Cloth Before Chrome Rule", "body": "When a surface needs richness, introduce authentic textile grain or commission imagery before adding gradients, metallic effects, or ornamental color.", "section": "colors" },
+      { "name": "The Condensed Declaration Rule", "body": "Antonio owns headlines, product titles, and ceremonial markers; it does not replace Albert Sans in dense instructions, specifications, or form content.", "section": "typography" },
+      { "name": "The Uppercase With Purpose Rule", "body": "Uppercase is for orientation and action. Sentence case remains the default for explanatory copy so premium does not become performatively loud.", "section": "typography" },
+      { "name": "The Action Before Detail Rule", "body": "In narrow viewports, preserve the vertical narrative order so the primary build action arrives before secondary photography and browsing content.", "section": "layout" },
+      { "name": "The Flat Until Touched Rule", "body": "Containers remain flat at rest; lift is a brief response to hover or a necessary focus layer.", "section": "elevation" },
+      { "name": "The Cut-Cloth Rule", "body": "Default to square edges; use the compact corner only when it improves the handling of dense controls, never to make the interface generically friendly.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do build hierarchy with adjacent processional strips, fine seams, and shifts between Chalk, Cobalt, Coral, and Saffron.",
+      "Do use authentic commission photography and textile raster material as the principal evidence of quality and provenance.",
+      "Do keep the primary build or enquiry action visually early, especially in the mobile vertical score.",
+      "Do pair short Antonio declarations with calm Albert Sans explanation and practical labels.",
+      "Do preserve keyboard focus, readable contrast, semantic controls, and the reduced-motion override that collapses animation and transition duration.",
+      "Do let product grids and workbenches feel assembled like cut cloth: square, aligned, and structurally ruled."
+    ],
+    "donts": [
+      "Don't return to black-and-gold luxury styling, metallic gradients, heraldic motifs, or imitation-European royal clichés.",
+      "Don't turn every module into a rounded, shadowed card or scatter pill shapes across the page.",
+      "Don't substitute stock-style aspirational imagery for real people, real commissions, loom process, or fabric detail.",
+      "Don't use coral and saffron as arbitrary accents; coral marks cadence and focus, while saffron concentrates action.",
+      "Don't run decorative motion when prefers-reduced-motion is enabled or make hover transformations necessary to understand content.",
+      "Don't let uppercase display typography consume dense specifications, instructions, or long-form body copy."
+    ]
+  }
+}

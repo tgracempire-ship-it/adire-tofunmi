@@ -9,6 +9,15 @@ lerna-debug.log*
 
 node_modules
 dist
+.impeccable/chrome-*
+.impeccable/edge-*
+.impeccable/qa-profile-*
+.impeccable/build/
+.impeccable/mocks/
+.impeccable/review/
+.impeccable/surface-brief-body.md
+/assets/
+/regions.json
 dist-ssr
 *.local
 

@@ -95,7 +95,7 @@ export const App: React.FC = () => {
 
   return (
     <CurrencyProvider>
-      <div className="min-h-screen bg-[#070A0F] text-[#EDE8DF] selection:bg-[#D4AF37] selection:text-[#070A0F]">
+      <div className="min-h-screen bg-[var(--chalk)] text-[var(--ink)]">
         {/* Navigation Bar */}
         <Navbar
           onOpenCustomizer={scrollToCustomizer}
@@ -104,35 +104,22 @@ export const App: React.FC = () => {
           onOpenCart={() => setIsCartOpen(true)}
         />
 
-        {/* Hero Section */}
-        <Hero
-          onOpenCustomizer={scrollToCustomizer}
-          onExploreCollection={scrollToCollection}
-        />
-
-        {/* Interactive Loom Customizer Studio */}
-        <LoomCustomizer onAddCustomToCart={handleAddCustomToCart} />
-
-        {/* Curated Haute Couture Collection */}
-        <ProductShowcase
-          onSelectProduct={handleOpenProduct}
-          onAddToCart={handleAddToCart}
-        />
-
-        {/* Royal Bridal & Groom Packages */}
-        <BridalGroomSection />
-
-        {/* Aso Ebi Bulk Order Estimator */}
-        <AsoEbiCalculator />
-
-        {/* Artisan Story, Weaving Process & Video */}
-        <HeritageStory />
-
-        {/* Client Testimonials */}
-        <TestimonialsSection />
-
-        {/* Fabric Care & FAQ */}
-        <CareAndFaq />
+        <main>
+          <Hero
+            onOpenCustomizer={scrollToCustomizer}
+            onExploreCollection={scrollToCollection}
+          />
+          <LoomCustomizer onAddCustomToCart={handleAddCustomToCart} />
+          <ProductShowcase
+            onSelectProduct={handleOpenProduct}
+            onAddToCart={handleAddToCart}
+          />
+          <BridalGroomSection />
+          <AsoEbiCalculator />
+          <HeritageStory />
+          <TestimonialsSection />
+          <CareAndFaq />
+        </main>
 
         {/* Accessible Product Modal */}
         <ProductModal
