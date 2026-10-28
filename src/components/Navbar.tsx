@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { Menu, X, ShoppingBag, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ShoppingBag, Calendar, MessageCircle } from 'lucide-react';
+import { VENDOR_DETAILS } from '../data/asoOkeProducts';
 
 interface NavbarProps {
   onOpenCustomizer: () => void;
   onOpenAsoEbi: () => void;
   orderCount: number;
   onOpenCart: () => void;
+  onOpenBooking: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenCustomizer, onOpenAsoEbi, orderCount, onOpenCart }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  onOpenCustomizer,
+  onOpenAsoEbi,
+  orderCount,
+  onOpenCart,
+  onOpenBooking
+}) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -17,11 +25,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCustomizer, onOpenAsoEbi, 
   }, [mobileMenuOpen]);
 
   const links = [
-    { label: 'Atelier', href: '#loom-builder', action: onOpenCustomizer },
-    { label: 'Collection', href: '#collection' },
+    { label: 'Lookbook', href: '#collection' },
+    { label: 'Bespoke Loom', href: '#loom-builder', action: onOpenCustomizer },
     { label: 'Weddings', href: '#wedding-packages' },
-    { label: 'Aso Ebi', href: '#aso-ebi-calc', action: onOpenAsoEbi },
-    { label: 'Our Story', href: '#story' },
+    { label: 'Aso Ebi Bulk', href: '#aso-ebi-calc', action: onOpenAsoEbi },
+    { label: 'Artisan Story', href: '#story' },
   ];
 
   const closeAndRun = (action?: () => void) => {
@@ -30,45 +38,121 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCustomizer, onOpenAsoEbi, 
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--ink)]/15 bg-[var(--chalk)]/95 backdrop-blur-md">
-      <div className="mx-auto flex h-[72px] max-w-[1600px] items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#" className="group flex items-center gap-3" aria-label="Threads of Heritage home">
+    <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[#fffdf9]/95 backdrop-blur-md">
+      <div className="mx-auto flex h-[76px] max-w-[1600px] items-center justify-between px-4 sm:px-6 lg:px-8">
+        {/* Brand Emblem & Name */}
+        <a href="#" className="group flex items-center gap-3.5" aria-label="Threads of Heritage home">
           <span className="brand-mark" aria-hidden="true">TH</span>
-          <span className="leading-none">
-            <span className="font-display block text-[1.05rem] uppercase tracking-[-0.02em] text-[var(--ink)] sm:text-xl">Threads of Heritage</span>
-            <span className="mt-1 block text-[0.58rem] font-bold uppercase tracking-[0.24em] text-[var(--cobalt)]">Aso Oke Atelier · Nigeria</span>
+          <span className="leading-tight">
+            <span className="font-royal block text-base sm:text-lg uppercase text-[var(--ink)] tracking-wider">
+              Threads of Heritage
+            </span>
+            <span className="block text-[0.62rem] font-bold uppercase tracking-[0.22em] text-[var(--cobalt)]">
+              Bespoke Yoruba Aso Oke · Jesutofunmi
+            </span>
           </span>
         </a>
 
-        <nav className="hidden" aria-label="Primary navigation">
-          {links.map((link) => <a key={link.label} href={link.href} onClick={link.action} className="nav-link">{link.label}</a>)}
+        {/* Desktop Primary Navigation */}
+        <nav className="hidden lg:flex items-center gap-8" aria-label="Primary navigation">
+          {links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              onClick={link.action}
+              className="nav-link"
+            >
+              {link.label}
+            </a>
+          ))}
         </nav>
 
-        <div className="flex items-center gap-2">
-          <button onClick={onOpenCart} className="inquiry-button" aria-label={`Open inquiry bag with ${orderCount} items`}>
-            <ShoppingBag className="h-4 w-4" /><span className="hidden sm:inline">Inquiry</span><span className="tabular-nums">{orderCount}</span>
+        {/* Right Actions: Inquiry Bag & Prominent Quick Booking */}
+        <div className="flex items-center gap-3">
+          {/* Inquiry List Drawer Button */}
+          <button
+            onClick={onOpenCart}
+            className="inquiry-button"
+            aria-label={`Open inquiry bag with ${orderCount} items`}
+          >
+            <ShoppingBag className="h-4 w-4 text-[var(--cobalt)]" />
+            <span className="hidden sm:inline">Inquiry</span>
+            {orderCount > 0 && (
+              <span className="tabular-nums px-1.5 py-0.2 bg-[var(--coral)] text-white text-[10px] font-bold rounded-full">
+                {orderCount}
+              </span>
+            )}
           </button>
-          <a href="#loom-builder" onClick={onOpenCustomizer} className="hidden items-center gap-2 bg-[var(--ink)] px-4 py-3 text-xs font-bold uppercase tracking-[0.12em] text-[var(--chalk)] transition-colors hover:bg-[var(--cobalt)] sm:flex">
-            Begin <ArrowUpRight className="h-4 w-4" />
+
+          {/* Frictionless Consultation Booking Action */}
+          <button
+            onClick={onOpenBooking}
+            className="book-consultation-btn"
+          >
+            <Calendar className="h-3.5 w-3.5" />
+            <span>Book Consultation</span>
+          </button>
+
+          {/* Direct WhatsApp Pill (hidden on very small screens, accessible in menu) */}
+          <a
+            href={`https://wa.me/${VENDOR_DETAILS.whatsappNumber}?text=Hello%20Jesutofunmi,%20I%20am%20inquiring%20about%20ordering%20Aso%20Oke`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden xl:flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#25D366] text-[#070A0F] text-xs font-bold hover:brightness-105 transition-all shadow-sm"
+            title="Chat directly with Jesutofunmi"
+          >
+            <MessageCircle className="w-3.5 h-3.5 fill-[#070A0F]" />
+            <span>WhatsApp</span>
           </a>
-          <button onClick={() => setMobileMenuOpen((open) => !open)} className="grid h-11 w-11 place-items-center border border-[var(--ink)]/20 lg:hidden" aria-expanded={mobileMenuOpen} aria-label="Toggle navigation">
+
+          {/* Mobile Menu Toggle Button */}
+          <button
+            onClick={() => setMobileMenuOpen((open) => !open)}
+            className="grid h-10 w-10 place-items-center rounded-lg border border-[var(--line-strong)] text-[var(--ink)] lg:hidden cursor-pointer"
+            aria-expanded={mobileMenuOpen}
+            aria-label="Toggle navigation"
+          >
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
+      {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-x-0 top-[72px] h-[calc(100dvh-72px)] bg-[var(--cobalt)] px-6 py-10 text-[var(--chalk)] lg:hidden">
-          <nav className="flex flex-col" aria-label="Mobile navigation">
+        <div className="fixed inset-x-0 top-[76px] h-[calc(100dvh-76px)] bg-[#fffdf9] border-b border-[var(--line)] px-6 py-8 text-[var(--ink)] overflow-y-auto lg:hidden">
+          <nav className="flex flex-col space-y-2" aria-label="Mobile navigation">
             {links.map((link, index) => (
-              <a key={link.label} href={link.href} onClick={() => closeAndRun(link.action)} className="flex items-baseline justify-between border-b border-white/25 py-5">
-                <span className="font-display text-4xl uppercase">{link.label}</span><span className="text-xs tabular-nums">0{index + 1}</span>
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => closeAndRun(link.action)}
+                className="flex items-center justify-between border-b border-[var(--line)] py-4 text-base font-semibold hover:text-[var(--cobalt)]"
+              >
+                <span className="font-heading text-xl uppercase tracking-wide">{link.label}</span>
+                <span className="text-xs text-[var(--muted)] tabular-nums">0{index + 1}</span>
               </a>
             ))}
           </nav>
-          <button onClick={() => closeAndRun(onOpenCustomizer)} className="mt-8 flex w-full items-center justify-between bg-[var(--saffron)] p-5 font-bold uppercase tracking-[0.12em] text-[var(--ink)]">
-            Build your Aso Oke <ArrowUpRight className="h-5 w-5" />
-          </button>
+
+          <div className="mt-8 space-y-3">
+            <button
+              onClick={() => closeAndRun(onOpenBooking)}
+              className="w-full flex items-center justify-center gap-2 bg-[var(--cobalt)] py-4 px-5 rounded-lg font-bold uppercase tracking-wider text-white shadow-md cursor-pointer"
+            >
+              <Calendar className="h-4 w-4" />
+              <span>Book Loom Consultation</span>
+            </button>
+
+            <a
+              href={`https://wa.me/${VENDOR_DETAILS.whatsappNumber}?text=Hello%20Jesutofunmi,%20I%20would%20like%20to%20order%20Aso%20Oke`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full flex items-center justify-center gap-2 bg-[#25D366] py-3.5 px-5 rounded-lg font-bold uppercase tracking-wider text-[#070A0F] shadow-sm text-center"
+            >
+              <MessageCircle className="h-4 w-4 fill-[#070A0F]" />
+              <span>Direct WhatsApp Chat</span>
+            </a>
+          </div>
         </div>
       )}
     </header>

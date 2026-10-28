@@ -13,12 +13,16 @@ import { TestimonialsSection } from './components/TestimonialsSection';
 import { CareAndFaq } from './components/CareAndFaq';
 import { OrderSummaryDrawer } from './components/OrderSummaryDrawer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { QuickBookingModal } from './components/QuickBookingModal';
 import { Footer } from './components/Footer';
 
 export const App: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [bookingOccasion, setBookingOccasion] = useState('Bridal Traditional Wedding');
+
   const [cartItems, setCartItems] = useState<OrderItem[]>([
     {
       id: 'default-custom-1',
@@ -39,6 +43,13 @@ export const App: React.FC = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedProduct(null);
+  };
+
+  const handleOpenBooking = (occasion?: string) => {
+    if (occasion) {
+      setBookingOccasion(occasion);
+    }
+    setIsBookingOpen(true);
   };
 
   const handleAddToCart = (product: Product) => {
@@ -102,23 +113,28 @@ export const App: React.FC = () => {
           onOpenAsoEbi={scrollToAsoEbi}
           orderCount={cartItems.reduce((acc, curr) => acc + curr.quantity, 0)}
           onOpenCart={() => setIsCartOpen(true)}
+          onOpenBooking={() => handleOpenBooking()}
         />
 
         <main>
           <Hero
             onOpenCustomizer={scrollToCustomizer}
             onExploreCollection={scrollToCollection}
+            onOpenBooking={() => handleOpenBooking()}
           />
-          <LoomCustomizer onAddCustomToCart={handleAddCustomToCart} />
+          <LoomCustomizer
+            onAddCustomToCart={handleAddCustomToCart}
+            onOpenBooking={handleOpenBooking}
+          />
           <ProductShowcase
             onSelectProduct={handleOpenProduct}
             onAddToCart={handleAddToCart}
           />
-          <BridalGroomSection />
-          <AsoEbiCalculator />
+          <BridalGroomSection onOpenBooking={handleOpenBooking} />
+          <AsoEbiCalculator onOpenBooking={handleOpenBooking} />
           <HeritageStory />
           <TestimonialsSection />
-          <CareAndFaq />
+          <CareAndFaq onOpenBooking={() => handleOpenBooking()} />
         </main>
 
         {/* Accessible Product Modal */}
@@ -138,11 +154,18 @@ export const App: React.FC = () => {
           onClearItems={handleClearItems}
         />
 
+        {/* Quick Consultation & Loom Reservation Modal */}
+        <QuickBookingModal
+          isOpen={isBookingOpen}
+          onClose={() => setIsBookingOpen(false)}
+          initialOccasion={bookingOccasion}
+        />
+
         {/* Always Accessible Floating WhatsApp Button */}
-        <FloatingWhatsApp />
+        <FloatingWhatsApp onOpenBooking={() => handleOpenBooking()} />
 
         {/* Footer */}
-        <Footer />
+        <Footer onOpenBooking={() => handleOpenBooking()} />
       </div>
     </CurrencyProvider>
   );

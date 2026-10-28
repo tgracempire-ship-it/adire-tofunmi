@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { TraditionalWeaveType } from '../types';
 import { VENDOR_DETAILS } from '../data/asoOkeProducts';
-import { Sparkles, MessageCircle, Check, Info, Palette, Clock, Scissors, Send } from 'lucide-react';
+import { Sparkles, MessageCircle, Check, Info, Palette, Scissors, Calendar } from 'lucide-react';
 
 interface LoomCustomizerProps {
   onAddCustomToCart?: (item: any) => void;
+  onOpenBooking?: (occasion?: string) => void;
 }
 
-export const LoomCustomizer: React.FC<LoomCustomizerProps> = ({ onAddCustomToCart }) => {
+export const LoomCustomizer: React.FC<LoomCustomizerProps> = ({ onAddCustomToCart, onOpenBooking }) => {
   // Customizer State
   const [weaveType, setWeaveType] = useState<TraditionalWeaveType>('alaari');
   const [ensemble, setEnsemble] = useState<'bridal-full' | 'groom-agbada' | 'couple-twinning' | 'aso-ebi-set' | 'children-occasion'>('groom-agbada');
@@ -25,7 +26,7 @@ export const LoomCustomizer: React.FC<LoomCustomizerProps> = ({ onAddCustomToCar
   // Weave Information & Cultural Significance
   const WEAVE_DETAILS: Record<TraditionalWeaveType, { title: string; subtitle: string; desc: string; defaultSample: string }> = {
     alaari: {
-      title: 'Alaari (Royal Magenta / Crimson)',
+      title: 'Alaari (Royal Crimson / Magenta)',
       subtitle: 'The King of Yoruba Weaves',
       desc: 'Historically reserved for kings, princes, and victorious celebration. Its crimson tone reflects vibrancy, royalty, and high authority.',
       defaultSample: '/images/groom-agbada-portrait.jpg'
@@ -103,7 +104,7 @@ Please advise on custom quote, loom availability, and next steps for sample swat
     if (onAddCustomToCart) {
       onAddCustomToCart({
         id: `custom-loom-${Date.now()}`,
-        title: `Bespoke Loom: ${WEAVE_DETAILS[weaveType].title}`,
+        title: `Bespoke Loom: ${WEAVE_DETAILS[weaveType].title.split(' ')[0]}`,
         price: 0,
         currency: 'USD',
         category: 'custom',
@@ -116,25 +117,28 @@ Please advise on custom quote, loom availability, and next steps for sample swat
   };
 
   return (
-    <section id="loom-builder" className="atelier-workbench py-20 bg-[#070A0F] relative border-b border-[#D4AF37]/20">
+    <section id="loom-builder" className="atelier-workbench py-20 bg-[var(--chalk)] relative border-b border-[var(--line)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="atelier-workbench__heading text-center max-w-3xl mx-auto mb-14">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FDFBF7] font-heading">
-            Bespoke Loom <span className="text-gold font-royal">Atelier Simulator</span>
+        <div className="atelier-workbench__heading mb-12">
+          <div className="text-xs uppercase font-bold tracking-[0.18em] text-[var(--cobalt)] mb-2">
+            Artisan Customizer
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading text-[var(--ink)]">
+            Bespoke Loom Atelier Simulator
           </h2>
-          <p className="text-sm sm:text-base text-[#9CA3AF] mt-3">
+          <p className="text-sm text-[var(--muted)] mt-2 max-w-2xl">
             Commission a one-of-a-kind royal piece. Select ancestral weave lineage, yarn palettes, custom embroidery, and tailoring preferences for artisan Jesutofunmi’s wooden looms.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Controls: Left & Center Columns */}
-          <div className="atelier-controls lg:col-span-8 bg-[#0D1422] border border-[#243044] rounded-2xl p-6 sm:p-8 space-y-8">
+          <div className="atelier-controls lg:col-span-8 bg-[var(--paper)] border border-[var(--line-strong)] rounded-xl p-6 sm:p-8 space-y-8 shadow-sm">
             {/* Step 1: Traditional Weave Heritage Selection */}
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-gold-light flex items-center gap-2 mb-3">
-                <Palette className="w-4 h-4 text-gold" />
+              <label className="text-xs font-bold uppercase tracking-wider text-[var(--ink)] flex items-center gap-2 mb-3">
+                <Palette className="w-4 h-4 text-[var(--cobalt)]" />
                 <span>1. Select Traditional Weave Ancestry</span>
               </label>
 
@@ -147,20 +151,20 @@ Please advise on custom quote, loom availability, and next steps for sample swat
                       key={key}
                       onClick={() => setWeaveType(key)}
                       type="button"
-                      className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
+                      className={`p-3.5 rounded-lg border text-left transition-all cursor-pointer flex flex-col justify-between ${
                         isSelected
-                          ? 'border-[#D4AF37] bg-[#141C2B] shadow-md'
-                          : 'border-[#243044] bg-[#070A0F]/60 hover:border-[#D4AF37]/50 text-gray-300'
+                          ? 'border-[var(--cobalt)] bg-[var(--cobalt-light)] shadow-sm'
+                          : 'border-[var(--line)] bg-[var(--chalk)] hover:border-[var(--cobalt)]/40 text-[var(--ink)]'
                       }`}
                     >
                       <div>
                         <div className="flex items-center justify-between mb-1.5">
-                          <span className={`text-xs font-bold ${isSelected ? 'text-gold' : 'text-white'}`}>
+                          <span className={`text-xs font-bold ${isSelected ? 'text-[var(--cobalt)]' : 'text-[var(--ink)]'}`}>
                             {item.title.split(' ')[0]}
                           </span>
-                          {isSelected && <Check className="w-3.5 h-3.5 text-gold" />}
+                          {isSelected && <Check className="w-3.5 h-3.5 text-[var(--cobalt)]" />}
                         </div>
-                        <span className="text-[11px] text-[#A0AEC0] block leading-tight">
+                        <span className="text-[11px] text-[var(--muted)] block leading-tight">
                           {item.subtitle}
                         </span>
                       </div>
@@ -170,10 +174,10 @@ Please advise on custom quote, loom availability, and next steps for sample swat
               </div>
 
               {/* Informative Weave Description */}
-              <div className="mt-3 p-3.5 rounded-xl bg-[#070A0F] border border-[#243044] text-xs text-[#CBD5E1] flex items-start gap-2.5">
-                <Info className="w-4 h-4 text-gold flex-shrink-0 mt-0.5" />
+              <div className="mt-3 p-3.5 rounded-lg bg-[var(--chalk)] border border-[var(--line)] text-xs text-[var(--muted)] flex items-start gap-2.5">
+                <Info className="w-4 h-4 text-[var(--cobalt)] flex-shrink-0 mt-0.5" />
                 <div>
-                  <strong className="text-white block mb-0.5">{WEAVE_DETAILS[weaveType].title}</strong>
+                  <strong className="text-[var(--ink)] block mb-0.5">{WEAVE_DETAILS[weaveType].title}</strong>
                   <span>{WEAVE_DETAILS[weaveType].desc}</span>
                 </div>
               </div>
@@ -181,8 +185,8 @@ Please advise on custom quote, loom availability, and next steps for sample swat
 
             {/* Step 2: Royal Ensemble Format */}
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-gold-light flex items-center gap-2 mb-3">
-                <Scissors className="w-4 h-4 text-gold" />
+              <label className="text-xs font-bold uppercase tracking-wider text-[var(--ink)] flex items-center gap-2 mb-3">
+                <Scissors className="w-4 h-4 text-[var(--cobalt)]" />
                 <span>2. Choose Ensemble Silhouette</span>
               </label>
 
@@ -192,19 +196,19 @@ Please advise on custom quote, loom availability, and next steps for sample swat
                     key={key}
                     type="button"
                     onClick={() => setEnsemble(key as any)}
-                    className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
+                    className={`p-3.5 rounded-lg border text-left transition-all cursor-pointer ${
                       ensemble === key
-                        ? 'border-[#D4AF37] bg-[#141C2B] shadow-md'
-                        : 'border-[#243044] bg-[#070A0F]/60 hover:border-[#D4AF37]/50 text-gray-300'
+                        ? 'border-[var(--cobalt)] bg-[var(--cobalt-light)] shadow-sm'
+                        : 'border-[var(--line)] bg-[var(--chalk)] hover:border-[var(--cobalt)]/40 text-[var(--ink)]'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <span className={`text-xs font-bold ${ensemble === key ? 'text-gold' : 'text-white'}`}>
+                      <span className={`text-xs font-bold ${ensemble === key ? 'text-[var(--cobalt)]' : 'text-[var(--ink)]'}`}>
                         {val.name}
                       </span>
-                      {ensemble === key && <Check className="w-3.5 h-3.5 text-gold" />}
+                      {ensemble === key && <Check className="w-3.5 h-3.5 text-[var(--cobalt)]" />}
                     </div>
-                    <span className="text-[11px] text-[#9CA3AF] block tabular-nums">
+                    <span className="text-[11px] text-[var(--muted)] block tabular-nums">
                       Production Window: {val.leadWeeks}
                     </span>
                   </button>
@@ -214,18 +218,18 @@ Please advise on custom quote, loom availability, and next steps for sample swat
 
             {/* Step 3: Yarn Palette Customization */}
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-gold-light flex items-center gap-2 mb-3">
-                <Palette className="w-4 h-4 text-gold" />
+              <label className="text-xs font-bold uppercase tracking-wider text-[var(--ink)] flex items-center gap-2 mb-3">
+                <Palette className="w-4 h-4 text-[var(--cobalt)]" />
                 <span>3. Custom Yarn Dye Palette</span>
               </label>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <span className="text-xs text-[#A0AEC0] block mb-1.5 font-medium">Primary Ground Color</span>
+                  <span className="text-xs text-[var(--muted)] block mb-1.5 font-medium">Primary Ground Color</span>
                   <select
                     value={baseColor}
                     onChange={(e) => setBaseColor(e.target.value)}
-                    className="w-full bg-[#070A0F] border border-[#243044] rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-[#D4AF37] focus:outline-none"
+                    className="w-full bg-[var(--chalk)] border border-[var(--line)] rounded-lg px-3.5 py-2.5 text-xs text-[var(--ink)] focus:border-[var(--cobalt)] focus:outline-none"
                   >
                     <option value="Royal Crimson (#8A1528)">Alaari Royal Crimson (#8A1528)</option>
                     <option value="Deep Indigo Navy (#152238)">Etu Deep Indigo Navy (#152238)</option>
@@ -239,11 +243,11 @@ Please advise on custom quote, loom availability, and next steps for sample swat
                 </div>
 
                 <div>
-                  <span className="text-xs text-[#A0AEC0] block mb-1.5 font-medium">Accent / Metallic Stripe Yarn</span>
+                  <span className="text-xs text-[var(--muted)] block mb-1.5 font-medium">Accent / Metallic Stripe Yarn</span>
                   <select
                     value={accentColor}
                     onChange={(e) => setAccentColor(e.target.value)}
-                    className="w-full bg-[#070A0F] border border-[#243044] rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-[#D4AF37] focus:outline-none"
+                    className="w-full bg-[var(--chalk)] border border-[var(--line)] rounded-lg px-3.5 py-2.5 text-xs text-[var(--ink)] focus:border-[var(--cobalt)] focus:outline-none"
                   >
                     <option value="Champagne Gold (#D4AF37)">Metallic Champagne Gold (#D4AF37)</option>
                     <option value="Polished Silver Lurex (#E2E8F0)">Polished Silver Lurex (#E2E8F0)</option>
@@ -258,8 +262,8 @@ Please advise on custom quote, loom availability, and next steps for sample swat
 
             {/* Step 4: Embellishment & Detailing */}
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-gold-light flex items-center gap-2 mb-3">
-                <Sparkles className="w-4 h-4 text-gold" />
+              <label className="text-xs font-bold uppercase tracking-wider text-[var(--ink)] flex items-center gap-2 mb-3">
+                <Sparkles className="w-4 h-4 text-[var(--cobalt)]" />
                 <span>4. Bullion Embroidery & Embellishment</span>
               </label>
 
@@ -269,19 +273,19 @@ Please advise on custom quote, loom availability, and next steps for sample swat
                     key={key}
                     type="button"
                     onClick={() => setEmbellishment(key as any)}
-                    className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
+                    className={`p-3.5 rounded-lg border text-left transition-all cursor-pointer ${
                       embellishment === key
-                        ? 'border-[#D4AF37] bg-[#141C2B] shadow-md'
-                        : 'border-[#243044] bg-[#070A0F]/60 hover:border-[#D4AF37]/50 text-gray-300'
+                        ? 'border-[var(--cobalt)] bg-[var(--cobalt-light)] shadow-sm'
+                        : 'border-[var(--line)] bg-[var(--chalk)] hover:border-[var(--cobalt)]/40 text-[var(--ink)]'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <span className={`text-xs font-bold ${embellishment === key ? 'text-gold' : 'text-white'}`}>
+                      <span className={`text-xs font-bold ${embellishment === key ? 'text-[var(--cobalt)]' : 'text-[var(--ink)]'}`}>
                         {val.name}
                       </span>
-                      {embellishment === key && <Check className="w-3.5 h-3.5 text-gold" />}
+                      {embellishment === key && <Check className="w-3.5 h-3.5 text-[var(--cobalt)]" />}
                     </div>
-                    <span className="text-[11px] text-[#A0AEC0] block">
+                    <span className="text-[11px] text-[var(--muted)] block">
                       {val.note}
                     </span>
                   </button>
@@ -290,17 +294,17 @@ Please advise on custom quote, loom availability, and next steps for sample swat
             </div>
 
             {/* Tailoring & Add-ons */}
-            <div className="pt-2 border-t border-[#243044] grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="pt-2 border-t border-[var(--line)] grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <span className="text-xs text-[#A0AEC0] block mb-2 font-medium">Finishing State</span>
+                <span className="text-xs text-[var(--muted)] block mb-2 font-medium">Finishing State</span>
                 <div className="flex gap-2">
                   <button
                     type="button"
                     onClick={() => setTailoringOption('custom-tailored')}
                     className={`flex-1 py-2 px-3 rounded-lg text-xs font-semibold cursor-pointer border ${
                       tailoringOption === 'custom-tailored'
-                        ? 'bg-[#D4AF37] text-[#070A0F] border-[#D4AF37] font-bold'
-                        : 'bg-[#070A0F] text-[#A0AEC0] border-[#243044]'
+                        ? 'bg-[var(--cobalt)] text-white border-[var(--cobalt)] font-bold'
+                        : 'bg-[var(--chalk)] text-[var(--ink)] border-[var(--line)]'
                     }`}
                   >
                     Custom Tailored
@@ -310,8 +314,8 @@ Please advise on custom quote, loom availability, and next steps for sample swat
                     onClick={() => setTailoringOption('fabric-raw-cut')}
                     className={`flex-1 py-2 px-3 rounded-lg text-xs font-semibold cursor-pointer border ${
                       tailoringOption === 'fabric-raw-cut'
-                        ? 'bg-[#D4AF37] text-[#070A0F] border-[#D4AF37] font-bold'
-                        : 'bg-[#070A0F] text-[#A0AEC0] border-[#243044]'
+                        ? 'bg-[var(--cobalt)] text-white border-[var(--cobalt)] font-bold'
+                        : 'bg-[var(--chalk)] text-[var(--ink)] border-[var(--line)]'
                     }`}
                   >
                     Raw Loom Strips
@@ -320,15 +324,15 @@ Please advise on custom quote, loom availability, and next steps for sample swat
               </div>
 
               <div>
-                <span className="text-xs text-[#A0AEC0] block mb-2 font-medium">Headwear (Gele / Fila)</span>
-                <label className="flex items-center gap-2 cursor-pointer p-2 rounded-lg bg-[#070A0F] border border-[#243044]">
+                <span className="text-xs text-[var(--muted)] block mb-2 font-medium">Headwear (Gele / Fila)</span>
+                <label className="flex items-center gap-2 cursor-pointer p-2 rounded-lg bg-[var(--chalk)] border border-[var(--line)]">
                   <input
                     type="checkbox"
                     checked={headwearIncluded}
                     onChange={(e) => setHeadwearIncluded(e.target.checked)}
-                    className="w-4 h-4 rounded text-[#D4AF37] accent-[#D4AF37] bg-[#141C2B]"
+                    className="w-4 h-4 rounded text-[var(--cobalt)] accent-[var(--cobalt)]"
                   />
-                  <span className="text-xs text-white">Include Matching Auto-Gele or Fila</span>
+                  <span className="text-xs text-[var(--ink)]">Include Matching Auto-Gele or Fila</span>
                 </label>
               </div>
             </div>
@@ -336,34 +340,34 @@ Please advise on custom quote, loom availability, and next steps for sample swat
             {/* Client Notes & Target Date */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
               <div>
-                <label className="text-xs text-[#A0AEC0] block mb-1">Your Full Name</label>
+                <label className="text-xs text-[var(--muted)] block mb-1">Your Full Name</label>
                 <input
                   type="text"
                   placeholder="e.g. Chief Adeleke / Olori Mary"
                   value={clientName}
                   onChange={(e) => setClientName(e.target.value)}
-                  className="w-full bg-[#070A0F] border border-[#243044] rounded-xl px-3.5 py-2 text-xs text-white placeholder-gray-600 focus:border-[#D4AF37] focus:outline-none"
+                  className="w-full bg-[var(--chalk)] border border-[var(--line)] rounded-lg px-3.5 py-2 text-xs text-[var(--ink)] placeholder:text-gray-400 focus:border-[var(--cobalt)] focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="text-xs text-[#A0AEC0] block mb-1">Target Event Date</label>
+                <label className="text-xs text-[var(--muted)] block mb-1">Target Event Date</label>
                 <input
                   type="date"
                   value={targetDate}
                   onChange={(e) => setTargetDate(e.target.value)}
-                  className="w-full bg-[#070A0F] border border-[#243044] rounded-xl px-3.5 py-2 text-xs text-white focus:border-[#D4AF37] focus:outline-none"
+                  className="w-full bg-[var(--chalk)] border border-[var(--line)] rounded-lg px-3.5 py-2 text-xs text-[var(--ink)] focus:border-[var(--cobalt)] focus:outline-none"
                 />
               </div>
 
               <div className="sm:col-span-2">
-                <label className="text-xs text-[#A0AEC0] block mb-1">Special Measurements / Notes</label>
+                <label className="text-xs text-[var(--muted)] block mb-1">Special Measurements / Notes</label>
                 <textarea
                   rows={2}
                   placeholder="Provide chest, agbada length, wedding color scheme, or delivery city..."
                   value={clientNotes}
                   onChange={(e) => setClientNotes(e.target.value)}
-                  className="w-full bg-[#070A0F] border border-[#243044] rounded-xl px-3.5 py-2 text-xs text-white placeholder-gray-600 focus:border-[#D4AF37] focus:outline-none resize-none"
+                  className="w-full bg-[var(--chalk)] border border-[var(--line)] rounded-lg px-3.5 py-2 text-xs text-[var(--ink)] placeholder:text-gray-400 focus:border-[var(--cobalt)] focus:outline-none resize-none"
                 />
               </div>
             </div>
@@ -371,25 +375,25 @@ Please advise on custom quote, loom availability, and next steps for sample swat
 
           {/* Right Column: Dynamic Specification & Live Summary */}
           <div className="lg:col-span-4 space-y-6">
-            <div className="atelier-summary bg-[#0D1422] border border-[#D4AF37]/35 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
-              <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#243044]">
-                <h3 className="text-base font-bold text-white font-heading">
-                  Bespoke Commission Summary
+            <div className="atelier-summary bg-[var(--paper)] border border-[var(--line-strong)] rounded-xl p-6 shadow-md relative overflow-hidden">
+              <div className="flex items-center justify-between mb-4 pb-3 border-b border-[var(--line)]">
+                <h3 className="text-base font-bold text-[var(--ink)] font-heading">
+                  Commission Specification
                 </h3>
-                <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-0.5 rounded-full bg-[#8A1528] text-white">
+                <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-0.5 rounded-full bg-[var(--cobalt)] text-white">
                   Handloom
                 </span>
               </div>
 
               {/* Sample Preview Image */}
-              <div className="relative aspect-video rounded-xl overflow-hidden mb-4 border border-[#243044]">
+              <div className="relative aspect-video rounded-lg overflow-hidden mb-4 border border-[var(--line)] bg-[#e8e2d8]">
                 <img
                   src={WEAVE_DETAILS[weaveType].defaultSample}
                   alt={WEAVE_DETAILS[weaveType].title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex flex-col justify-end p-3">
-                  <span className="text-[10px] font-bold text-gold uppercase tracking-wider">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-3">
+                  <span className="text-[10px] font-bold text-[var(--saffron)] uppercase tracking-wider">
                     {WEAVE_DETAILS[weaveType].title}
                   </span>
                   <span className="text-xs font-semibold text-white">
@@ -399,81 +403,92 @@ Please advise on custom quote, loom availability, and next steps for sample swat
               </div>
 
               {/* Specification Attributes */}
-              <div className="space-y-2.5 text-xs text-[#CBD5E1] border-b border-[#243044] pb-4">
+              <div className="space-y-2.5 text-xs text-[var(--ink)] border-b border-[var(--line)] pb-4">
                 <div className="flex justify-between">
-                  <span className="text-[#9CA3AF]">Weave Lineage:</span>
-                  <span className="font-semibold text-white">{WEAVE_DETAILS[weaveType].title.split(' ')[0]}</span>
+                  <span className="text-[var(--muted)]">Weave Lineage:</span>
+                  <span className="font-semibold">{WEAVE_DETAILS[weaveType].title.split(' ')[0]}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#9CA3AF]">Ground Yarn:</span>
-                  <span className="font-semibold text-white text-right max-w-[180px] truncate">{baseColor}</span>
+                  <span className="text-[var(--muted)]">Ground Yarn:</span>
+                  <span className="font-semibold text-right max-w-[180px] truncate">{baseColor}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#9CA3AF]">Accent / Metallic:</span>
-                  <span className="font-semibold text-white text-right max-w-[180px] truncate">{accentColor}</span>
+                  <span className="text-[var(--muted)]">Accent / Metallic:</span>
+                  <span className="font-semibold text-right max-w-[180px] truncate">{accentColor}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#9CA3AF]">Embellishment:</span>
-                  <span className="font-semibold text-white text-right max-w-[180px] truncate">{EMBELLISHMENT_OPTIONS[embellishment].note}</span>
+                  <span className="text-[var(--muted)]">Embellishment:</span>
+                  <span className="font-semibold text-right max-w-[180px] truncate">{EMBELLISHMENT_OPTIONS[embellishment].note}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#9CA3AF]">Finishing:</span>
-                  <span className="font-semibold text-white">{tailoringOption === 'custom-tailored' ? 'Full Bespoke Tailored' : 'Raw Fabric Strips'}</span>
+                  <span className="text-[var(--muted)]">Finishing:</span>
+                  <span className="font-semibold">{tailoringOption === 'custom-tailored' ? 'Full Bespoke Tailored' : 'Raw Fabric Strips'}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#9CA3AF]">Headwear Included:</span>
-                  <span className="font-semibold text-white">{headwearIncluded ? 'Yes (Gele/Fila)' : 'Excluded'}</span>
+                  <span className="text-[var(--muted)]">Headwear Included:</span>
+                  <span className="font-semibold">{headwearIncluded ? 'Yes (Gele/Fila)' : 'Excluded'}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#9CA3AF]">Production Window:</span>
-                  <span className="font-bold text-gold tabular-nums">{ENSEMBLE_DETAILS[ensemble].leadWeeks}</span>
+                  <span className="text-[var(--muted)]">Production Window:</span>
+                  <span className="font-bold text-[var(--cobalt)] tabular-nums">{ENSEMBLE_DETAILS[ensemble].leadWeeks}</span>
                 </div>
               </div>
 
               {/* Price on Request Banner */}
               <div className="py-4">
-                <span className="text-xs text-[#9CA3AF] block mb-0.5">Atelier Quotation:</span>
-                <span className="text-xl font-bold text-gold uppercase tracking-wider font-royal block">
+                <span className="text-xs text-[var(--muted)] block mb-0.5">Atelier Quotation:</span>
+                <span className="text-xl font-bold text-[var(--cobalt)] uppercase tracking-wider font-royal block">
                   Price on Request
                 </span>
-                <span className="text-[11px] text-[#9CA3AF] block mt-1">
+                <span className="text-[11px] text-[var(--muted)] block mt-1">
                   Quotation customized to measurements, gold bullion density, and DHL destination.
                 </span>
               </div>
 
               {/* Action Buttons */}
-              <div className="space-y-3 pt-2">
+              <div className="space-y-2.5 pt-1">
                 <a
                   href={generateWhatsAppMessage()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-3.5 px-4 rounded-xl gold-button text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-lg text-center"
+                  className="w-full py-3.5 px-4 rounded-lg bg-[var(--cobalt)] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-md hover:bg-[var(--cobalt-deep)] transition-all text-center"
                 >
-                  <MessageCircle className="w-4 h-4 text-[#070A0F]" />
+                  <MessageCircle className="w-4 h-4" />
                   <span>Send Spec to Jesutofunmi</span>
                 </a>
+
+                {onOpenBooking && (
+                  <button
+                    type="button"
+                    onClick={() => onOpenBooking(ENSEMBLE_DETAILS[ensemble].name)}
+                    className="w-full py-2.5 px-4 rounded-lg text-xs font-semibold text-[var(--cobalt)] hover:bg-[var(--cobalt-light)] flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                  >
+                    <Calendar className="w-3.5 h-3.5" />
+                    <span>Book Loom Consultation Slot</span>
+                  </button>
+                )}
 
                 <button
                   type="button"
                   onClick={handleAddSpecificationToCart}
-                  className="w-full py-3 px-4 rounded-xl gold-button-outline text-xs font-semibold flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-2.5 px-4 rounded-lg border border-[var(--line-strong)] text-xs font-semibold text-[var(--ink)] hover:bg-[var(--chalk)] flex items-center justify-center gap-2 cursor-pointer transition-colors"
                 >
-                  <Sparkles className="w-4 h-4 text-gold" />
-                  <span>Save Specification to Inquiry List</span>
+                  <Sparkles className="w-3.5 h-3.5 text-[var(--cobalt)]" />
+                  <span>Save Spec to Inquiry List</span>
                 </button>
 
                 {copiedNotification && (
-                  <div className="p-2.5 rounded-lg bg-[#0F382A] border border-[#25D366]/40 text-xs text-[#86EFAC] text-center font-medium">
+                  <div className="p-2.5 rounded bg-[var(--cobalt-light)] border border-[var(--cobalt)]/30 text-xs text-[var(--cobalt)] text-center font-medium">
                     ✓ Specification added to your bespoke inquiry list!
                   </div>
                 )}
               </div>
             </div>
 
-            {/* Direct Consultation Notice */}
-            <div className="p-4 rounded-xl bg-[#0D1422] border border-[#243044] text-xs text-[#9CA3AF] space-y-1">
-              <span className="font-bold text-white block">📍 Master Artisan Workshop</span>
-              <span>Loom facilities located in Ibadan & Lagos, Nigeria. Worldwide express shipping with real-time video measurement consultation.</span>
+            {/* Direct Workshop Notice */}
+            <div className="p-4 rounded-xl bg-[var(--paper)] border border-[var(--line-strong)] text-xs text-[var(--muted)] space-y-1 shadow-sm">
+              <span className="font-bold text-[var(--ink)] block">📍 Master Artisan Workshop</span>
+              <span>Loom facilities located in Ibadan & Lagos, Nigeria. Worldwide express courier shipping with live video measurement consultations.</span>
             </div>
           </div>
         </div>

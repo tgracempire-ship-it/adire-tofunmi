@@ -1,69 +1,77 @@
 import React from 'react';
 import { VENDOR_DETAILS } from '../data/asoOkeProducts';
-import { Mail, Phone, Instagram, MapPin, Heart } from 'lucide-react';
+import { Mail, Phone, Instagram, MapPin, Heart, Calendar } from 'lucide-react';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onOpenBooking?: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
   return (
-    <footer className="bg-[#05080D] border-t border-[#D4AF37]/20 text-[#A0AEC0] pt-16 pb-12">
+    <footer className="bg-[var(--ink)] text-[#d1d5db] pt-16 pb-12 border-t border-[var(--ink)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-[#1C2638]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
           {/* Brand Presentation */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#0D1422] border border-[#D4AF37]/40 flex items-center justify-center">
-                <svg className="w-6 h-6 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                  <path d="M4 19L8 5L12 11L16 5L20 19" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M6 15h12" strokeLinecap="round" />
-                  <circle cx="12" cy="7" r="1.5" fill="#D4AF37" />
-                </svg>
-              </div>
+              <span className="brand-mark bg-[var(--cobalt)] text-white" aria-hidden="true">TH</span>
               <div>
                 <span className="font-royal text-lg font-bold text-white block tracking-wider">
                   THREADS OF HERITAGE
                 </span>
-                <span className="text-[10px] uppercase tracking-widest text-gold block font-semibold">
+                <span className="text-[10px] uppercase tracking-widest text-[#a8b8d8] block font-semibold">
                   Purveyor of Luxurious Aso Oke
                 </span>
               </div>
             </div>
 
-            <p className="text-xs leading-relaxed text-[#9CA3AF]">
+            <p className="text-xs leading-relaxed text-[#9ca3af]">
               Preserving authentic Yoruba handloom traditions for kings, queens, and celebrated occasions across the globe. Handwoven in Nigeria, delivered worldwide.
             </p>
 
-            <div className="text-xs text-[#CBD5E1]">
-              Master Artisan: <strong className="text-white">{VENDOR_DETAILS.name}</strong>
+            <div className="text-xs text-white">
+              Master Artisan: <strong>{VENDOR_DETAILS.name}</strong>
             </div>
+
+            {onOpenBooking && (
+              <button
+                onClick={onOpenBooking}
+                className="mt-2 inline-flex items-center gap-2 px-3.5 py-2 rounded bg-[var(--cobalt)] text-white text-xs font-bold uppercase tracking-wider hover:bg-[var(--cobalt-deep)] transition-colors cursor-pointer"
+              >
+                <Calendar className="w-3.5 h-3.5" />
+                <span>Book Consultation</span>
+              </button>
+            )}
           </div>
 
-          {/* Quick Links */}
+          {/* Couture Collections */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider font-heading">
               Couture Collections
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <a href="#collection" className="hover:text-gold transition-colors">
+                <a href="#collection" className="hover:text-white transition-colors">
                   Royal Groom Crimson Alaari Agbada
                 </a>
               </li>
               <li>
-                <a href="#collection" className="hover:text-gold transition-colors">
+                <a href="#collection" className="hover:text-white transition-colors">
                   Bridal Sculpted Gele & Iro/Buba
                 </a>
               </li>
               <li>
-                <a href="#wedding-packages" className="hover:text-gold transition-colors">
+                <a href="#wedding-packages" className="hover:text-white transition-colors">
                   Oba & Olori Wedding Twinning Suites
                 </a>
               </li>
               <li>
-                <a href="#aso-ebi-calc" className="hover:text-gold transition-colors">
+                <a href="#aso-ebi-calc" className="hover:text-white transition-colors">
                   Aso Ebi Bulk Production (10–200 Sets)
                 </a>
               </li>
               <li>
-                <a href="#collection" className="hover:text-gold transition-colors">
+                <a href="#collection" className="hover:text-white transition-colors">
                   Little Monarch Children Milestone Wraps
                 </a>
               </li>
@@ -77,27 +85,27 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <a href="#loom-builder" className="hover:text-gold transition-colors">
+                <a href="#loom-builder" className="hover:text-white transition-colors">
                   Alaari (Imperial Crimson Silk)
                 </a>
               </li>
               <li>
-                <a href="#loom-builder" className="hover:text-gold transition-colors">
+                <a href="#loom-builder" className="hover:text-white transition-colors">
                   Sanyan (Aristocratic Khaki Wild Silk)
                 </a>
               </li>
               <li>
-                <a href="#loom-builder" className="hover:text-gold transition-colors">
+                <a href="#loom-builder" className="hover:text-white transition-colors">
                   Etu (Midnight Indigo & Blue Striped)
                 </a>
               </li>
               <li>
-                <a href="#loom-builder" className="hover:text-gold transition-colors">
+                <a href="#loom-builder" className="hover:text-white transition-colors">
                   Lurex Metallic Shimmer & Gold Thread
                 </a>
               </li>
               <li>
-                <a href="#loom-builder" className="hover:text-gold transition-colors">
+                <a href="#loom-builder" className="hover:text-white transition-colors">
                   Crystal & Coral Bead Embellished
                 </a>
               </li>
@@ -111,7 +119,7 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-3 text-xs">
               <li className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-gold flex-shrink-0" />
+                <Phone className="w-4 h-4 text-[#a8b8d8] flex-shrink-0" />
                 <a
                   href={`tel:${VENDOR_DETAILS.phone}`}
                   className="hover:text-white transition-colors tabular-nums"
@@ -121,7 +129,7 @@ export const Footer: React.FC = () => {
               </li>
 
               <li className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-gold flex-shrink-0" />
+                <Mail className="w-4 h-4 text-[#a8b8d8] flex-shrink-0" />
                 <a
                   href={`mailto:${VENDOR_DETAILS.email}`}
                   className="hover:text-white transition-colors"
@@ -131,7 +139,7 @@ export const Footer: React.FC = () => {
               </li>
 
               <li className="flex items-center gap-2.5">
-                <Instagram className="w-4 h-4 text-gold flex-shrink-0" />
+                <Instagram className="w-4 h-4 text-[#a8b8d8] flex-shrink-0" />
                 <a
                   href={VENDOR_DETAILS.instagramUrl}
                   target="_blank"
@@ -143,7 +151,7 @@ export const Footer: React.FC = () => {
               </li>
 
               <li className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-gold flex-shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-[#a8b8d8] flex-shrink-0 mt-0.5" />
                 <span>{VENDOR_DETAILS.location}</span>
               </li>
             </ul>
@@ -151,14 +159,12 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs gap-4 text-[#6B7280]">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs gap-4 text-[#9ca3af]">
           <div>
             © {new Date().getFullYear()} <strong>Threads of Heritage</strong>. All rights reserved. Purveyor of Luxurious Aso Oke.
           </div>
           <div className="flex items-center gap-1">
-            <span>Handwoven with</span>
-            <Heart className="w-3.5 h-3.5 fill-[#8A1528] text-[#8A1528]" />
-            <span>by Master Artisan <strong>Jesutofunmi</strong></span>
+            <span>Handwoven with ancestral devotion by Master Artisan <strong>{VENDOR_DETAILS.name}</strong></span>
           </div>
         </div>
       </div>
