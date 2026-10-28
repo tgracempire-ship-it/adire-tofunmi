@@ -25,19 +25,19 @@ export const LoomCustomizer: React.FC<LoomCustomizerProps> = ({ onAddCustomToCar
   // Weave Information & Cultural Significance
   const WEAVE_DETAILS: Record<TraditionalWeaveType, { title: string; subtitle: string; desc: string; defaultSample: string }> = {
     alaari: {
-      title: 'Alaari (The Royal Magenta / Crimson)',
+      title: 'Alaari (Royal Magenta / Crimson)',
       subtitle: 'The King of Yoruba Weaves',
       desc: 'Historically reserved for kings, princes, and victorious celebration. Its crimson tone reflects vibrancy, royalty, and high authority.',
       defaultSample: '/images/groom-agbada-portrait.jpg'
     },
     sanyan: {
-      title: 'Sanyan (The Aristocratic Wild Silk)',
+      title: 'Sanyan (Aristocratic Wild Silk)',
       subtitle: 'Raw Earth Brown & Khaki Silk',
       desc: 'Woven from indigenous Anaphe silk moths. Warm fawn and beige hues symbolizing ancient prestige, wealth, and aristocratic restraint.',
       defaultSample: '/images/fabric-chocolate-roll.jpg'
     },
     etu: {
-      title: 'Etu (The Indigo Guinea Fowl Weave)',
+      title: 'Etu (Indigo Guinea Fowl Weave)',
       subtitle: 'Deep Indigo Navy & Fine White Stripes',
       desc: 'Named after the dappled feathers of the guinea fowl. Striking midnight navy and cobalt lines symbolizing wisdom, eldership, and deep dignity.',
       defaultSample: '/images/fabric-blue-stripes.jpg'
@@ -99,16 +99,16 @@ Please advise on custom quote, loom availability, and next steps for sample swat
     return `https://wa.me/${VENDOR_DETAILS.whatsappNumber}?text=${encodeURIComponent(text)}`;
   };
 
-  const handleAddToCart = () => {
+  const handleAddSpecificationToCart = () => {
     if (onAddCustomToCart) {
       onAddCustomToCart({
         id: `custom-loom-${Date.now()}`,
-        title: `Bespoke ${WEAVE_DETAILS[weaveType].title.split(' ')[0]} ${ENSEMBLE_DETAILS[ensemble].name.split(' ')[0]}`,
-        category: 'custom-loom',
-        priceNGN: 0,
-        image: WEAVE_DETAILS[weaveType].defaultSample,
-        details: `${baseColor} with ${accentColor} • ${EMBELLISHMENT_OPTIONS[embellishment].name}`,
-        quantity: 1
+        title: `Bespoke Loom: ${WEAVE_DETAILS[weaveType].title}`,
+        price: 0,
+        currency: 'USD',
+        category: 'custom',
+        quantity: 1,
+        details: `${ENSEMBLE_DETAILS[ensemble].name} | ${baseColor} + ${accentColor} | ${EMBELLISHMENT_OPTIONS[embellishment].name}`
       });
       setCopiedNotification(true);
       setTimeout(() => setCopiedNotification(false), 3000);
@@ -116,367 +116,364 @@ Please advise on custom quote, loom availability, and next steps for sample swat
   };
 
   return (
-    <section id="loom-builder" className="py-20 bg-[#0C111D] relative border-b border-[#D4AF37]/20">
-      {/* Decorative Glow */}
-      <div className="absolute top-10 left-10 w-96 h-96 bg-[#8A1528]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#D4AF37]/10 rounded-full blur-3xl pointer-events-none" />
-
+    <section id="loom-builder" className="py-20 bg-[#070A0F] relative border-b border-[#D4AF37]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#182234] border border-[#D4AF37]/30 text-xs font-semibold text-[#D4AF37] mb-3">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Interactive Bespoke Loom Studio</span>
-          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FDFBF7] font-heading">
-            Design Your Royal <span className="gold-gradient-text font-royal">Aso Oke</span>
+            Bespoke Loom <span className="text-gold font-royal">Atelier Simulator</span>
           </h2>
           <p className="text-sm sm:text-base text-[#9CA3AF] mt-3">
-            Select your ancestral weave, custom color palette, and embroidery details. Master Weaver Jesutofunmi handcrafts each strip on authentic wooden looms to your exact specifications.
+            Commission a one-of-a-kind royal piece. Select ancestral weave lineage, yarn palettes, custom embroidery, and tailoring preferences for artisan Jesutofunmi’s wooden looms.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Column: Interactive Selection Controls */}
-          <div className="lg:col-span-7 space-y-8 bg-[#111724]/90 border border-[#D4AF37]/25 rounded-2xl p-6 sm:p-8 backdrop-blur-md">
-            {/* Step 1: Traditional Weave Selection */}
+          {/* Controls: Left & Center Columns */}
+          <div className="lg:col-span-8 bg-[#0D1422] border border-[#243044] rounded-2xl p-6 sm:p-8 space-y-8">
+            {/* Step 1: Traditional Weave Heritage Selection */}
             <div>
-              <label className="flex items-center justify-between text-sm font-bold text-[#F4E4BA] mb-3">
-                <span className="flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-[#D4AF37] text-[#0A0E17] text-xs font-extrabold flex items-center justify-center">1</span>
-                  Select Ancestral Weave Base
-                </span>
-                <span className="text-xs text-[#A0AEC0] font-normal">Authentic Handloom</span>
+              <label className="text-xs font-bold uppercase tracking-wider text-gold-light flex items-center gap-2 mb-3">
+                <Palette className="w-4 h-4 text-gold" />
+                <span>1. Select Traditional Weave Ancestry</span>
               </label>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                {(Object.keys(WEAVE_DETAILS) as TraditionalWeaveType[]).map((type) => {
-                  const info = WEAVE_DETAILS[type];
-                  const active = weaveType === type;
-                  return (
-                    <button
-                      key={type}
-                      type="button"
-                      onClick={() => setWeaveType(type)}
-                      className={`text-left p-3 rounded-xl border transition-all cursor-pointer ${
-                        active
-                          ? 'border-[#D4AF37] bg-[#1E293B] shadow-lg shadow-[#D4AF37]/15'
-                          : 'border-[#243044] bg-[#0E1522] hover:border-[#D4AF37]/50'
-                      }`}
-                    >
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-xs font-bold capitalize text-[#FDFBF7]">{type}</span>
-                        {active && <Check className="w-3.5 h-3.5 text-[#D4AF37]" />}
-                      </div>
-                      <span className="text-[10px] text-[#A0AEC0] block line-clamp-1">{info.subtitle}</span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Informational Callout for Selected Weave */}
-              <div className="mt-3 p-3 rounded-lg bg-[#161F2E] border border-[#D4AF37]/20 flex items-start gap-2.5 text-xs text-[#D1D5DB]">
-                <Info className="w-4 h-4 text-[#D4AF37] flex-shrink-0 mt-0.5" />
-                <p>
-                  <strong className="text-[#F4E4BA]">{WEAVE_DETAILS[weaveType].title}:</strong> {WEAVE_DETAILS[weaveType].desc}
-                </p>
-              </div>
-            </div>
-
-            {/* Step 2: Ensemble Garment Type */}
-            <div>
-              <label className="flex items-center justify-between text-sm font-bold text-[#F4E4BA] mb-3">
-                <span className="flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-[#D4AF37] text-[#0A0E17] text-xs font-extrabold flex items-center justify-center">2</span>
-                  Select Ensemble / Package
-                </span>
-                <span className="text-xs text-[#A0AEC0] font-normal">Bespoke Fitting</span>
-              </label>
-
-              <div className="space-y-2">
-                {(Object.keys(ENSEMBLE_DETAILS) as (keyof typeof ENSEMBLE_DETAILS)[]).map((key) => {
-                  const ens = ENSEMBLE_DETAILS[key];
-                  const active = ensemble === key;
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {(Object.keys(WEAVE_DETAILS) as TraditionalWeaveType[]).map((key) => {
+                  const item = WEAVE_DETAILS[key];
+                  const isSelected = weaveType === key;
                   return (
                     <button
                       key={key}
+                      onClick={() => setWeaveType(key)}
                       type="button"
-                      onClick={() => setEnsemble(key)}
-                      className={`w-full flex items-center justify-between p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
-                        active
-                          ? 'border-[#D4AF37] bg-[#1E293B] shadow-md shadow-[#D4AF37]/10'
-                          : 'border-[#243044] bg-[#0E1522] hover:border-[#D4AF37]/50'
+                      className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
+                        isSelected
+                          ? 'border-[#D4AF37] bg-[#141C2B] shadow-md'
+                          : 'border-[#243044] bg-[#070A0F]/60 hover:border-[#D4AF37]/50 text-gray-300'
                       }`}
                     >
-                      <div className="flex items-center gap-3">
-                        <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${active ? 'border-[#D4AF37] bg-[#D4AF37]' : 'border-[#4B5563]'}`}>
-                          {active && <span className="w-1.5 h-1.5 rounded-full bg-[#0A0E17]" />}
+                      <div>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <span className={`text-xs font-bold ${isSelected ? 'text-gold' : 'text-white'}`}>
+                            {item.title.split(' ')[0]}
+                          </span>
+                          {isSelected && <Check className="w-3.5 h-3.5 text-gold" />}
                         </div>
-                        <div>
-                          <span className="text-xs sm:text-sm font-semibold text-white block">{ens.name}</span>
-                          <span className="text-[11px] text-[#A0AEC0]">Lead Time: {ens.leadWeeks}</span>
-                        </div>
+                        <span className="text-[11px] text-[#A0AEC0] block leading-tight">
+                          {item.subtitle}
+                        </span>
                       </div>
-                      <span className="text-xs font-semibold text-[#D4AF37]">
-                        Bespoke Commission
-                      </span>
                     </button>
                   );
                 })}
               </div>
+
+              {/* Informative Weave Description */}
+              <div className="mt-3 p-3.5 rounded-xl bg-[#070A0F] border border-[#243044] text-xs text-[#CBD5E1] flex items-start gap-2.5">
+                <Info className="w-4 h-4 text-gold flex-shrink-0 mt-0.5" />
+                <div>
+                  <strong className="text-white block mb-0.5">{WEAVE_DETAILS[weaveType].title}</strong>
+                  <span>{WEAVE_DETAILS[weaveType].desc}</span>
+                </div>
+              </div>
             </div>
 
-            {/* Step 3: Color Palette & Accents */}
+            {/* Step 2: Royal Ensemble Format */}
             <div>
-              <label className="flex items-center justify-between text-sm font-bold text-[#F4E4BA] mb-3">
-                <span className="flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-[#D4AF37] text-[#0A0E17] text-xs font-extrabold flex items-center justify-center">3</span>
-                  Palette & Accent Harmony
-                </span>
-                <Palette className="w-4 h-4 text-[#D4AF37]" />
+              <label className="text-xs font-bold uppercase tracking-wider text-gold-light flex items-center gap-2 mb-3">
+                <Scissors className="w-4 h-4 text-gold" />
+                <span>2. Choose Ensemble Silhouette</span>
+              </label>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {Object.entries(ENSEMBLE_DETAILS).map(([key, val]) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => setEnsemble(key as any)}
+                    className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
+                      ensemble === key
+                        ? 'border-[#D4AF37] bg-[#141C2B] shadow-md'
+                        : 'border-[#243044] bg-[#070A0F]/60 hover:border-[#D4AF37]/50 text-gray-300'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className={`text-xs font-bold ${ensemble === key ? 'text-gold' : 'text-white'}`}>
+                        {val.name}
+                      </span>
+                      {ensemble === key && <Check className="w-3.5 h-3.5 text-gold" />}
+                    </div>
+                    <span className="text-[11px] text-[#9CA3AF] block tabular-nums">
+                      Production Window: {val.leadWeeks}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Step 3: Yarn Palette Customization */}
+            <div>
+              <label className="text-xs font-bold uppercase tracking-wider text-gold-light flex items-center gap-2 mb-3">
+                <Palette className="w-4 h-4 text-gold" />
+                <span>3. Custom Yarn Dye Palette</span>
               </label>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs text-[#A0AEC0] block mb-1.5">Primary Weave Tone</label>
+                  <span className="text-xs text-[#A0AEC0] block mb-1.5 font-medium">Primary Ground Color</span>
                   <select
                     value={baseColor}
                     onChange={(e) => setBaseColor(e.target.value)}
-                    className="w-full bg-[#0E1522] border border-[#243044] rounded-lg px-3 py-2.5 text-xs text-white focus:border-[#D4AF37] focus:outline-none"
+                    className="w-full bg-[#070A0F] border border-[#243044] rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-[#D4AF37] focus:outline-none"
                   >
-                    <option value="Royal Crimson (#8A1528)">Regal Alaari Crimson (#8A1528)</option>
-                    <option value="Imperial Indigo Navy (#152238)">Imperial Indigo Navy (#152238)</option>
-                    <option value="Earthy Sanyan Raw Champagne (#D9C3A3)">Earthy Sanyan Raw Champagne (#D9C3A3)</option>
-                    <option value="Emerald Monarch Green (#0D3B26)">Emerald Monarch Green (#0D3B26)</option>
-                    <option value="Pewter Slate & Silver (#4A5568)">Pewter Slate & Silver (#4A5568)</option>
-                    <option value="Midnight Onyx Black (#0B0F17)">Midnight Onyx Black (#0B0F17)</option>
-                    <option value="Burnt Orange & Terracotta (#C05621)">Burnt Orange & Terracotta (#C05621)</option>
+                    <option value="Royal Crimson (#8A1528)">Alaari Royal Crimson (#8A1528)</option>
+                    <option value="Deep Indigo Navy (#152238)">Etu Deep Indigo Navy (#152238)</option>
+                    <option value="Raw Silk Tan / Brown (#D9C3A3)">Sanyan Wild Raw Silk Tan (#D9C3A3)</option>
+                    <option value="Onyx Midnight Black (#0A0A0A)">Onyx Midnight Black (#0A0A0A)</option>
+                    <option value="Emerald Monarch Green (#0F382A)">Monarch Emerald Green (#0F382A)</option>
+                    <option value="Pure Sovereign White (#FFFFFF)">Pure Sovereign White (#FFFFFF)</option>
+                    <option value="Lavender Lilac Orchid (#7E5A8F)">Lilac / Orchid Violet (#7E5A8F)</option>
+                    <option value="Custom Wedding Dye Match">Custom Wedding Fabric Swatch Dye</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="text-xs text-[#A0AEC0] block mb-1.5">Accent & Thread Highlights</label>
+                  <span className="text-xs text-[#A0AEC0] block mb-1.5 font-medium">Accent / Metallic Stripe Yarn</span>
                   <select
                     value={accentColor}
                     onChange={(e) => setAccentColor(e.target.value)}
-                    className="w-full bg-[#0E1522] border border-[#243044] rounded-lg px-3 py-2.5 text-xs text-white focus:border-[#D4AF37] focus:outline-none"
+                    className="w-full bg-[#070A0F] border border-[#243044] rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-[#D4AF37] focus:outline-none"
                   >
-                    <option value="Champagne Gold (#D4AF37)">Champagne Metallic Gold</option>
-                    <option value="Pure Lurex Silver (#E2E8F0)">Pure Lurex Silver</option>
-                    <option value="Deep Wine Burgundy (#500B17)">Deep Wine Burgundy</option>
-                    <option value="Warm Ivory (#FDFBF7)">Warm Ivory Raw Silk</option>
-                    <option value="Benin Coral Red (#DD6B20)">Benin Coral Accent</option>
+                    <option value="Champagne Gold (#D4AF37)">Metallic Champagne Gold (#D4AF37)</option>
+                    <option value="Polished Silver Lurex (#E2E8F0)">Polished Silver Lurex (#E2E8F0)</option>
+                    <option value="Copper Rose Gold (#C87D55)">Copper Rose Gold (#C87D55)</option>
+                    <option value="Cobalt Blue Highlights (#1E40AF)">Cobalt Blue Pinstripes (#1E40AF)</option>
+                    <option value="Coral Peach Tones (#E27D60)">Coral Bead Peach Tone (#E27D60)</option>
+                    <option value="Tone-on-Tone Monochromatic">Tone-on-Tone Monochromatic</option>
                   </select>
                 </div>
               </div>
             </div>
 
-            {/* Step 4: Embellishments & Tailoring Options */}
+            {/* Step 4: Embellishment & Detailing */}
             <div>
-              <label className="flex items-center justify-between text-sm font-bold text-[#F4E4BA] mb-3">
-                <span className="flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-[#D4AF37] text-[#0A0E17] text-xs font-extrabold flex items-center justify-center">4</span>
-                  Finishing & Embellishment Level
-                </span>
-                <Scissors className="w-4 h-4 text-[#D4AF37]" />
+              <label className="text-xs font-bold uppercase tracking-wider text-gold-light flex items-center gap-2 mb-3">
+                <Sparkles className="w-4 h-4 text-gold" />
+                <span>4. Bullion Embroidery & Embellishment</span>
               </label>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                {(Object.keys(EMBELLISHMENT_OPTIONS) as (keyof typeof EMBELLISHMENT_OPTIONS)[]).map((key) => {
-                  const emb = EMBELLISHMENT_OPTIONS[key];
-                  const active = embellishment === key;
-                  return (
-                    <button
-                      key={key}
-                      type="button"
-                      onClick={() => setEmbellishment(key)}
-                      className={`text-left p-3 rounded-xl border transition-all cursor-pointer ${
-                        active
-                          ? 'border-[#D4AF37] bg-[#1E293B] shadow-sm'
-                          : 'border-[#243044] bg-[#0E1522] hover:border-[#D4AF37]/50'
-                      }`}
-                    >
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-xs font-semibold text-white">{emb.name}</span>
-                        {active && <Check className="w-3.5 h-3.5 text-[#D4AF37]" />}
-                      </div>
-                      <span className="text-[11px] text-[#A0AEC0]">
-                        {emb.note}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {Object.entries(EMBELLISHMENT_OPTIONS).map(([key, val]) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => setEmbellishment(key as any)}
+                    className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
+                      embellishment === key
+                        ? 'border-[#D4AF37] bg-[#141C2B] shadow-md'
+                        : 'border-[#243044] bg-[#070A0F]/60 hover:border-[#D4AF37]/50 text-gray-300'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className={`text-xs font-bold ${embellishment === key ? 'text-gold' : 'text-white'}`}>
+                        {val.name}
                       </span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Headwear & Tailoring Toggles */}
-              <div className="mt-4 pt-4 border-t border-[#243044] space-y-3">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-[#D1D5DB]">Include Matching Headwear (Bridal Gele or Groom Fila Gobi):</span>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={headwearIncluded}
-                      onChange={(e) => setHeadwearIncluded(e.target.checked)}
-                      className="sr-only peer"
-                    />
-                    <div className="w-9 h-5 bg-[#243044] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#D4AF37]"></div>
-                  </label>
-                </div>
-
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-[#D1D5DB]">Tailoring Mode:</span>
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setTailoringOption('custom-tailored')}
-                      className={`px-2.5 py-1 rounded text-xs transition-all ${tailoringOption === 'custom-tailored' ? 'bg-[#D4AF37] text-[#0A0E17] font-bold' : 'bg-[#182234] text-[#A0AEC0]'}`}
-                    >
-                      Bespoke Tailored
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setTailoringOption('fabric-raw-cut')}
-                      className={`px-2.5 py-1 rounded text-xs transition-all ${tailoringOption === 'fabric-raw-cut' ? 'bg-[#D4AF37] text-[#0A0E17] font-bold' : 'bg-[#182234] text-[#A0AEC0]'}`}
-                    >
-                      Fabric Only
-                    </button>
-                  </div>
-                </div>
+                      {embellishment === key && <Check className="w-3.5 h-3.5 text-gold" />}
+                    </div>
+                    <span className="text-[11px] text-[#A0AEC0] block">
+                      {val.note}
+                    </span>
+                  </button>
+                ))}
               </div>
             </div>
 
-            {/* Client Notes & Date */}
-            <div className="pt-2 border-t border-[#243044] grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {/* Tailoring & Add-ons */}
+            <div className="pt-2 border-t border-[#243044] grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-xs text-[#A0AEC0] block mb-1">Your Name / Event Host</label>
+                <span className="text-xs text-[#A0AEC0] block mb-2 font-medium">Finishing State</span>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setTailoringOption('custom-tailored')}
+                    className={`flex-1 py-2 px-3 rounded-lg text-xs font-semibold cursor-pointer border ${
+                      tailoringOption === 'custom-tailored'
+                        ? 'bg-[#D4AF37] text-[#070A0F] border-[#D4AF37] font-bold'
+                        : 'bg-[#070A0F] text-[#A0AEC0] border-[#243044]'
+                    }`}
+                  >
+                    Custom Tailored
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTailoringOption('fabric-raw-cut')}
+                    className={`flex-1 py-2 px-3 rounded-lg text-xs font-semibold cursor-pointer border ${
+                      tailoringOption === 'fabric-raw-cut'
+                        ? 'bg-[#D4AF37] text-[#070A0F] border-[#D4AF37] font-bold'
+                        : 'bg-[#070A0F] text-[#A0AEC0] border-[#243044]'
+                    }`}
+                  >
+                    Raw Loom Strips
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <span className="text-xs text-[#A0AEC0] block mb-2 font-medium">Headwear (Gele / Fila)</span>
+                <label className="flex items-center gap-2 cursor-pointer p-2 rounded-lg bg-[#070A0F] border border-[#243044]">
+                  <input
+                    type="checkbox"
+                    checked={headwearIncluded}
+                    onChange={(e) => setHeadwearIncluded(e.target.checked)}
+                    className="w-4 h-4 rounded text-[#D4AF37] accent-[#D4AF37] bg-[#141C2B]"
+                  />
+                  <span className="text-xs text-white">Include Matching Auto-Gele or Fila</span>
+                </label>
+              </div>
+            </div>
+
+            {/* Client Notes & Target Date */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div>
+                <label className="text-xs text-[#A0AEC0] block mb-1">Your Full Name</label>
                 <input
                   type="text"
-                  placeholder="e.g., Folashade Adeleke"
+                  placeholder="e.g. Chief Adeleke / Olori Mary"
                   value={clientName}
                   onChange={(e) => setClientName(e.target.value)}
-                  className="w-full bg-[#0E1522] border border-[#243044] rounded-lg px-3 py-2 text-xs text-white focus:border-[#D4AF37] focus:outline-none"
+                  className="w-full bg-[#070A0F] border border-[#243044] rounded-xl px-3.5 py-2 text-xs text-white placeholder-gray-600 focus:border-[#D4AF37] focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="text-xs text-[#A0AEC0] block mb-1">Target Event Date (Optional)</label>
+                <label className="text-xs text-[#A0AEC0] block mb-1">Target Event Date</label>
                 <input
                   type="date"
                   value={targetDate}
                   onChange={(e) => setTargetDate(e.target.value)}
-                  className="w-full bg-[#0E1522] border border-[#243044] rounded-lg px-3 py-2 text-xs text-white focus:border-[#D4AF37] focus:outline-none"
+                  className="w-full bg-[#070A0F] border border-[#243044] rounded-xl px-3.5 py-2 text-xs text-white focus:border-[#D4AF37] focus:outline-none"
+                />
+              </div>
+
+              <div className="sm:col-span-2">
+                <label className="text-xs text-[#A0AEC0] block mb-1">Special Measurements / Notes</label>
+                <textarea
+                  rows={2}
+                  placeholder="Provide chest, agbada length, wedding color scheme, or delivery city..."
+                  value={clientNotes}
+                  onChange={(e) => setClientNotes(e.target.value)}
+                  className="w-full bg-[#070A0F] border border-[#243044] rounded-xl px-3.5 py-2 text-xs text-white placeholder-gray-600 focus:border-[#D4AF37] focus:outline-none resize-none"
                 />
               </div>
             </div>
           </div>
 
-          {/* Right Column: Live Order Specification Card & WhatsApp Trigger */}
-          <div className="lg:col-span-5 sticky top-28 space-y-6">
-            <div className="bg-gradient-to-b from-[#182234] to-[#0E1624] border border-[#D4AF37]/40 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
-              {/* Gold Ribbon Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-[#D4AF37]/25">
-                <div>
-                  <span className="text-[10px] uppercase tracking-widest text-[#D4AF37] font-bold block">
-                    Bespoke Loom Ticket
-                  </span>
-                  <h3 className="text-lg font-bold text-white font-heading">
-                    {ENSEMBLE_DETAILS[ensemble].name}
-                  </h3>
-                </div>
-                <div className="w-10 h-10 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37] flex items-center justify-center text-lg">
-                  🧵
-                </div>
-              </div>
-
-              {/* Fabric Preview Visual */}
-              <div className="my-5 rounded-xl overflow-hidden border border-[#D4AF37]/30 relative aspect-video bg-black">
-                <img
-                  src={WEAVE_DETAILS[weaveType].defaultSample}
-                  alt={`${weaveType} Aso Oke sample`}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-3.5">
-                  <span className="text-xs font-bold text-[#F3E5AB]">
-                    Weave Style: {WEAVE_DETAILS[weaveType].title.split('(')[0]}
-                  </span>
-                  <span className="text-[11px] text-[#CBD5E1]">
-                    Palette: {baseColor.split('(')[0]} + {accentColor.split('(')[0]}
-                  </span>
-                </div>
-              </div>
-
-              {/* Summary Breakdown */}
-              <div className="space-y-2 text-xs border-b border-[#243044] pb-4">
-                <div className="flex justify-between text-[#A0AEC0]">
-                  <span>Weave Type:</span>
-                  <span className="text-white font-medium capitalize">{weaveType} Handloom</span>
-                </div>
-                <div className="flex justify-between text-[#A0AEC0]">
-                  <span>Embellishment:</span>
-                  <span className="text-white font-medium">{EMBELLISHMENT_OPTIONS[embellishment].name.split('(')[0]}</span>
-                </div>
-                <div className="flex justify-between text-[#A0AEC0]">
-                  <span>Headwear:</span>
-                  <span className="text-white font-medium">{headwearIncluded ? 'Included (Gele/Fila)' : 'Excluded'}</span>
-                </div>
-                <div className="flex justify-between text-[#A0AEC0]">
-                  <span>Estimated Lead Time:</span>
-                  <span className="text-[#F4E4BA] font-semibold flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5" />
-                    {ENSEMBLE_DETAILS[ensemble].leadWeeks}
-                  </span>
-                </div>
-              </div>
-
-              {/* Price / Quote Notice */}
-              <div className="pt-4 flex items-baseline justify-between">
-                <div>
-                  <span className="text-[11px] uppercase tracking-wider text-[#A0AEC0] block">
-                    Bespoke Commission:
-                  </span>
-                  <span className="text-xl sm:text-2xl font-bold text-[#D4AF37] font-royal uppercase">
-                    Quotation on Request
-                  </span>
-                </div>
-                <span className="text-[10px] text-[#D4AF37] font-medium bg-[#D4AF37]/10 px-2 py-1 rounded border border-[#D4AF37]/30">
-                  Direct Weaver
+          {/* Right Column: Dynamic Specification & Live Summary */}
+          <div className="lg:col-span-4 space-y-6">
+            <div className="bg-[#0D1422] border border-[#D4AF37]/35 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+              <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#243044]">
+                <h3 className="text-base font-bold text-white font-heading">
+                  Bespoke Commission Summary
+                </h3>
+                <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-0.5 rounded-full bg-[#8A1528] text-white">
+                  Handloom
                 </span>
               </div>
 
-              {/* Actions */}
-              <div className="mt-6 space-y-3">
+              {/* Sample Preview Image */}
+              <div className="relative aspect-video rounded-xl overflow-hidden mb-4 border border-[#243044]">
+                <img
+                  src={WEAVE_DETAILS[weaveType].defaultSample}
+                  alt={WEAVE_DETAILS[weaveType].title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex flex-col justify-end p-3">
+                  <span className="text-[10px] font-bold text-gold uppercase tracking-wider">
+                    {WEAVE_DETAILS[weaveType].title}
+                  </span>
+                  <span className="text-xs font-semibold text-white">
+                    {ENSEMBLE_DETAILS[ensemble].name}
+                  </span>
+                </div>
+              </div>
+
+              {/* Specification Attributes */}
+              <div className="space-y-2.5 text-xs text-[#CBD5E1] border-b border-[#243044] pb-4">
+                <div className="flex justify-between">
+                  <span className="text-[#9CA3AF]">Weave Lineage:</span>
+                  <span className="font-semibold text-white">{WEAVE_DETAILS[weaveType].title.split(' ')[0]}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[#9CA3AF]">Ground Yarn:</span>
+                  <span className="font-semibold text-white text-right max-w-[180px] truncate">{baseColor}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[#9CA3AF]">Accent / Metallic:</span>
+                  <span className="font-semibold text-white text-right max-w-[180px] truncate">{accentColor}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[#9CA3AF]">Embellishment:</span>
+                  <span className="font-semibold text-white text-right max-w-[180px] truncate">{EMBELLISHMENT_OPTIONS[embellishment].note}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[#9CA3AF]">Finishing:</span>
+                  <span className="font-semibold text-white">{tailoringOption === 'custom-tailored' ? 'Full Bespoke Tailored' : 'Raw Fabric Strips'}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[#9CA3AF]">Headwear Included:</span>
+                  <span className="font-semibold text-white">{headwearIncluded ? 'Yes (Gele/Fila)' : 'Excluded'}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[#9CA3AF]">Production Window:</span>
+                  <span className="font-bold text-gold tabular-nums">{ENSEMBLE_DETAILS[ensemble].leadWeeks}</span>
+                </div>
+              </div>
+
+              {/* Price on Request Banner */}
+              <div className="py-4">
+                <span className="text-xs text-[#9CA3AF] block mb-0.5">Atelier Quotation:</span>
+                <span className="text-xl font-bold text-gold uppercase tracking-wider font-royal block">
+                  Price on Request
+                </span>
+                <span className="text-[11px] text-[#9CA3AF] block mt-1">
+                  Quotation customized to measurements, gold bullion density, and DHL destination.
+                </span>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="space-y-3 pt-2">
                 <a
                   href={generateWhatsAppMessage()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-bold text-sm shadow-lg shadow-green-500/20 hover:brightness-110 transition-all cursor-pointer"
+                  className="w-full py-3.5 px-4 rounded-xl gold-button text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-lg text-center"
                 >
-                  <MessageCircle className="w-5 h-5 fill-white" />
-                  <span>Send Specification to WhatsApp</span>
+                  <MessageCircle className="w-4 h-4 text-[#070A0F]" />
+                  <span>Send Spec to Jesutofunmi</span>
                 </a>
 
-                {onAddCustomToCart && (
-                  <button
-                    type="button"
-                    onClick={handleAddToCart}
-                    className="w-full py-2.5 px-4 rounded-xl gold-button-outline text-xs font-semibold flex items-center justify-center gap-2 cursor-pointer"
-                  >
-                    <Send className="w-3.5 h-3.5" />
-                    <span>Save to My Inquiry Wishlist</span>
-                  </button>
-                )}
+                <button
+                  type="button"
+                  onClick={handleAddSpecificationToCart}
+                  className="w-full py-3 px-4 rounded-xl gold-button-outline text-xs font-semibold flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <Sparkles className="w-4 h-4 text-gold" />
+                  <span>Save Specification to Inquiry List</span>
+                </button>
 
                 {copiedNotification && (
-                  <div className="p-2 text-center text-xs text-green-400 bg-green-950/40 border border-green-800 rounded-lg">
-                    ✓ Custom configuration saved to your inquiry list!
+                  <div className="p-2.5 rounded-lg bg-[#0F382A] border border-[#25D366]/40 text-xs text-[#86EFAC] text-center font-medium">
+                    ✓ Specification added to your bespoke inquiry list!
                   </div>
                 )}
               </div>
+            </div>
 
-              {/* Artisan Note */}
-              <div className="mt-4 pt-3 border-t border-[#243044] text-[11px] text-[#9CA3AF] text-center">
-                Questions? Speak directly with <strong>Jesutofunmi</strong> on <strong>{VENDOR_DETAILS.phone}</strong> for custom measurements and matching coral bead advice.
-              </div>
+            {/* Direct Consultation Notice */}
+            <div className="p-4 rounded-xl bg-[#0D1422] border border-[#243044] text-xs text-[#9CA3AF] space-y-1">
+              <span className="font-bold text-white block">📍 Master Artisan Workshop</span>
+              <span>Loom facilities located in Ibadan & Lagos, Nigeria. Worldwide express shipping with real-time video measurement consultation.</span>
             </div>
           </div>
         </div>

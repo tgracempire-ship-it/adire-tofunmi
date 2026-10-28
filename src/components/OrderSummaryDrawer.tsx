@@ -70,20 +70,20 @@ export const OrderSummaryDrawer: React.FC<OrderSummaryDrawerProps> = ({
       onClick={handleDialogClick}
       onCancel={onClose}
       aria-labelledby="drawer-title"
-      className="m-0 sm:ml-auto h-full max-h-screen w-full sm:max-w-md bg-[#0D131F] border-l border-[#D4AF37]/30 text-white p-0 shadow-2xl backdrop:bg-black/75 backdrop:backdrop-blur-sm"
+      className="m-0 sm:ml-auto h-full max-h-screen w-full sm:max-w-md bg-[#070A0F] border-l border-[#D4AF37]/30 text-white p-0 shadow-2xl backdrop:bg-black/80 backdrop:backdrop-blur-sm"
     >
       <div className="flex flex-col h-full justify-between">
         {/* Header */}
-        <div className="p-5 border-b border-[#243044] flex items-center justify-between bg-[#111724]">
+        <div className="p-5 border-b border-[#243044] flex items-center justify-between bg-[#0D1422]">
           <div className="flex items-center gap-2">
-            <ShoppingBag className="w-5 h-5 text-[#D4AF37]" />
+            <ShoppingBag className="w-5 h-5 text-gold" />
             <h2 id="drawer-title" className="text-base font-bold font-heading text-white">
               Your Custom Inquiry List
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg bg-[#182234] text-[#A0AEC0] hover:text-white cursor-pointer"
+            className="p-1.5 rounded-lg bg-[#141C2B] text-[#A0AEC0] hover:text-white cursor-pointer"
             aria-label="Close drawer"
           >
             <X className="w-5 h-5" />
@@ -103,7 +103,7 @@ export const OrderSummaryDrawer: React.FC<OrderSummaryDrawerProps> = ({
                 onClick={onClose}
                 className="mt-4 px-4 py-2 rounded-xl gold-button text-xs font-bold"
               >
-                Explore Collection
+                Explore Lookbook
               </button>
             </div>
           ) : (
@@ -111,7 +111,7 @@ export const OrderSummaryDrawer: React.FC<OrderSummaryDrawerProps> = ({
               {items.map((item) => (
                 <div
                   key={item.id}
-                  className="p-3.5 rounded-xl bg-[#131B29] border border-[#243044] flex gap-3 items-center"
+                  className="p-3.5 rounded-xl bg-[#0D1422] border border-[#243044] flex gap-3 items-center"
                 >
                   <div className="w-16 h-16 rounded-lg overflow-hidden border border-[#D4AF37]/30 flex-shrink-0 bg-black">
                     <img
@@ -129,7 +129,7 @@ export const OrderSummaryDrawer: React.FC<OrderSummaryDrawerProps> = ({
                       {item.details}
                     </p>
                     <div className="mt-1 flex items-center justify-between">
-                      <span className="text-[11px] font-semibold text-[#D4AF37] uppercase">
+                      <span className="text-[11px] font-semibold text-gold uppercase">
                         Bespoke Commission
                       </span>
                       <button
@@ -158,12 +158,12 @@ export const OrderSummaryDrawer: React.FC<OrderSummaryDrawerProps> = ({
 
         {/* Footer Checkout */}
         {items.length > 0 && (
-          <div className="p-5 border-t border-[#243044] bg-[#111724] space-y-4">
+          <div className="p-5 border-t border-[#243044] bg-[#0D1422] space-y-4">
             <div className="flex justify-between items-baseline">
               <span className="text-xs text-[#A0AEC0] uppercase tracking-wider">
                 Total Items Selected:
               </span>
-              <span className="text-xl font-bold text-white font-heading">
+              <span className="text-xl font-bold text-white font-heading tabular-nums">
                 {items.reduce((acc, curr) => acc + curr.quantity, 0)} Creations
               </span>
             </div>
@@ -176,9 +176,9 @@ export const OrderSummaryDrawer: React.FC<OrderSummaryDrawerProps> = ({
               href={generateWhatsAppCheckout()}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-bold text-xs sm:text-sm shadow-lg shadow-green-500/20 hover:brightness-110 transition-all cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#25D366] text-[#070A0F] font-bold text-xs uppercase tracking-wider hover:brightness-105 transition-all cursor-pointer shadow-lg"
             >
-              <MessageCircle className="w-4 h-4 fill-white" />
+              <MessageCircle className="w-4 h-4 fill-[#070A0F]" />
               <span>Request Quote on WhatsApp</span>
               <ArrowRight className="w-4 h-4" />
             </a>

@@ -95,7 +95,7 @@ export const App: React.FC = () => {
 
   return (
     <CurrencyProvider>
-      <div className="min-h-screen bg-[#0A0E17] text-[#EDE8DF] selection:bg-[#D4AF37] selection:text-[#0A0E17]">
+      <div className="min-h-screen bg-[#070A0F] text-[#EDE8DF] selection:bg-[#D4AF37] selection:text-[#070A0F]">
         {/* Navigation Bar */}
         <Navbar
           onOpenCustomizer={scrollToCustomizer}

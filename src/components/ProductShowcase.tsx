@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Product, WeaveCategory } from '../types';
 import { ASO_OKE_PRODUCTS } from '../data/asoOkeProducts';
-import { Eye, MessageCircle, Sparkles, Filter, ChevronRight } from 'lucide-react';
+import { Eye, MessageCircle, Filter, ArrowUpRight } from 'lucide-react';
 import { VENDOR_DETAILS } from '../data/asoOkeProducts';
 
 interface ProductShowcaseProps {
@@ -36,20 +36,16 @@ export const ProductShowcase: React.FC<ProductShowcaseProps> = ({
   });
 
   return (
-    <section id="collection" className="py-20 bg-[#0A0E17] relative border-b border-[#D4AF37]/20">
+    <section id="collection" className="py-20 bg-[#070A0F] relative border-b border-[#D4AF37]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#182234] border border-[#D4AF37]/30 text-xs font-semibold text-[#D4AF37] mb-3">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>The Jesutofunmi Haute Couture Lookbook</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FDFBF7] font-heading">
-              Curated <span className="gold-gradient-text font-royal">Heirloom Creations</span>
+              Curated <span className="text-gold font-royal">Heirloom Creations</span>
             </h2>
             <p className="text-sm sm:text-base text-[#9CA3AF] mt-2 max-w-xl">
-              Authentic handwoven masterpieces tailored for kings, queens, and milestone ceremonies. Each piece is woven from scratch upon request.
+              Authentic handwoven masterpieces tailored for kings, queens, and celebrated milestone ceremonies. Every piece is woven upon bespoke request.
             </p>
           </div>
 
@@ -57,25 +53,25 @@ export const ProductShowcase: React.FC<ProductShowcaseProps> = ({
           <div className="mt-6 md:mt-0 w-full md:w-72">
             <input
               type="text"
-              placeholder="Search by weave, color, or attire..."
+              placeholder="Search by weave, color, or ensemble..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#131B29] border border-[#243044] rounded-xl px-4 py-2.5 text-xs text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none transition-colors"
+              className="w-full bg-[#0D1422] border border-[#243044] rounded-xl px-4 py-2.5 text-xs text-white placeholder-gray-500 focus:border-[#D4AF37] focus:outline-none transition-colors"
             />
           </div>
         </div>
 
-        {/* Filter Category Pills */}
+        {/* Filter Category Tabs */}
         <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-10 scrollbar-none">
-          <Filter className="w-4 h-4 text-[#D4AF37] flex-shrink-0 mr-1" />
+          <Filter className="w-4 h-4 text-gold flex-shrink-0 mr-1" />
           {categories.map((cat) => (
             <button
               key={cat.key}
               onClick={() => setSelectedCategory(cat.key)}
               className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                 selectedCategory === cat.key
-                  ? 'bg-gradient-to-r from-[#D4AF37] to-[#BF9522] text-[#0A0E17] shadow-lg shadow-[#D4AF37]/20 font-bold'
-                  : 'bg-[#111724] border border-[#243044] text-[#A0AEC0] hover:text-white hover:border-[#D4AF37]/40'
+                  ? 'bg-[#D4AF37] text-[#070A0F] font-bold shadow-md'
+                  : 'bg-[#0D1422] border border-[#243044] text-[#A0AEC0] hover:text-white hover:border-[#D4AF37]/40'
               }`}
             >
               {cat.label}
@@ -105,11 +101,11 @@ export const ProductShowcase: React.FC<ProductShowcaseProps> = ({
                       loading="lazy"
                     />
 
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E17] via-transparent to-transparent opacity-80" />
+                    {/* Gradient Overlay for Contrast */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#070A0F] via-transparent to-transparent opacity-80" />
 
                     {/* Weave Badge */}
-                    <div className="absolute top-3 left-3 bg-[#0A0E17]/85 backdrop-blur-md px-3 py-1 rounded-full border border-[#D4AF37]/40 text-[10px] font-bold text-[#F4E4BA] uppercase tracking-wider">
+                    <div className="absolute top-3 left-3 bg-[#070A0F]/90 px-3 py-1 rounded-full border border-[#D4AF37]/40 text-[10px] font-bold text-[#F4E4BA] uppercase tracking-wider">
                       {product.weaveType} Weave
                     </div>
 
@@ -123,7 +119,7 @@ export const ProductShowcase: React.FC<ProductShowcaseProps> = ({
                     <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 p-4">
                       <button
                         onClick={() => onSelectProduct(product)}
-                        className="px-4 py-2 rounded-xl bg-white text-[#0A0E17] font-bold text-xs flex items-center gap-1.5 shadow-xl hover:bg-[#F3E5AB] transition-colors cursor-pointer"
+                        className="px-4 py-2 rounded-xl bg-white text-[#070A0F] font-bold text-xs flex items-center gap-1.5 shadow-xl hover:bg-[#F3E5AB] transition-colors cursor-pointer"
                       >
                         <Eye className="w-4 h-4" />
                         <span>View Details</span>
@@ -141,76 +137,72 @@ export const ProductShowcase: React.FC<ProductShowcaseProps> = ({
                     </div>
                   </div>
 
-                  {/* Card Content */}
-                  <div className="p-6">
-                    <div className="flex items-center justify-between text-[11px] text-[#A0AEC0] mb-1.5">
-                      <span className="capitalize">{product.category} Collection</span>
-                      <span>Lead: {product.leadTimeWeeks}</span>
+                  {/* Product Metadata Content */}
+                  <div className="p-5 space-y-3">
+                    <div className="flex items-center justify-between text-xs text-[#9CA3AF]">
+                      <span>{product.piecesIncluded} Included</span>
+                      <span className="text-gold font-medium">Bespoke Couture</span>
                     </div>
 
-                    <h3 className="text-lg font-bold text-white font-heading group-hover:text-[#D4AF37] transition-colors leading-snug">
+                    <h3 className="text-lg font-bold text-[#FDFBF7] font-heading group-hover:text-gold transition-colors leading-snug">
                       {product.name}
                     </h3>
 
-                    <p className="text-xs text-[#9CA3AF] mt-2 line-clamp-2 leading-relaxed">
-                      {product.subtitle}
+                    <p className="text-xs text-[#9CA3AF] line-clamp-2 leading-relaxed">
+                      {product.description}
                     </p>
 
-                    {/* Pricing Display */}
-                    <div className="mt-4 pt-3 border-t border-[#243044] flex items-baseline justify-between">
-                      <div>
-                        <span className="text-[10px] uppercase text-[#A0AEC0] block">
-                          Bespoke Handwoven:
+                    {/* Tag Pills */}
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {product.tags.slice(0, 3).map((tag, idx) => (
+                        <span
+                          key={idx}
+                          className="text-[10px] bg-[#141C2B] border border-[#243044] text-[#CBD5E1] px-2 py-0.5 rounded-md"
+                        >
+                          #{tag}
                         </span>
-                        <span className="text-xs font-bold text-[#D4AF37] uppercase tracking-wider font-royal">
-                          Price on Request
-                        </span>
-                      </div>
-
-                      <button
-                        onClick={() => onSelectProduct(product)}
-                        className="text-xs font-semibold text-[#D4AF37] hover:text-[#FFF] flex items-center gap-1 cursor-pointer"
-                      >
-                        <span>Specifications</span>
-                        <ChevronRight className="w-3.5 h-3.5" />
-                      </button>
+                      ))}
                     </div>
                   </div>
                 </div>
 
-                {/* Card Action Footer */}
-                <div className="px-6 pb-6 pt-0">
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-[#182234] border border-[#25D366]/40 text-[#25D366] hover:bg-[#25D366] hover:text-white text-xs font-bold transition-all cursor-pointer"
-                  >
-                    <MessageCircle className="w-4 h-4 fill-current" />
-                    <span>Inquire on WhatsApp</span>
-                  </a>
+                {/* Card Footer: Price on Request & Actions */}
+                <div className="p-5 pt-0 border-t border-[#1C2638] mt-3">
+                  <div className="pt-3 flex items-center justify-between">
+                    <div>
+                      <span className="text-[10px] uppercase tracking-wider text-[#9CA3AF] block font-semibold">
+                        Investment:
+                      </span>
+                      <span className="text-sm font-bold text-gold uppercase tracking-wider font-royal">
+                        Price on Request
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => onSelectProduct(product)}
+                        className="px-3.5 py-2 rounded-lg bg-[#141C2B] hover:bg-[#1E283C] text-xs font-semibold text-white flex items-center gap-1 border border-[#243044] hover:border-[#D4AF37]/50 transition-colors cursor-pointer"
+                      >
+                        <span>Details</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 text-gold" />
+                      </button>
+
+                      <a
+                        href={whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-lg bg-[#25D366] text-[#070A0F] hover:brightness-105 transition-all cursor-pointer"
+                        title="Chat about this piece"
+                      >
+                        <MessageCircle className="w-4 h-4 fill-[#070A0F]" />
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
-
-        {filteredProducts.length === 0 && (
-          <div className="text-center py-16 bg-[#111724] border border-[#243044] rounded-2xl p-8">
-            <span className="text-4xl block mb-3">🔍</span>
-            <h3 className="text-lg font-bold text-white">No creations match your filter</h3>
-            <p className="text-xs text-[#A0AEC0] mt-1">Try resetting the category filter or searching for another term.</p>
-            <button
-              onClick={() => {
-                setSelectedCategory('all');
-                setSearchQuery('');
-              }}
-              className="mt-4 px-4 py-2 rounded-xl gold-button text-xs font-bold"
-            >
-              Reset Filters
-            </button>
-          </div>
-        )}
       </div>
     </section>
   );

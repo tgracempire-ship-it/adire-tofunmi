@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, Sparkles, HelpCircle, Shield, Droplets, Wind } from 'lucide-react';
+import { ChevronDown, Droplets, Wind, Sparkles } from 'lucide-react';
 import { VENDOR_DETAILS } from '../data/asoOkeProducts';
 
 export const CareAndFaq: React.FC = () => {
@@ -8,7 +8,7 @@ export const CareAndFaq: React.FC = () => {
   const faqs = [
     {
       q: 'How do I take measurements for an Agbada or Bridal ensemble if I am outside Nigeria?',
-      a: 'Jesutofunmi provides a guided video measurement chart over WhatsApp. You can also visit any local alterations tailor in the UK, US, or Canada with our standard measurement form (Chest, Shoulder-to-Shoulder, Agbada Length, Sleeve Length, Waist, Trouser Outseam, and Head Circumference for the Fila or Gele).'
+      a: 'Jesutofunmi provides a guided video measurement consultation over WhatsApp. You can also visit any local alterations tailor in the UK, US, or Canada with our standard measurement form (Chest, Shoulder-to-Shoulder, Agbada Length, Sleeve Length, Waist, Trouser Outseam, and Head Circumference for the Fila or Gele).'
     },
     {
       q: 'How long in advance should we place an order for a traditional wedding?',
@@ -29,18 +29,13 @@ export const CareAndFaq: React.FC = () => {
   ];
 
   return (
-    <section id="faq" className="py-20 bg-[#0C121E] relative border-b border-[#D4AF37]/20">
+    <section id="faq" className="py-20 bg-[#070A0F] relative border-b border-[#D4AF37]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left Column: Authentic Fabric Care Guide */}
-          <div className="lg:col-span-5 bg-[#111724] border border-[#D4AF37]/30 rounded-2xl p-6 sm:p-8 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#182234] border border-[#D4AF37]/30 text-xs font-semibold text-[#D4AF37]">
-              <Shield className="w-3.5 h-3.5" />
-              <span>Generational Longevity</span>
-            </div>
-
+          <div className="lg:col-span-5 bg-[#0D1422] border border-[#D4AF37]/30 rounded-2xl p-6 sm:p-8 space-y-6">
             <h3 className="text-2xl font-bold text-white font-heading">
-              Preserving Your <span className="gold-gradient-text font-royal">Heirloom Aso Oke</span>
+              Preserving Your <span className="text-gold font-royal">Heirloom Aso Oke</span>
             </h3>
 
             <p className="text-xs sm:text-sm text-[#A0AEC0] leading-relaxed">
@@ -48,18 +43,18 @@ export const CareAndFaq: React.FC = () => {
             </p>
 
             <div className="space-y-4 pt-2">
-              <div className="flex items-start gap-3 p-3 rounded-xl bg-[#0E1522] border border-[#243044]">
-                <Droplets className="w-5 h-5 text-[#D4AF37] flex-shrink-0 mt-0.5" />
+              <div className="flex items-start gap-3 p-3.5 rounded-xl bg-[#070A0F] border border-[#243044]">
+                <Droplets className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
                 <div>
                   <h4 className="text-xs font-bold text-white mb-0.5">Professional Dry Clean Only</h4>
                   <p className="text-[11px] text-[#9CA3AF]">
-                    Never machine wash or soak in water. Handwoven natural silk and metallic lurex threads require gentle hydrocarbon or perchloroethylene dry cleaning.
+                    Never machine wash or soak in water. Handwoven natural silk and metallic lurex threads require gentle hydrocarbon dry cleaning.
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 p-3 rounded-xl bg-[#0E1522] border border-[#243044]">
-                <Wind className="w-5 h-5 text-[#D4AF37] flex-shrink-0 mt-0.5" />
+              <div className="flex items-start gap-3 p-3.5 rounded-xl bg-[#070A0F] border border-[#243044]">
+                <Wind className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
                 <div>
                   <h4 className="text-xs font-bold text-white mb-0.5">Store in Breathable Cotton Bags</h4>
                   <p className="text-[11px] text-[#9CA3AF]">
@@ -68,8 +63,8 @@ export const CareAndFaq: React.FC = () => {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 p-3 rounded-xl bg-[#0E1522] border border-[#243044]">
-                <Sparkles className="w-5 h-5 text-[#D4AF37] flex-shrink-0 mt-0.5" />
+              <div className="flex items-start gap-3 p-3.5 rounded-xl bg-[#070A0F] border border-[#243044]">
+                <Sparkles className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
                 <div>
                   <h4 className="text-xs font-bold text-white mb-0.5">Press on Reverse Side with Warm Iron</h4>
                   <p className="text-[11px] text-[#9CA3AF]">
@@ -78,65 +73,58 @@ export const CareAndFaq: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Right Column: FAQ Accordion */}
-          <div className="lg:col-span-7 space-y-4">
-            <div className="mb-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#182234] border border-[#D4AF37]/30 text-xs font-semibold text-[#D4AF37] mb-2">
-                <HelpCircle className="w-3.5 h-3.5" />
-                <span>Frequently Asked Questions</span>
-              </div>
-              <h2 className="text-3xl font-extrabold text-white font-heading">
-                Ordering & Commissioning Details
-              </h2>
-            </div>
-
-            <div className="space-y-3">
-              {faqs.map((faq, idx) => {
-                const isOpen = openFaq === idx;
-                return (
-                  <div
-                    key={idx}
-                    className="border border-[#243044] rounded-xl overflow-hidden bg-[#111724] transition-all"
-                  >
-                    <button
-                      type="button"
-                      onClick={() => setOpenFaq(isOpen ? null : idx)}
-                      className="w-full flex items-center justify-between p-4 sm:p-5 text-left text-xs sm:text-sm font-bold text-[#EDE8DF] hover:text-[#D4AF37] transition-colors cursor-pointer"
-                    >
-                      <span className="pr-4">{faq.q}</span>
-                      <ChevronDown
-                        className={`w-4 h-4 text-[#D4AF37] flex-shrink-0 transition-transform duration-300 ${
-                          isOpen ? 'rotate-180' : ''
-                        }`}
-                      />
-                    </button>
-
-                    {isOpen && (
-                      <div className="px-4 sm:px-5 pb-5 pt-1 text-xs text-[#9CA3AF] leading-relaxed border-t border-[#1C2638]">
-                        {faq.a}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Inquire on WhatsApp Note */}
-            <div className="mt-8 p-4 rounded-xl bg-gradient-to-r from-[#182234] to-[#0E1624] border border-[#D4AF37]/30 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div>
-                <span className="text-xs font-bold text-white block">Have a unique custom request?</span>
-                <span className="text-[11px] text-[#A0AEC0]">Jesutofunmi answers consultations personally on WhatsApp.</span>
-              </div>
+            <div className="pt-4 border-t border-[#1C2638]">
               <a
-                href={`https://wa.me/${VENDOR_DETAILS.whatsappNumber}?text=Hello%20Jesutofunmi,%20I%20have%20a%20question%20regarding%20Threads%20of%20Heritage`}
+                href={`https://wa.me/${VENDOR_DETAILS.whatsappNumber}?text=Hello%20Jesutofunmi,%20I%20have%20a%20question%20regarding%20Aso%20Oke%20care%20and%20orders`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 rounded-lg bg-[#25D366] text-white text-xs font-bold flex-shrink-0 hover:brightness-110 transition-all"
+                className="w-full py-3 px-4 rounded-xl gold-button-outline text-xs font-semibold flex items-center justify-center gap-2 cursor-pointer text-center"
               >
-                Chat Direct: {VENDOR_DETAILS.phone}
+                <span>Ask Jesutofunmi a Specific Question</span>
               </a>
+            </div>
+          </div>
+
+          {/* Right Column: Interactive FAQ Accordion */}
+          <div className="lg:col-span-7 space-y-6">
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#FDFBF7] font-heading">
+                Frequently Asked <span className="text-gold font-royal">Questions</span>
+              </h2>
+              <p className="text-xs sm:text-sm text-[#9CA3AF] mt-2">
+                Everything you need to know about bespoke commissions, international courier delivery, and custom yarn dyeing.
+              </p>
+            </div>
+
+            <div className="space-y-3 pt-4">
+              {faqs.map((faq, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-xl border border-[#243044] bg-[#0D1422] overflow-hidden transition-all"
+                >
+                  <button
+                    onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                    className="w-full p-4 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-[#121A2A] transition-colors"
+                    aria-expanded={openFaq === idx}
+                  >
+                    <span className="text-sm font-bold text-white font-heading">
+                      {faq.q}
+                    </span>
+                    <ChevronDown
+                      className={`w-4 h-4 text-gold transition-transform duration-300 flex-shrink-0 ${
+                        openFaq === idx ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+
+                  {openFaq === idx && (
+                    <div className="p-4 pt-1 text-xs text-[#CBD5E1] leading-relaxed border-t border-[#1C2638] bg-[#070A0F]/50">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </div>

@@ -62,16 +62,12 @@ Hello Jesutofunmi, please provide a wholesale bulk quotation and loom scheduling
   };
 
   return (
-    <section id="aso-ebi-calc" className="py-20 bg-[#0A0F1A] relative border-b border-[#D4AF37]/20">
+    <section id="aso-ebi-calc" className="py-20 bg-[#070A0F] relative border-b border-[#D4AF37]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#182234] border border-[#D4AF37]/30 text-xs font-semibold text-[#D4AF37] mb-3">
-            <Calculator className="w-3.5 h-3.5" />
-            <span>Harmonized Guest Attire</span>
-          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FDFBF7] font-heading">
-            Aso Ebi <span className="gold-gradient-text font-royal">Bulk Estimator</span> & Timeline
+            Aso Ebi <span className="text-gold font-royal">Bulk Estimator</span> & Timeline
           </h2>
           <p className="text-sm sm:text-base text-[#9CA3AF] mt-3">
             Ensure color harmony across your wedding guests and bridal train. Estimate bundles, custom packaging, and production timelines with worldwide courier distribution.
@@ -80,15 +76,15 @@ Hello Jesutofunmi, please provide a wholesale bulk quotation and loom scheduling
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Controls */}
-          <div className="lg:col-span-7 bg-[#111724] border border-[#243044] rounded-2xl p-6 sm:p-8 space-y-8">
+          <div className="lg:col-span-7 bg-[#0D1422] border border-[#243044] rounded-2xl p-6 sm:p-8 space-y-8">
             {/* Guest Count Slider */}
             <div>
               <div className="flex items-center justify-between mb-3">
-                <label className="text-sm font-bold text-[#F4E4BA] flex items-center gap-2">
-                  <Users className="w-4 h-4 text-[#D4AF37]" />
+                <label className="text-xs font-bold uppercase tracking-wider text-gold-light flex items-center gap-2">
+                  <Users className="w-4 h-4 text-gold" />
                   <span>Number of Guests / Bundles</span>
                 </label>
-                <span className="text-xl font-extrabold text-white bg-[#182234] px-3.5 py-1 rounded-lg border border-[#D4AF37]/30 font-heading">
+                <span className="text-xl font-bold text-white bg-[#070A0F] px-4 py-1.5 rounded-lg border border-[#D4AF37]/35 font-heading tabular-nums">
                   {guestCount} Sets
                 </span>
               </div>
@@ -100,179 +96,174 @@ Hello Jesutofunmi, please provide a wholesale bulk quotation and loom scheduling
                 step="5"
                 value={guestCount}
                 onChange={(e) => setGuestCount(Number(e.target.value))}
-                className="w-full h-2 bg-[#1C2638] rounded-lg appearance-none cursor-pointer accent-[#D4AF37]"
+                className="w-full h-2 bg-[#070A0F] rounded-lg appearance-none cursor-pointer accent-[#D4AF37]"
               />
 
-              <div className="flex justify-between text-[11px] text-[#A0AEC0] mt-2">
-                <span>10 sets (Intimate bridal train)</span>
-                <span>50 sets (Standard wedding)</span>
-                <span>200+ sets (Mega celebration)</span>
-              </div>
-
-              {/* Volume Discount Notice */}
-              <div className="mt-3 p-2.5 rounded-lg bg-[#162030] border border-[#D4AF37]/30 flex items-center gap-2 text-xs text-[#F4E4BA]">
-                <CheckCircle2 className="w-4 h-4 text-[#D4AF37] flex-shrink-0" />
-                <span>
-                  <strong>Tier Applied:</strong> {volumeTier}
-                </span>
+              <div className="flex justify-between text-[11px] text-[#9CA3AF] mt-2 tabular-nums">
+                <span>10 Sets (Intimate)</span>
+                <span>50 Sets (Standard Wedding)</span>
+                <span>100+ Sets (Grand Matrimony)</span>
               </div>
             </div>
 
-            {/* Bundle Type */}
+            {/* Bundle Configuration */}
             <div>
-              <label className="text-sm font-bold text-[#F4E4BA] block mb-3">
-                Select Aso Ebi Cloth Package
+              <label className="text-xs font-bold uppercase tracking-wider text-gold-light flex items-center gap-2 mb-3">
+                <Package className="w-4 h-4 text-gold" />
+                <span>Select Weave Format for Guests</span>
               </label>
+
               <div className="space-y-2.5">
-                {(Object.keys(BUNDLE_RATES) as (keyof typeof BUNDLE_RATES)[]).map((key) => {
-                  const b = BUNDLE_RATES[key];
-                  const active = bundleType === key;
-                  return (
-                    <button
-                      key={key}
-                      type="button"
-                      onClick={() => setBundleType(key)}
-                      className={`w-full text-left p-3.5 rounded-xl border transition-all cursor-pointer ${
-                        active
-                          ? 'border-[#D4AF37] bg-[#1E293B] shadow-sm'
-                          : 'border-[#243044] bg-[#0E1522] hover:border-[#D4AF37]/40'
-                      }`}
-                    >
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-xs sm:text-sm font-semibold text-white">{b.name}</span>
-                        <span className="text-xs font-semibold text-[#D4AF37]">Bespoke Weave</span>
-                      </div>
-                      <span className="text-[11px] text-[#A0AEC0] block">{b.desc}</span>
-                    </button>
-                  );
-                })}
+                {Object.entries(BUNDLE_RATES).map(([key, val]) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => setBundleType(key as any)}
+                    className={`w-full p-3.5 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
+                      bundleType === key
+                        ? 'border-[#D4AF37] bg-[#141C2B] shadow-md'
+                        : 'border-[#243044] bg-[#070A0F]/60 hover:border-[#D4AF37]/50 text-gray-300'
+                    }`}
+                  >
+                    <div>
+                      <span className={`text-xs font-bold block ${bundleType === key ? 'text-gold' : 'text-white'}`}>
+                        {val.name}
+                      </span>
+                      <span className="text-[11px] text-[#A0AEC0] block mt-0.5">
+                        {val.desc}
+                      </span>
+                    </div>
+                    {bundleType === key && <CheckCircle2 className="w-4 h-4 text-gold flex-shrink-0" />}
+                  </button>
+                ))}
               </div>
             </div>
 
-            {/* Packaging Option */}
+            {/* Packaging Presentation */}
             <div>
-              <label className="text-sm font-bold text-[#F4E4BA] block mb-3">
-                Presentation & Packaging Tier
+              <label className="text-xs font-bold uppercase tracking-wider text-gold-light flex items-center gap-2 mb-3">
+                <Gift className="w-4 h-4 text-gold" />
+                <span>Custom Guest Presentation Packaging</span>
               </label>
+
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {(Object.keys(PACKAGING_RATES) as (keyof typeof PACKAGING_RATES)[]).map((key) => {
-                  const p = PACKAGING_RATES[key];
-                  const active = packagingTier === key;
-                  return (
-                    <button
-                      key={key}
-                      type="button"
-                      onClick={() => setPackagingTier(key)}
-                      className={`text-left p-3 rounded-xl border transition-all cursor-pointer ${
-                        active
-                          ? 'border-[#D4AF37] bg-[#1E293B] shadow-sm'
-                          : 'border-[#243044] bg-[#0E1522] hover:border-[#D4AF37]/40'
-                      }`}
-                    >
-                      <span className="text-xs font-semibold text-white block mb-1">{p.name}</span>
-                      <span className="text-[11px] text-[#D4AF37] block">{p.note}</span>
-                    </button>
-                  );
-                })}
+                {Object.entries(PACKAGING_RATES).map(([key, val]) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => setPackagingTier(key as any)}
+                    className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
+                      packagingTier === key
+                        ? 'border-[#D4AF37] bg-[#141C2B] shadow-md'
+                        : 'border-[#243044] bg-[#070A0F]/60 hover:border-[#D4AF37]/50 text-gray-300'
+                    }`}
+                  >
+                    <span className={`text-xs font-bold block mb-1 ${packagingTier === key ? 'text-gold' : 'text-white'}`}>
+                      {val.name.split(' ')[0]} {val.name.split(' ')[1]}
+                    </span>
+                    <span className="text-[10px] text-[#9CA3AF] block leading-tight">
+                      {val.note}
+                    </span>
+                  </button>
+                ))}
               </div>
             </div>
 
-            {/* Event Date & Location */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-[#243044]">
+            {/* Destination Region & Date */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
               <div>
-                <label className="text-xs text-[#A0AEC0] block mb-1">Target Event Date</label>
-                <input
-                  type="date"
-                  value={eventDate}
-                  onChange={(e) => setEventDate(e.target.value)}
-                  className="w-full bg-[#0E1522] border border-[#243044] rounded-lg px-3 py-2 text-xs text-white focus:border-[#D4AF37] focus:outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="text-xs text-[#A0AEC0] block mb-1">Shipping Destination</label>
+                <label className="text-xs text-[#A0AEC0] block mb-1 font-medium">Delivery Destination</label>
                 <select
                   value={destination}
                   onChange={(e) => setDestination(e.target.value as any)}
-                  className="w-full bg-[#0E1522] border border-[#243044] rounded-lg px-3 py-2 text-xs text-white focus:border-[#D4AF37] focus:outline-none"
+                  className="w-full bg-[#070A0F] border border-[#243044] rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-[#D4AF37] focus:outline-none"
                 >
-                  <option value="lagos-local">Lagos Island / Mainland Delivery</option>
-                  <option value="nigeria-state">Other Nigerian States (Abuja, Ibadan, PH)</option>
+                  <option value="lagos-local">Lagos State (Doorstep Courier)</option>
+                  <option value="nigeria-state">Other Nigerian States (Express Parcel)</option>
                   <option value="uk-europe">United Kingdom & Europe (DHL Express)</option>
                   <option value="us-canada">United States & Canada (DHL Express)</option>
                 </select>
               </div>
+
+              <div>
+                <label className="text-xs text-[#A0AEC0] block mb-1 font-medium">Wedding Date</label>
+                <input
+                  type="date"
+                  value={eventDate}
+                  onChange={(e) => setEventDate(e.target.value)}
+                  className="w-full bg-[#070A0F] border border-[#243044] rounded-xl px-3.5 py-2 text-xs text-white focus:border-[#D4AF37] focus:outline-none"
+                />
+              </div>
             </div>
           </div>
 
-          {/* Right Summary Box */}
-          <div className="lg:col-span-5 sticky top-28 space-y-6">
-            <div className="bg-gradient-to-b from-[#182234] to-[#0E1624] border border-[#D4AF37]/40 rounded-2xl p-6 sm:p-8 shadow-2xl">
-              <div className="flex items-center justify-between pb-4 border-b border-[#D4AF37]/25">
-                <div>
-                  <span className="text-[10px] uppercase tracking-widest text-[#D4AF37] font-bold block">
-                    Volume Specification
-                  </span>
-                  <h3 className="text-lg font-bold text-white font-heading">
-                    {guestCount} Guest Aso Ebi Order
-                  </h3>
-                </div>
-                <Package className="w-8 h-8 text-[#D4AF37]" />
-              </div>
+          {/* Real-time Bulk Quotation Card */}
+          <div className="lg:col-span-5 bg-[#0D1422] border border-[#D4AF37]/35 rounded-2xl p-6 sm:p-8 shadow-2xl relative">
+            <h3 className="text-lg font-bold text-white font-heading mb-4 pb-3 border-b border-[#243044]">
+              Aso Ebi Production Schedule
+            </h3>
 
-              {/* Breakdown */}
-              <div className="space-y-3 py-4 border-b border-[#243044] text-xs">
-                <div className="flex justify-between text-[#A0AEC0]">
-                  <span>Package Selected:</span>
-                  <span className="text-white font-medium">{BUNDLE_RATES[bundleType].name.split('(')[0]}</span>
-                </div>
-                <div className="flex justify-between text-[#A0AEC0]">
-                  <span>Wholesale Tier:</span>
-                  <span className="text-[#D4AF37] font-semibold">{volumeTier}</span>
-                </div>
-                <div className="flex justify-between text-[#A0AEC0]">
-                  <span>Packaging:</span>
-                  <span className="text-white font-medium">{PACKAGING_RATES[packagingTier].name.split('(')[0]}</span>
-                </div>
-                <div className="flex justify-between text-[#A0AEC0]">
-                  <span>Estimated Production Lead Time:</span>
-                  <span className="text-[#F4E4BA] font-bold">{leadTime}</span>
-                </div>
-                <div className="flex justify-between text-[#A0AEC0]">
-                  <span>Dye Consistency:</span>
-                  <span className="text-white font-medium">100% Kettle Batch Harmonized</span>
-                </div>
+            {/* Volume Tier Privilege Badge */}
+            <div className="p-3.5 rounded-xl bg-[#070A0F] border border-[#D4AF37]/30 mb-6 flex items-center justify-between">
+              <div>
+                <span className="text-[10px] uppercase font-bold text-gold block">Loom Allocation Tier:</span>
+                <span className="text-xs font-bold text-white">{volumeTier}</span>
               </div>
+              <span className="w-8 h-8 rounded-full bg-[#8A1528] flex items-center justify-center text-sm">
+                👑
+              </span>
+            </div>
 
-              {/* Quotation Notice */}
-              <div className="pt-4">
-                <span className="text-[11px] uppercase tracking-wider text-[#A0AEC0] block">
-                  Wholesale Bulk Pricing:
-                </span>
-                <span className="text-xl sm:text-2xl font-bold text-[#D4AF37] uppercase tracking-wide font-royal block mt-1">
-                  Quotation on Request
-                </span>
-                <span className="text-[11px] text-[#A0AEC0] block mt-0.5">
-                  Includes yarn dyeing, weaving, and optional luxury packaging.
-                </span>
+            {/* Calculations Breakdown */}
+            <div className="space-y-3 text-xs text-[#CBD5E1] border-b border-[#243044] pb-5">
+              <div className="flex justify-between">
+                <span className="text-[#9CA3AF]">Requested Sets:</span>
+                <span className="font-bold text-white tabular-nums">{guestCount} Guest Bundles</span>
               </div>
+              <div className="flex justify-between">
+                <span className="text-[#9CA3AF]">Fabric Style:</span>
+                <span className="font-semibold text-white text-right max-w-[200px] truncate">{BUNDLE_RATES[bundleType].name}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-[#9CA3AF]">Packaging:</span>
+                <span className="font-semibold text-white">{PACKAGING_RATES[packagingTier].name.split(' ')[0]}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-[#9CA3AF]">Estimated Weave Duration:</span>
+                <span className="font-bold text-gold tabular-nums">{leadTime}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-[#9CA3AF]">Dye Consistency:</span>
+                <span className="font-semibold text-[#86EFAC]">100% Single-Vat Guaranteed</span>
+              </div>
+            </div>
 
-              {/* Action Button */}
-              <div className="mt-6">
-                <a
-                  href={generateAsoEbiWhatsApp()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-bold text-sm shadow-lg shadow-green-500/20 hover:brightness-110 transition-all cursor-pointer"
-                >
-                  <MessageCircle className="w-5 h-5 fill-white" />
-                  <span>Request Bulk Quote from Jesutofunmi</span>
-                </a>
-              </div>
+            {/* Price on Request Banner */}
+            <div className="py-5">
+              <span className="text-xs text-[#9CA3AF] block mb-1">Bulk Commission Investment:</span>
+              <span className="text-2xl font-bold text-gold uppercase tracking-wider font-royal block">
+                Quotation on Request
+              </span>
+              <span className="text-[11px] text-[#9CA3AF] block mt-1">
+                Wholesale bulk tier pricing tailored to guest count, custom yarn dyeing, and packaging selection.
+              </span>
+            </div>
 
-              <div className="mt-4 pt-3 border-t border-[#243044] text-[11px] text-[#9CA3AF] text-center">
-                Need color sample swatches shipped before full production? Ask Jesutofunmi directly on WhatsApp.
-              </div>
+            {/* Action CTA */}
+            <div className="space-y-3 pt-2">
+              <a
+                href={generateAsoEbiWhatsApp()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-4 px-4 rounded-xl gold-button text-xs uppercase tracking-wider font-bold flex items-center justify-center gap-2 cursor-pointer shadow-lg text-center"
+              >
+                <MessageCircle className="w-4 h-4 text-[#070A0F]" />
+                <span>Request Wholesale Quotation via WhatsApp</span>
+              </a>
+
+              <p className="text-[10px] text-center text-[#9CA3AF]">
+                Includes sample swatch approval before commencing full bulk loom production
+              </p>
             </div>
           </div>
         </div>
