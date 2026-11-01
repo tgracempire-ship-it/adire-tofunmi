@@ -56,6 +56,26 @@ export const WEDDING_PACKAGES: WeddingPackage[] = [
 
 export const CLIENT_TESTIMONIALS = [
   {
+    id: 'oguntuase',
+    name: 'Mr & Mrs Oguntuase',
+    event: 'Traditional Wedding · Dark Grey Aso Oke',
+    quote: 'Heritage Thread delivered our desired dark grey colour for our traditional wedding. It was a 10/10 experience: neatly knitted, well ironed, and beautifully packaged. Thank you for making our day bright and royal.',
+    avatar: '/images/groom-agbada-portrait.jpg',
+    rating: 5,
+    package: 'Custom Dark Grey Wedding Commission',
+    fabric: 'Dark grey Aso Oke'
+  },
+  {
+    id: 'ola',
+    name: 'Mr & Mrs Òlà',
+    event: 'Traditional Wedding · Wine Aso Oke',
+    quote: 'Thanks so much for the Aso Oke. It is really nice and elegant. My wife loves it, and we are so glad we chose you.',
+    avatar: '/images/bride-grey-gold.jpg',
+    rating: 5,
+    package: 'Custom Wine Aso Oke Wedding Commission',
+    fabric: 'Wine Aso Oke'
+  },
+  {
     id: '1',
     name: 'Dr. & Mrs. Adebayo Ogunlesi',
     event: 'Traditional Engagement, Victoria Island, Lagos',

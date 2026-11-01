@@ -11,7 +11,7 @@ export const TestimonialsSection: React.FC = () => {
             Matrimonial Words
           </div>
           <h2 className="text-3xl sm:text-4xl font-heading text-[var(--ink)]">
-            Worn by Celebrated Kings & Queens
+            Recent words from the atelier
           </h2>
           <p className="text-xs sm:text-sm text-[var(--muted)] mt-2">
             Hear from Nigerian couples and event coordinators across Lagos, Ibadan, the UK, and North America.
@@ -38,6 +38,12 @@ export const TestimonialsSection: React.FC = () => {
                 <p className="text-xs sm:text-sm text-[var(--ink)] leading-relaxed italic mb-6">
                   "{item.quote}"
                 </p>
+                {'fabric' in item && item.fabric && (
+                  <span className="inline-flex items-center gap-2 mb-5 text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--cobalt)]">
+                    <span className="h-2.5 w-2.5 rounded-full bg-[var(--coral)]" aria-hidden="true" />
+                    {item.fabric}
+                  </span>
+                )}
               </div>
 
               <div className="pt-4 border-t border-[var(--line)] flex items-center gap-3.5">
