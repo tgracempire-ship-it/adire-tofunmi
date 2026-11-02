@@ -14,7 +14,7 @@ export const WEDDING_PACKAGES: WeddingPackage[] = [
       'Authentic Benin / Yoruba Royal Coral Bead Neckpiece & Wristlets Set',
       'Matching Embroidered Bride Purse / Envelope Clutch',
       'Dual Luxury Keepsake Presentation Chests with Couple Monogram',
-      'Priority Loom Production Slot with Video Proof of Weaving'
+      'Production timing and progress updates discussed during consultation'
     ],
     leadTime: '4 - 5 weeks',
     popular: true
@@ -75,33 +75,6 @@ export const CLIENT_TESTIMONIALS = [
     package: 'Custom Wine Aso Oke Wedding Commission',
     fabric: 'Wine Aso Oke'
   },
-  {
-    id: '1',
-    name: 'Dr. & Mrs. Adebayo Ogunlesi',
-    event: 'Traditional Engagement, Victoria Island, Lagos',
-    quote: 'Jesutofunmi outdid herself! Our crimson Alaari Agbada and bridal Gele stopped the entire hall. The weave had such regal weight and didn’t crease once. Even our photographer said the golden threads reflected the strobe lighting like royalty.',
-    avatar: '/images/groom-agbada-portrait.jpg',
-    rating: 5,
-    package: 'The Crown Monarch (Oba & Olori)'
-  },
-  {
-    id: '2',
-    name: 'Folashade & Michael Davies',
-    event: 'Diaspora Wedding (London, UK)',
-    quote: 'Ordering from the UK was seamless. Jesutofunmi sent videos from the loom every step of the way, and the DHL package arrived in London in under 5 days, perfectly steamed and folded. The quality put high-end London fashion houses to shame.',
-    avatar: '/images/bride-grey-gold.jpg',
-    rating: 5,
-    package: 'Signature Heritage Duo'
-  },
-  {
-    id: '3',
-    name: 'Chief (Mrs.) Bimbo Alabi',
-    event: 'Daughter’s 100-Guest Aso Ebi Coordinator (Ibadan)',
-    quote: 'Coordinating 100 guests is usually a nightmare with uneven colors, but Threads of Heritage delivered 100 bundles with 100% consistent dye tones and exact yardage. All our guests were praising the softness and prestige of the cloth.',
-    avatar: '/images/bride-striped-gown.jpg',
-    rating: 5,
-    package: 'Aso Ebi 100-Bundle Custom Order'
-  }
 ];
 
 export const WEAVING_PROCESS_STEPS = [
@@ -123,6 +96,6 @@ export const WEAVING_PROCESS_STEPS = [
   {
     step: '04',
     title: 'Joining, Embroidery & Finishing',
-    desc: 'Strips are invisibly hand-joined, steam-calendered, and embellished with gold bullion threadwork, Swarovski crystals, or bead fringes before luxury delivery.'
+    desc: 'Strips are joined, pressed, and finished with the selected embroidery, stone, metallic or bead details before delivery.'
   }
 ];

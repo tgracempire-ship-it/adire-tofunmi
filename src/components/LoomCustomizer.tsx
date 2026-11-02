@@ -23,47 +23,47 @@ export const LoomCustomizer: React.FC<LoomCustomizerProps> = ({ onAddCustomToCar
   const [targetDate, setTargetDate] = useState('');
   const [copiedNotification, setCopiedNotification] = useState(false);
 
-  // Weave Information & Cultural Significance
+  // Weave options and preview references supplied by the atelier
   const WEAVE_DETAILS: Record<TraditionalWeaveType, { title: string; subtitle: string; desc: string; defaultSample: string }> = {
     alaari: {
-      title: 'Alaari (Royal Crimson / Magenta)',
-      subtitle: 'The King of Yoruba Weaves',
-      desc: 'Historically reserved for kings, princes, and victorious celebration. Its crimson tone reflects vibrancy, royalty, and high authority.',
+      title: 'Alaari (Crimson / Magenta)',
+      subtitle: 'Crimson handwoven cloth',
+      desc: 'A crimson-to-magenta palette for a strong ceremonial look. Confirm the final shade and available yarn with Jesutofunmi.',
       defaultSample: '/assets/selection/alaari.webp'
     },
     sanyan: {
-      title: 'Sanyan (Aristocratic Wild Silk)',
-      subtitle: 'Raw Earth Brown & Khaki Silk',
-      desc: 'Woven from indigenous Anaphe silk moths. Warm fawn and beige hues symbolizing ancient prestige, wealth, and aristocratic restraint.',
+      title: 'Sanyan (Earth Brown / Khaki)',
+      subtitle: 'Warm earth and khaki tones',
+      desc: 'A quiet earth-tone direction for clients who want a softer, natural palette. Confirm the final fibre and shade at enquiry.',
       defaultSample: '/assets/selection/sanyan.webp'
     },
     etu: {
-      title: 'Etu (Indigo Guinea Fowl Weave)',
-      subtitle: 'Deep Indigo Navy & Fine White Stripes',
-      desc: 'Named after the dappled feathers of the guinea fowl. Striking midnight navy and cobalt lines symbolizing wisdom, eldership, and deep dignity.',
+      title: 'Etu (Indigo / Navy)',
+      subtitle: 'Deep indigo with fine stripes',
+      desc: 'A deep indigo direction with fine stripe contrast. Use the preview as a starting point for the final swatch discussion.',
       defaultSample: '/images/fabric-blue-stripes.jpg'
     },
     lurex: {
       title: 'Metallic Lurex (Contemporary Shimmer)',
-      subtitle: 'Modern Wedding Glamour & Gold Thread',
-      desc: 'Intertwined with gleaming metallic filaments that capture photography flashes and ballroom chandeliers with majestic brilliance.',
+      subtitle: 'Metallic accent yarn',
+      desc: 'A reflective accent direction for a brighter finish. The final metallic yarn and density are confirmed during consultation.',
       defaultSample: '/assets/selection/gele.webp'
     },
     beaded: {
-      title: 'Beaded & Stone Haute Couture',
-      subtitle: 'Pearl Studded & Scalloped Trims',
-      desc: 'Hand-sewn crystal beads, dangling fringe tassels, and intricate cord work placed along collar, cuffs, and hem.',
+      title: 'Beaded & Stone Detailing',
+      subtitle: 'Beads, stones or fringe details',
+      desc: 'A detailing direction for collars, cuffs or hems. Exact materials and placement are agreed in the commission brief.',
       defaultSample: '/assets/selection/textile-detail.webp'
     }
   };
 
   // Base ensemble details
   const ENSEMBLE_DETAILS = {
-    'bridal-full': { name: 'Full Bridal Suite (Iro, Buba, Gele & Ipele)', leadWeeks: '3–4 weeks' },
-    'groom-agbada': { name: 'Royal Groom Grand Agbada (4-Piece with Fila)', leadWeeks: '3–4 weeks' },
-    'couple-twinning': { name: 'Oba & Olori Couple Twinning Suite (8 Pieces)', leadWeeks: '4–5 weeks' },
-    'aso-ebi-set': { name: 'Aso Ebi 5-Yard Loom Bundle', leadWeeks: '2–3 weeks' },
-    'children-occasion': { name: 'Little Monarch Children Milestone Wrap', leadWeeks: '1–2 weeks' }
+    'bridal-full': { name: 'Full Bridal Suite (Iro, Buba, Gele & Ipele)', leadWeeks: 'Confirm at enquiry' },
+    'groom-agbada': { name: 'Groom Agbada Set (with Fila)', leadWeeks: 'Confirm at enquiry' },
+    'couple-twinning': { name: 'Couple Twinning Suite', leadWeeks: 'Confirm at enquiry' },
+    'aso-ebi-set': { name: 'Aso Ebi Loom Bundle', leadWeeks: 'Confirm at enquiry' },
+    'children-occasion': { name: 'Children’s Occasion Wrap', leadWeeks: 'Confirm at enquiry' }
   };
 
   // Embellishment options
@@ -71,7 +71,7 @@ export const LoomCustomizer: React.FC<LoomCustomizerProps> = ({ onAddCustomToCar
     'pure-classic': { name: 'Pure Classic Handloom (Clean Weave)', note: 'Minimalist Ancestral', sample: '/assets/selection/textile-detail.webp' },
     'bullion-embroidery': { name: 'Handcrafted Golden Bullion Chest / Border Work', note: 'Royal Bullion Thread', sample: '/assets/selection/gele.webp' },
     'coral-pearl-fringes': { name: 'Hand-strung Coral & Pearl Dangling Fringes', note: 'Luxury Beaded Hem', sample: '/assets/plates/tassel-photo.webp' },
-    'crystal-stone-royal': { name: 'All-over Swarovski Crystal & Diamond Stone Studding', note: 'Haute Couture Brilliance', sample: '/images/bride-grey-gold.jpg' }
+    'crystal-stone-royal': { name: 'Crystal & Stone Studding', note: 'High-shine detailing', sample: '/images/bride-grey-gold.jpg' }
   };
 
   const PATTERN_OPTIONS = {
@@ -160,7 +160,7 @@ Please advise on custom quote, loom availability, and next steps for sample swat
             Bespoke Loom Atelier Simulator
           </h2>
           <p className="text-sm text-[var(--muted)] mt-2 max-w-2xl">
-            Commission a one-of-a-kind royal piece. Select ancestral weave lineage, yarn palettes, custom embroidery, and tailoring preferences for artisan Jesutofunmi’s wooden looms.
+            Build a clear commission brief. Choose a cloth direction, silhouette, palette and finish, then send the specification to Jesutofunmi for confirmation.
           </p>
         </div>
 
@@ -241,7 +241,7 @@ Please advise on custom quote, loom availability, and next steps for sample swat
                       {ensemble === key && <Check className="w-3.5 h-3.5 text-[var(--cobalt)]" />}
                     </div>
                     <span className="text-[11px] text-[var(--muted)] block tabular-nums">
-                      Production Window: {val.leadWeeks}
+                      Timing: {val.leadWeeks}
                     </span>
                   </button>
                 ))}
@@ -497,19 +497,19 @@ Please advise on custom quote, loom availability, and next steps for sample swat
                   <span className="font-semibold">{headwearIncluded ? 'Yes (Gele/Fila)' : 'Excluded'}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[var(--muted)]">Production Window:</span>
+                  <span className="text-[var(--muted)]">Timing:</span>
                   <span className="font-bold text-[var(--cobalt)] tabular-nums">{ENSEMBLE_DETAILS[ensemble].leadWeeks}</span>
                 </div>
               </div>
 
-              {/* Price on Request Banner */}
+              {/* Quote guidance */}
               <div className="py-4">
-                <span className="text-xs text-[var(--muted)] block mb-0.5">Atelier Quotation:</span>
+                <span className="text-xs text-[var(--muted)] block mb-0.5">Commission quote:</span>
                 <span className="text-xl font-bold text-[var(--cobalt)] uppercase tracking-wider font-royal block">
-                  Price on Request
+                  Confirm after review
                 </span>
                 <span className="text-[11px] text-[var(--muted)] block mt-1">
-                  Quotation customized to measurements, gold bullion density, and DHL destination.
+                  Final pricing follows your measurements, selected finish, quantity and delivery details.
                 </span>
               </div>
 
@@ -555,8 +555,8 @@ Please advise on custom quote, loom availability, and next steps for sample swat
 
             {/* Direct Workshop Notice */}
             <div className="p-4 rounded-xl bg-[var(--paper)] border border-[var(--line-strong)] text-xs text-[var(--muted)] space-y-1 shadow-sm">
-              <span className="font-bold text-[var(--ink)] block">📍 Master Artisan Workshop</span>
-              <span>Loom facilities located in Ibadan & Lagos, Nigeria. Worldwide express courier shipping with live video measurement consultations.</span>
+              <span className="font-bold text-[var(--ink)] block">Atelier note</span>
+              <span>This preview is a starting brief. Jesutofunmi confirms available cloth, measurements, timing and delivery options before production.</span>
             </div>
           </div>
         </div>
